@@ -16,13 +16,6 @@ func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]any{
 			"purchase_intent": map[string]any{
-				"activity": map[string]any{"recent": []any{map[string]any{
-					"created_at":         "2026-09-09T12:01:00Z",
-					"id":                 "saleevt_123",
-					"purchase_intent_id": "sale_123",
-					"type":               "viewed",
-					"visitor":            map[string]any{"ip_address": "203.0.113.7"},
-				}}},
 				"allow_variants": false,
 				"created_at":     "2026-09-09T12:00:00Z",
 				"id":             "sale_123",
@@ -50,9 +43,6 @@ func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {
 	intent, err := client.PurchaseIntents.Lookup(context.Background(), "sale_123")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
-	}
-	if got := intent.Activity.Recent[0].Visitor.IPAddress; got != "203.0.113.7" {
-		t.Fatalf("visitor IP address = %q", got)
 	}
 	if got := intent.Merchant.OrganizationName; got != "Tea House Ltd" {
 		t.Fatalf("merchant organization name = %q", got)

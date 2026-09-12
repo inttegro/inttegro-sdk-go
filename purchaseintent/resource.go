@@ -4,7 +4,6 @@ import "time"
 
 // PurchaseIntent represents a customer's intent to purchase a product.
 type PurchaseIntent struct {
-	Activity      *ActivityLog `json:"activity,omitempty"`
 	AllowVariants bool         `json:"allow_variants"`
 	CreatedAt     time.Time    `json:"created_at"`
 	ExpiresAt     *time.Time   `json:"expires_at,omitempty"`
