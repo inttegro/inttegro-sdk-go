@@ -152,7 +152,7 @@ func TestRefundOmitsOptionalResponseFields(t *testing.T) {
 		t.Fatalf("Unmarshal() error = %v", err)
 	}
 	for _, key := range []string{
-		"canceled_at", "custom_data", "failed_at", "processing_at",
+		"canceled_at", "custom_data", "failed_at", "failure", "processing_at",
 		"reason_details", "reference", "succeeded_at",
 	} {
 		if _, exists := body[key]; exists {
@@ -166,6 +166,25 @@ func TestRefundOmitsOptionalResponseFields(t *testing.T) {
 	}
 	if body["created_at"] != "2026-09-02T10:00:00Z" {
 		t.Fatalf("created_at = %#v", body["created_at"])
+	}
+}
+
+func TestRefundDecodesSanitizedFailure(t *testing.T) {
+	var got refund.Refund
+	err := json.Unmarshal([]byte(`{
+		"status":"failed",
+		"failure":{
+			"reason":"refund_declined",
+			"detail":"The refund was declined.",
+			"retryable":false
+		}
+	}`), &got)
+	if err != nil {
+		t.Fatalf("Unmarshal() error = %v", err)
+	}
+	if got.Failure == nil || got.Failure.Reason != refund.FailureReasonRefundDeclined ||
+		got.Failure.Detail != "The refund was declined." || got.Failure.Retryable {
+		t.Fatalf("decoded failure = %#v", got.Failure)
 	}
 }
 

@@ -31,6 +31,7 @@ type Refund struct {
 	CreatedAt     time.Time         `json:"created_at"`
 	ProcessingAt  *time.Time        `json:"processing_at,omitempty"`
 	SucceededAt   *time.Time        `json:"succeeded_at,omitempty"`
+	Failure       *Failure          `json:"failure,omitempty"`
 	FailedAt      *time.Time        `json:"failed_at,omitempty"`
 	CanceledAt    *time.Time        `json:"canceled_at,omitempty"`
 	CancelReason  string            `json:"cancel_reason,omitempty"`
