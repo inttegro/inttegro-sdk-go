@@ -21,6 +21,7 @@ type Refund struct {
 	ID            string            `json:"id"`
 	OrderID       string            `json:"order_id"`
 	OrderAmount   *money.Amount     `json:"order_amount,omitempty"`
+	Settlement    Settlement        `json:"settlement"`
 	Status        Status            `json:"status"`
 	Total         money.Amount      `json:"total"`
 	LineItems     []LineItem        `json:"line_items"`
