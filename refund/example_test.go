@@ -3,9 +3,9 @@ package refund_test
 import (
 	"context"
 
-	inttegro "github.com/zebodotdev/inttegro-sdk-go/v7"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/refund"
+	inttegro "github.com/zebodotdev/inttegro-sdk-go/v8"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/refund"
 )
 
 func ExampleService_Create() {

@@ -3,8 +3,8 @@ package paymentmethod
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/internal/transport"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
 )
 
 // PaymentMethodsService manages payment method tokenization, verification, and deletion.

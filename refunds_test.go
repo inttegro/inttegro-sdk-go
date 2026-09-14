@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/refund"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/refund"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
 )
 
 func TestRefundsServiceUsesCanonicalContracts(t *testing.T) {

@@ -3,8 +3,8 @@ package order
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/paymentmethod"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/paymentmethod"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
 )
 
 // Pay initiates payment for an existing order.
