@@ -28,6 +28,7 @@ type CreateParams struct {
 // CancelRefundRequest cancels a refund that has not begun processing.
 type CancelParams struct {
 	RefundID    string        `json:"refund_id"`
+	Reason      string        `json:"reason,omitempty"`
 	RequestMeta *request.Meta `json:"request_meta,omitempty"`
 }
 
