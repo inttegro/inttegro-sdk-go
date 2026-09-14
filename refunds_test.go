@@ -48,7 +48,8 @@ func TestRefundsServiceUsesCanonicalContracts(t *testing.T) {
 		t.Fatalf("Refunds.Create() error = %v", err)
 	}
 	canceled, err := client.Refunds.Cancel(ctx, refund.CancelParams{
-		RefundID: "rf_123", RequestMeta: &request.Meta{IdempotencyKey: "cancel-refund-123"},
+		RefundID: "rf_123", Reason: "Customer no longer wants the refund",
+		RequestMeta: &request.Meta{IdempotencyKey: "cancel-refund-123"},
 	})
 	if err != nil {
 		t.Fatalf("Refunds.Cancel() error = %v", err)
@@ -87,6 +88,7 @@ func TestRefundsServiceUsesCanonicalContracts(t *testing.T) {
 	})
 	assertJSONMapEqual(t, captured[1].body, map[string]any{
 		"refund_id":    "rf_123",
+		"reason":       "Customer no longer wants the refund",
 		"request_meta": map[string]any{"idempotency_key": "cancel-refund-123"},
 	})
 	assertJSONMapEqual(t, captured[2].body, map[string]any{"refund_id": "rf_123"})

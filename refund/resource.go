@@ -20,6 +20,7 @@ type LineItem struct {
 type Refund struct {
 	ID            string            `json:"id"`
 	OrderID       string            `json:"order_id"`
+	OrderAmount   *money.Amount     `json:"order_amount,omitempty"`
 	Status        Status            `json:"status"`
 	Total         money.Amount      `json:"total"`
 	LineItems     []LineItem        `json:"line_items"`
@@ -32,6 +33,7 @@ type Refund struct {
 	SucceededAt   *time.Time        `json:"succeeded_at,omitempty"`
 	FailedAt      *time.Time        `json:"failed_at,omitempty"`
 	CanceledAt    *time.Time        `json:"canceled_at,omitempty"`
+	CancelReason  string            `json:"cancel_reason,omitempty"`
 }
 
 // RefundPage contains one page of refunds.
