@@ -1,4 +1,4 @@
 package inttegro
 
 // Version is the semantic version of this SDK.
-const Version = "7.1.0"
+const Version = "8.0.0"

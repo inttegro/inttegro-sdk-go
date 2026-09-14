@@ -1,53 +1,56 @@
 package payout
 
-// PayoutScheduleSpec describes the balance transaction aging period.
-//
-// Balance transactions must age before becoming eligible for payout.
-// This protects against late-arriving disputes and chargebacks.
-type ScheduleSpec struct {
-	// ID is the spec identifier.
-	ID string `json:"id,omitempty"`
+// SettingsLookupScheduleAgingSpec describes when balance transactions become
+// eligible for payout in the settings read model.
+type SettingsLookupScheduleAgingSpec struct {
+	// Abide describes how the aging period is applied.
+	Abide string `json:"abide"`
 
-	// TPlus indicates the aging period in days.
-	// Example: "t+7" means 7 days after transaction.
-	TPlus string `json:"t_plus,omitempty"`
+	// Label is the human-readable aging rule label.
+	Label string `json:"label"`
 
-	// Label is a human-readable description.
-	Label string `json:"label,omitempty"`
-
-	// Abide is the formal aging rule specification.
-	Abide string `json:"abide,omitempty"`
+	// TPlus is the required transaction age, such as "168h".
+	TPlus string `json:"t_plus"`
 }
 
-// PayoutSchedule describes your payout timing configuration.
-//
-// Payouts can be automatic (weekly, daily) or manual (on-demand).
-// Automatic schedules trigger payouts at regular intervals for eligible
-// balance transactions. Manual mode requires explicit payout initiation.
-type Schedule struct {
-	// ID is the schedule identifier (read-only).
-	ID string `json:"id,omitempty"`
+// SettingsLookupSchedule is the active schedule returned by Service.Settings.
+type SettingsLookupSchedule struct {
+	// AgingSpec describes when balance transactions become eligible.
+	AgingSpec SettingsLookupScheduleAgingSpec `json:"aging_spec"`
 
-	// Name is the schedule's display name (read-only).
-	// Example: "Weekly Automatic", "Manual"
-	Name string `json:"name,omitempty"`
+	// Description explains the schedule behavior.
+	Description string `json:"description"`
 
-	// Type indicates automatic or manual mode (read-only).
-	// Values: "automatic", "manual"
-	Type string `json:"type,omitempty"`
+	// Interval is the payout frequency.
+	Interval string `json:"interval"`
 
-	// Interval is the payout frequency for automatic schedules (read-only).
-	// Values: "weekly", "daily", nil (for manual)
-	Interval string `json:"interval,omitempty"`
+	// Name is the schedule's display name.
+	Name string `json:"name"`
 
-	// ScheduleOn specifies when automatic payouts run (read-only).
-	// For weekly: day of week (e.g., "monday")
-	// For daily: time of day
-	ScheduleOn string `json:"schedule_on,omitempty"`
+	// ScheduleOn describes when automatic payouts run.
+	ScheduleOn string `json:"schedule_on"`
 
-	// Description explains the schedule behavior (read-only).
-	Description string `json:"description,omitempty"`
+	// Type identifies the schedule mode.
+	Type string `json:"type"`
+}
 
-	// Spec contains the balance transaction aging rules (read-only).
-	Spec *ScheduleSpec `json:"spec,omitempty"`
+// SettingsMutationScheduleSpec describes the aging rule returned after a
+// payout settings mutation.
+type SettingsMutationScheduleSpec struct {
+	Abide string `json:"abide"`
+	ID    string `json:"id"`
+	Label string `json:"label"`
+	TPlus string `json:"t_plus"`
+}
+
+// SettingsMutationSchedule is the updated schedule returned after a payout
+// settings mutation.
+type SettingsMutationSchedule struct {
+	Description string                       `json:"description"`
+	ID          string                       `json:"id"`
+	Interval    string                       `json:"interval"`
+	Name        string                       `json:"name"`
+	ScheduleOn  string                       `json:"schedule_on"`
+	Spec        SettingsMutationScheduleSpec `json:"spec"`
+	Type        string                       `json:"type"`
 }

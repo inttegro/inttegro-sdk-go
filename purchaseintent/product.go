@@ -3,7 +3,7 @@ package purchaseintent
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/product"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/product"
 )
 
 type Product struct {

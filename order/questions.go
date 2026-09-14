@@ -1,6 +1,6 @@
 package order
 
-import "github.com/zebodotdev/inttegro-sdk-go/v7/payment"
+import "github.com/zebodotdev/inttegro-sdk-go/v8/payment"
 
 // IsPaid reports whether the order has recorded payment, including a paid order
 // that has since advanced to completed.

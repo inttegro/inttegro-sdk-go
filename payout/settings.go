@@ -1,26 +1,33 @@
 package payout
 
-// PayoutSettings contains your complete payout configuration.
-//
-// Controls when payouts happen, where funds go, and whether currency
-// conversion is enabled.
-type Settings struct {
-	// ID is the settings identifier (read-only).
+// SettingsLookup contains the complete payout configuration returned by
+// Service.Settings.
+type SettingsLookup struct {
+	// Destinations contains the configured account for each supported currency.
+	Destinations Destinations `json:"destinations"`
+
+	// FXEnabled reports whether payout currency conversion is enabled.
+	// It is absent when the setting has not been configured.
+	FXEnabled *bool `json:"fx_enabled,omitempty"`
+
+	// Schedule is the active payout schedule, when configured.
+	Schedule *SettingsLookupSchedule `json:"schedule,omitempty"`
+}
+
+// SettingsMutation contains the fields returned after a payout settings
+// mutation. Endpoints return only the fields relevant to that mutation.
+type SettingsMutation struct {
+	// Destinations contains the updated destination assignments, when returned.
+	Destinations *Destinations `json:"destinations,omitempty"`
+
+	// FXEnabled contains the updated currency-conversion state, when returned.
+	FXEnabled *bool `json:"fx_enabled,omitempty"`
+
+	// ID is the payout settings identifier, when returned.
 	ID string `json:"id,omitempty"`
 
-	// FxEnabled indicates whether currency conversion is enabled (read-only).
-	// When true, can receive payouts in different currency than source funds.
-	// Requires FX-enabled destination accounts.
-	FxEnabled bool `json:"fx_enabled,omitempty"`
-
-	// Destinations maps currencies to financial account IDs.
-	// Key: currency code (e.g., "ghs", "usd")
-	// Value: financial account ID (e.g., "fa_abc123")
-	// Example: {"ghs": "fa_abc123", "usd": "fa_def456"}
-	Destinations map[string]string `json:"destinations,omitempty"`
-
-	// Schedule describes payout timing and frequency.
-	Schedule *Schedule `json:"schedule,omitempty"`
+	// Schedule is the updated payout schedule, when returned.
+	Schedule *SettingsMutationSchedule `json:"schedule,omitempty"`
 }
 
 // PayoutConfiguration describes payout routing and FX settings for a payment or balance transaction.

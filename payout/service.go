@@ -3,7 +3,7 @@ package payout
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/internal/transport"
 )
 
 // PayoutsService manages payout configuration, scheduling, and history.
@@ -20,9 +20,8 @@ import (
 // Example:
 //
 //	// Configure payout destinations
-//	settings, err := client.Payouts.SetDestinations(ctx, map[string]string{
-//	    "ghs": "fa_abc123",  // GHS payouts go to this mobile money account
-//	    "usd": "fa_def456",  // USD payouts go to this bank account
+//	settings, err := client.Payouts.SetDestinations(ctx, payout.Destinations{
+//	    GHS: "fa_abc123",
 //	})
 //
 // Learn more: https://studio.inttegro.com/set-up-payouts
@@ -32,33 +31,32 @@ type Service struct {
 
 // SetDestinations configures which financial accounts receive payouts by currency.
 //
-// Map each currency you accept to a financial account ID. When balance
-// transactions in that currency become eligible, they're paid out to the
+// Assign each supported currency to a financial account ID. When balance
+// transactions in that currency become eligible, they are paid out to the
 // corresponding account.
 //
 // Parameters:
-//   - destinations: Map of currency code to financial account ID
-//     Example: {"ghs": "fa_abc123", "usd": "fa_def456"}
+//   - destinations: Typed destination assignments for supported currencies
 //
 // Returns the updated payout settings.
 //
 // Example:
 //
-//	settings, err := client.Payouts.SetDestinations(ctx, map[string]string{
-//	    "ghs": "fa_abc123",
+//	settings, err := client.Payouts.SetDestinations(ctx, payout.Destinations{
+//	    GHS: "fa_abc123",
 //	})
 //	if err != nil {
 //	    return err
 //	}
-//	fmt.Printf("GHS destination: %s\n", settings.Destinations["ghs"])
+//	fmt.Printf("GHS destination: %s\n", settings.Destinations.GHS)
 //
 // Learn more: https://studio.inttegro.com/set-payout-destinations
-func (s *Service) SetDestinations(ctx context.Context, destinations map[string]string) (*Settings, error) {
+func (s *Service) SetDestinations(ctx context.Context, destinations Destinations) (*SettingsMutation, error) {
 	var resp struct {
-		Settings Settings `json:"settings"`
+		Settings SettingsMutation `json:"settings"`
 	}
 	payload := struct {
-		Destinations map[string]string `json:"destinations"`
+		Destinations Destinations `json:"destinations"`
 	}{Destinations: destinations}
 	if err := s.client.Do(ctx, "POST", "/payouts/set_destinations", payload, &resp); err != nil {
 		return nil, err
@@ -78,9 +76,9 @@ func (s *Service) SetDestinations(ctx context.Context, destinations map[string]s
 //	}
 //	fmt.Printf("Schedule: %s\n", settings.Schedule.Type)
 //	fmt.Printf("Destinations: %v\n", settings.Destinations)
-func (s *Service) Settings(ctx context.Context) (*Settings, error) {
+func (s *Service) Settings(ctx context.Context) (*SettingsLookup, error) {
 	var resp struct {
-		Settings Settings `json:"settings"`
+		Settings SettingsLookup `json:"settings"`
 	}
 	if err := s.client.Do(ctx, "POST", "/payouts/settings", map[string]any{}, &resp); err != nil {
 		return nil, err
@@ -127,9 +125,9 @@ func (s *Service) Lookup(ctx context.Context, payoutID string) (*Payout, error) 
 //	fmt.Printf("Schedule type: %s\n", settings.Schedule.Type) // "manual"
 //
 // Learn more: https://studio.inttegro.com/disable-automatic-payouts
-func (s *Service) DisableAutomatic(ctx context.Context) (*Settings, error) {
+func (s *Service) DisableAutomatic(ctx context.Context) (*SettingsMutation, error) {
 	var resp struct {
-		Settings Settings `json:"settings"`
+		Settings SettingsMutation `json:"settings"`
 	}
 	if err := s.client.Do(ctx, "POST", "/payouts/disable", map[string]any{}, &resp); err != nil {
 		return nil, err
@@ -138,9 +136,9 @@ func (s *Service) DisableAutomatic(ctx context.Context) (*Settings, error) {
 }
 
 // EnableAutomatic switches payout scheduling back to automatic mode.
-func (s *Service) EnableAutomatic(ctx context.Context) (*Settings, error) {
+func (s *Service) EnableAutomatic(ctx context.Context) (*SettingsMutation, error) {
 	var resp struct {
-		Settings Settings `json:"settings"`
+		Settings SettingsMutation `json:"settings"`
 	}
 	if err := s.client.Do(ctx, "POST", "/payouts/enable", map[string]any{}, &resp); err != nil {
 		return nil, err
@@ -163,10 +161,10 @@ func (s *Service) EnableAutomatic(ctx context.Context) (*Settings, error) {
 //	if err != nil {
 //	    return err
 //	}
-//	fmt.Printf("FX enabled: %v\n", settings.FxEnabled) // true
-func (s *Service) EnableFX(ctx context.Context) (*Settings, error) {
+//	fmt.Printf("FX enabled: %v\n", *settings.FXEnabled) // true
+func (s *Service) EnableFX(ctx context.Context) (*SettingsMutation, error) {
 	var resp struct {
-		Settings Settings `json:"settings"`
+		Settings SettingsMutation `json:"settings"`
 	}
 	if err := s.client.Do(ctx, "POST", "/payouts/enable_fx", map[string]any{}, &resp); err != nil {
 		return nil, err
@@ -187,10 +185,10 @@ func (s *Service) EnableFX(ctx context.Context) (*Settings, error) {
 //	if err != nil {
 //	    return err
 //	}
-//	fmt.Printf("FX enabled: %v\n", settings.FxEnabled) // false
-func (s *Service) DisableFX(ctx context.Context) (*Settings, error) {
+//	fmt.Printf("FX enabled: %v\n", *settings.FXEnabled) // false
+func (s *Service) DisableFX(ctx context.Context) (*SettingsMutation, error) {
 	var resp struct {
-		Settings Settings `json:"settings"`
+		Settings SettingsMutation `json:"settings"`
 	}
 	if err := s.client.Do(ctx, "POST", "/payouts/disable_fx", map[string]any{}, &resp); err != nil {
 		return nil, err
@@ -228,31 +226,29 @@ func (s *Service) Cancel(ctx context.Context, payoutID string) (*Payout, error) 
 //
 // Parameters:
 //   - params.PageNumber: Page to retrieve (optional, default: 1)
-//   - params.PageSize: Payouts per page (optional, default: 20, max: 100)
+//   - params.PageSize: Payouts per page (optional, default: 256, max: 256)
 //
-// Returns a slice of payouts for the requested page.
+// Returns page metadata and the payouts for the requested page.
 //
 // Example:
 //
-//	payouts, err := client.Payouts.Page(ctx, payout.PageParams{
+//	page, err := client.Payouts.Page(ctx, payout.PageParams{
 //	    PageNumber: 1,
 //	    PageSize:   50,
 //	})
-//	for _, payout := range payouts {
+//	for _, payout := range page.Payouts {
 //	    fmt.Printf("Payout %s: %s %d %s\n",
 //	        payout.ID, payout.Amount.Currency,
 //	        payout.Amount.Value, payout.Status)
 //	}
-func (s *Service) Page(ctx context.Context, params PageParams) ([]Payout, error) {
+func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
 	var resp struct {
-		Page struct {
-			Payouts []Payout `json:"payouts"`
-		} `json:"page"`
+		Page Page `json:"page"`
 	}
 	if err := s.client.Do(ctx, "POST", "/payouts/page", params, &resp); err != nil {
 		return nil, err
 	}
-	return resp.Page.Payouts, nil
+	return &resp.Page, nil
 }
 
 // NewService constructs the resource service used by inttegro.Client.

@@ -3,7 +3,7 @@ package purchaseintent_test
 import (
 	"fmt"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/purchaseintent"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/purchaseintent"
 )
 
 func ExampleStatus() {
