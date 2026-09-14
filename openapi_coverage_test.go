@@ -13,27 +13,27 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/app"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/balancetransaction"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/broadcast"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/chime"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/customer"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/file"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/filelink"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/filereference"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/financialaccount"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/messagetemplate"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/order"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/otp"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/paymentmethod"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/payout"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/price"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/product"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/purchaseintent"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/refund"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/secretkey"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/uploadrequest"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/app"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/balancetransaction"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/broadcast"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/chime"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/customer"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/file"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/filelink"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/filereference"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/financialaccount"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/messagetemplate"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/order"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/otp"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/paymentmethod"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/payout"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/price"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/product"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/purchaseintent"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/refund"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/secretkey"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/uploadrequest"
 )
 
 var openAPICapabilityURLPaths = map[string]bool{
@@ -310,7 +310,7 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.Payouts.Lookup(ctx, "po_1")
 	check(err)
-	_, err = client.Payouts.SetDestinations(ctx, map[string]string{"ghs": "fa_1"})
+	_, err = client.Payouts.SetDestinations(ctx, payout.Destinations{GHS: "fa_1"})
 	check(err)
 	_, err = client.Payouts.Settings(ctx)
 	check(err)

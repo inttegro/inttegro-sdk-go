@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 8.0.0 - 2026-09-14
+
+- Breaking: replaced payout maps and generic payloads with named request,
+  response, settings, page, error, and destination types.
+- Breaking: changed the module path to `github.com/zebodotdev/inttegro-sdk-go/v8`.
+- Made `GHS` the explicit supported payout-destination field and exposed payout
+  timestamps as `time.Time` values.
+- Removed server-internal purchase-intent activity response models and exposed
+  refund order and cancellation context.
+
 ## 7.1.0 - 2026-09-12
 
 - Added opt-in response envelopes that expose status, headers, request IDs,

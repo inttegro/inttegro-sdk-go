@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v7/checkout"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/customer"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/paymentmethod"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/request"
-	"github.com/zebodotdev/inttegro-sdk-go/v7/response"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/checkout"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/customer"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/paymentmethod"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/response"
 )
 
 // Create creates a new order.

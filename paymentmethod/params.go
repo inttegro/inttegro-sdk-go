@@ -1,7 +1,7 @@
 package paymentmethod
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v7/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
 )
 
 type PageParams struct {
