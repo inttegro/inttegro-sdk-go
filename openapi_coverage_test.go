@@ -310,7 +310,7 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.Payouts.Lookup(ctx, "po_1")
 	check(err)
-	_, err = client.Payouts.SetDestinations(ctx, map[string]string{"ghs": "fa_1"})
+	_, err = client.Payouts.SetDestinations(ctx, payout.Destinations{GHS: "fa_1"})
 	check(err)
 	_, err = client.Payouts.Settings(ctx)
 	check(err)

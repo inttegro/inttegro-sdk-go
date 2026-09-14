@@ -5,7 +5,7 @@ import "time"
 type ScheduleParams struct {
 	DestinationID string     `json:"destination_id"`
 	ExecuteAfter  *time.Time `json:"execute_after,omitempty"`
-	MaxAmount     int64      `json:"max_amount"`
+	MaxAmount     int64      `json:"max_amount,omitempty"`
 	Reference     string     `json:"reference"`
 }
 
@@ -13,9 +13,9 @@ type ScheduleParams struct {
 type PageParams struct {
 	// PageNumber is the page to retrieve (optional, default: 1).
 	// Pages are 1-indexed.
-	PageNumber int `json:"page_number,omitempty"`
+	PageNumber int `json:"page_number"`
 
-	// PageSize is the number of payouts per page (optional, default: 20).
-	// Maximum 100.
+	// PageSize is the number of payouts per page (optional, default: 256).
+	// Maximum 256.
 	PageSize int `json:"page_size,omitempty"`
 }
