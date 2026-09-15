@@ -14,6 +14,7 @@ type PaymentMethod struct {
 	CustomData   map[string]string `json:"custom_data,omitempty"`
 	Ephemeral    bool              `json:"ephemeral,omitempty"`
 	ExpiresOn    *time.Time        `json:"expires_on,omitempty"`
+	Fingerprint  string            `json:"fingerprint"`
 	MobileMoney  *MobileMoney      `json:"mobile_money,omitempty"`
 	Owner        *Owner            `json:"owner,omitempty"`
 	Supplied     *Supplied         `json:"supplied,omitempty"`
