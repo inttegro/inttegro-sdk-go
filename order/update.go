@@ -3,8 +3,9 @@ package order
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/paymentmethod"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/paymentmethod"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
 )
 
 // Update modifies mutable fields on an existing order.
@@ -23,7 +24,7 @@ func (s *Service) Update(ctx context.Context, params UpdateParams, opts ...reque
 type UpdateParams struct {
 	OrderID                   string              `json:"order_id"`
 	ClearPaymentMethod        *bool               `json:"clear_payment_method,omitempty"`
-	CustomData                map[string]string   `json:"custom_data,omitempty"`
+	CustomData                *customdata.Data    `json:"custom_data,omitempty"`
 	InvoiceSettings           *InvoiceSettings    `json:"invoice_settings,omitempty"`
 	Finalize                  *bool               `json:"finalize,omitempty"`
 	LineItems                 []LineItemParams    `json:"line_items,omitempty"`

@@ -1,7 +1,8 @@
 package customer
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
 )
 
 // CreateCustomerParams creates a customer record.
@@ -27,8 +28,9 @@ type CreateParams struct {
 	// PhoneNumber is the customer's phone number (optional).
 	PhoneNumber string `json:"phone_number,omitempty"`
 
-	// CustomData holds arbitrary key-value pairs (optional).
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	BillingAddress  *Address          `json:"billing_address,omitempty"`
+	CustomData      *customdata.Input `json:"custom_data,omitempty"`
+	ShippingAddress *Address          `json:"shipping_address,omitempty"`
 }
 
 // UpdateCustomerParams replaces the supplied fields on an existing customer.
@@ -36,7 +38,7 @@ type CreateParams struct {
 type UpdateParams struct {
 	CustomerID      string            `json:"customer_id"`
 	BillingAddress  *Address          `json:"billing_address,omitempty"`
-	CustomData      map[string]string `json:"custom_data,omitempty"`
+	CustomData      *customdata.Input `json:"custom_data,omitempty"`
 	Email           string            `json:"email_address,omitempty"`
 	Name            string            `json:"name,omitempty"`
 	PhoneNumber     string            `json:"phone_number,omitempty"`

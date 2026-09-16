@@ -1,6 +1,11 @@
 package customer
 
-import "time"
+import (
+	"time"
+
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
+)
 
 // CustomerData captures inline customer information for order creation.
 //
@@ -37,22 +42,31 @@ type Data struct {
 	// Maximum 255 characters. Must be unique across your customers.
 	Reference string `json:"reference,omitempty"`
 
-	// CustomData holds arbitrary key-value pairs about the customer (optional).
-	// Both keys and values must be strings. Maximum 25KB when serialized.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Input `json:"custom_data,omitempty"`
 }
 
 // Customer represents a customer record.
 type Customer struct {
-	ID          string            `json:"id,omitempty"`
-	Name        string            `json:"name,omitempty"`
-	Title       string            `json:"title,omitempty"`
-	Suffix      string            `json:"suffix,omitempty"`
-	Reference   string            `json:"reference,omitempty"`
-	Email       string            `json:"email_address,omitempty"`
-	PhoneNumber string            `json:"phone_number,omitempty"`
-	CustomData  map[string]string `json:"custom_data,omitempty"`
-	CreatedAt   *time.Time        `json:"created_at,omitempty"`
+	Balance         map[string]BalanceValue `json:"balance,omitempty"`
+	BillingAddress  *Address                `json:"billing_address,omitempty"`
+	CreatedAt       *time.Time              `json:"created_at,omitempty"`
+	CustomData      *customdata.Data        `json:"custom_data,omitempty"`
+	Email           string                  `json:"email_address,omitempty"`
+	Guest           bool                    `json:"guest,omitempty"`
+	ID              string                  `json:"id,omitempty"`
+	Name            string                  `json:"name,omitempty"`
+	PhoneNumber     string                  `json:"phone_number,omitempty"`
+	Reference       string                  `json:"reference,omitempty"`
+	ShippingAddress *Address                `json:"shipping_address,omitempty"`
+	Suffix          string                  `json:"suffix,omitempty"`
+	Title           string                  `json:"title,omitempty"`
+	UpdatedAt       *time.Time              `json:"updated_at,omitempty"`
+}
+
+// BalanceValue describes the customer's available balance in one currency.
+type BalanceValue struct {
+	AsOf      *time.Time   `json:"as_of,omitempty"`
+	Available money.Amount `json:"available"`
 }
 
 // CustomersPage holds a page of customers.

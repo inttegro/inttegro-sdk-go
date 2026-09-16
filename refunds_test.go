@@ -9,9 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/refund"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/refund"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
 )
 
 func TestRefundsServiceUsesCanonicalContracts(t *testing.T) {
@@ -275,7 +276,7 @@ func fullCreateRefundRequest() refund.CreateParams {
 		}},
 		ReasonDetails: "customer returned the item",
 		Reference:     "RETURN-123",
-		CustomData:    map[string]string{"warehouse": "accra"},
+		CustomData:    mustCustomData(map[string]string{"warehouse": "accra"}),
 		RequestMeta:   &request.Meta{IdempotencyKey: "create-refund-123"},
 	}
 }
@@ -285,7 +286,7 @@ func assertDecodedRefund(t *testing.T, got refund.Refund) {
 	if got.ID != "rf_123" || got.OrderID != "or_123" ||
 		got.Status != refund.StatusProcessing || got.Total.Currency != "ghs" ||
 		got.Total.Value != 2500 || got.Reason != refund.ReasonRequestedByCustomer ||
-		got.Reference != "RETURN-123" || got.CustomData["warehouse"] != "accra" {
+		got.Reference != "RETURN-123" || customDataValue(got.CustomData, "warehouse") != "accra" {
 		t.Fatalf("decoded refund = %#v", got)
 	}
 	if got.ProcessingAt == nil || !got.ProcessingAt.Equal(time.Date(2026, time.September, 2, 10, 1, 0, 0, time.UTC)) ||
@@ -300,6 +301,19 @@ func assertDecodedRefund(t *testing.T, got refund.Refund) {
 		*got.LineItems[0].Reason != refund.ReasonItemDamaged {
 		t.Fatalf("decoded refund lines = %#v", got.LineItems)
 	}
+}
+
+func mustCustomData(values map[string]string) *customdata.Data {
+	data, err := customdata.New(values)
+	if err != nil {
+		panic(err)
+	}
+	return data
+}
+
+func customDataValue(data *customdata.Data, key string) string {
+	value, _ := data.Get(key)
+	return value
 }
 
 func assertJSONMapEqual(t *testing.T, got, want map[string]any) {

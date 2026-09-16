@@ -3,9 +3,9 @@ package payment
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/balancetransaction"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/payout"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/balancetransaction"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/payout"
 )
 
 // Payment is the payment projection returned inside an order.

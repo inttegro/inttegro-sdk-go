@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/payout"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/payout"
 )
 
 func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
@@ -46,7 +46,8 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 	if len(got.BalanceTransactions) != 1 || got.BalanceTransactions[0] != "bt_123" {
 		t.Fatalf("balance transactions = %#v", got.BalanceTransactions)
 	}
-	if got.CustomData["batch"] != "weekly" || got.SentAt == nil || got.FailedAt == nil {
+	batch, _ := got.CustomData.Get("batch")
+	if batch != "weekly" || got.SentAt == nil || got.FailedAt == nil {
 		t.Fatalf("typed payout metadata/timestamps = %#v", got)
 	}
 

@@ -1,6 +1,6 @@
 package order
 
-import "github.com/zebodotdev/inttegro-sdk-go/v8/invoice"
+import "github.com/zebodotdev/inttegro-sdk-go/v9/invoice"
 
 // DocumentDeliveryResult contains the updated order and its delivery result.
 type DocumentDeliveryResult struct {

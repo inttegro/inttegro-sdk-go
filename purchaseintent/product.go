@@ -3,7 +3,8 @@ package purchaseintent
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/product"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/product"
 )
 
 type Product struct {
@@ -14,7 +15,7 @@ type Product struct {
 	Attributes   []ProductAttribute     `json:"attributes,omitempty"`
 	Category     string                 `json:"category,omitempty"`
 	CreatedAt    time.Time              `json:"created_at"`
-	CustomData   map[string]string      `json:"custom_data,omitempty"`
+	CustomData   *customdata.Data       `json:"custom_data,omitempty"`
 	Description  string                 `json:"description,omitempty"`
 	Dimensions   *ProductDimensions     `json:"dimensions,omitempty"`
 	Media        *ProductMedia          `json:"media,omitempty"`

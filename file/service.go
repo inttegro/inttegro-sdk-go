@@ -9,7 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/internal/transport"
 )
 
 type Service struct {

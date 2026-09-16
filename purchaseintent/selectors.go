@@ -1,7 +1,7 @@
 package purchaseintent
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v8/price"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/price"
 )
 
 type Quantity struct {

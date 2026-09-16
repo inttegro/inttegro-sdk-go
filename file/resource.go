@@ -1,11 +1,13 @@
 package file
 
+import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+
 // File represents an uploaded file.
 type File struct {
 	ID         string            `json:"id"`
 	Purpose    string            `json:"purpose"`
 	Status     Status            `json:"status"`
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data  `json:"custom_data,omitempty"`
 	Metadata   map[string]string `json:"metadata,omitempty"`
 }
 

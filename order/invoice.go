@@ -1,5 +1,7 @@
 package order
 
+import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+
 type Invoice struct {
 	Number string        `json:"number,omitempty"`
 	Format InvoiceFormat `json:"format"`
@@ -16,8 +18,8 @@ type DocumentFormat struct {
 }
 
 type InvoiceSettings struct {
-	Number     string            `json:"number,omitempty"`
-	Memo       string            `json:"memo,omitempty"`
-	Footer     string            `json:"footer,omitempty"`
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	Number     string           `json:"number,omitempty"`
+	Memo       string           `json:"memo,omitempty"`
+	Footer     string           `json:"footer,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 }

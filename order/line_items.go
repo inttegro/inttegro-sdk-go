@@ -1,9 +1,10 @@
 package order
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/price"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/product"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/price"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/product"
 )
 
 // ProductLineItemParams represents a product supplied in an order request.
@@ -60,23 +61,23 @@ type ProductLineItemParams struct {
 	// Both keys and values must be strings.
 	// Maximum 25KB when serialized.
 	// Learn more: https://studio.inttegro.com/custom-data
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 }
 
 // ProductLineItem is a product returned in an order.
 type ProductLineItem struct {
-	ID         string            `json:"id"`
-	ProductID  string            `json:"product_id,omitempty"`
-	PriceID    string            `json:"price_id,omitempty"`
-	Reference  string            `json:"reference,omitempty"`
-	About      string            `json:"about,omitempty"`
-	CustomData map[string]string `json:"custom_data,omitempty"`
-	TaxCode    string            `json:"tax_code,omitempty"`
-	Name       string            `json:"name"`
-	Category   string            `json:"category,omitempty"`
-	Type       product.Type      `json:"type,omitempty"`
-	Price      price.Inline      `json:"price"`
-	Quantity   int64             `json:"quantity"`
+	ID         string           `json:"id"`
+	ProductID  string           `json:"product_id,omitempty"`
+	PriceID    string           `json:"price_id,omitempty"`
+	Reference  string           `json:"reference,omitempty"`
+	About      string           `json:"about,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
+	TaxCode    string           `json:"tax_code,omitempty"`
+	Name       string           `json:"name"`
+	Category   string           `json:"category,omitempty"`
+	Type       product.Type     `json:"type,omitempty"`
+	Price      price.Inline     `json:"price"`
+	Quantity   int64            `json:"quantity"`
 }
 
 // FeeLineItemParams represents an additional charge supplied in a request.
@@ -109,7 +110,7 @@ type FeeLineItemParams struct {
 	// CustomData holds arbitrary key-value custom data (optional).
 	// Both keys and values must be strings.
 	// Maximum 25KB when serialized.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 
 	// Amount is the total fee charge (required).
 	// In minor units. Not multiplied by any quantity.
@@ -147,7 +148,7 @@ type ShippingLineItemParams struct {
 	// CustomData holds arbitrary key-value custom data (optional).
 	// Both keys and values must be strings.
 	// Maximum 25KB when serialized.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 }
 
 // ShippingLineItem is a delivery charge returned in an order.

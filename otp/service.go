@@ -3,8 +3,8 @@ package otp
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/internal/transport"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
 )
 
 // OtpService manages one-time password generation and verification.

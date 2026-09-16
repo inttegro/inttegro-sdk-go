@@ -4,11 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/checkout"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/customer"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/paymentmethod"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/response"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/checkout"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customer"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/paymentmethod"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/response"
 )
 
 // Create creates a new order.
@@ -240,7 +241,7 @@ type CreateParams struct {
 
 	// CustomData holds arbitrary key-value metadata for the order (optional).
 	// Both keys and values must be strings.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 
 	// BillingDetails optionally supplies billing contact and address details.
 	// Hosted checkout can collect payment-specific details when this is zero.

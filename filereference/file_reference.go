@@ -4,7 +4,7 @@ package filereference
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/internal/transport"
 )
 
 // FileReferencesService manages Inttegro resource file references.

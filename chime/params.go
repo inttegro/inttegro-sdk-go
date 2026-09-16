@@ -1,6 +1,10 @@
 package chime
 
-import "time"
+import (
+	"time"
+
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+)
 
 type PageParams struct {
 	CustomerID string `json:"customer_id,omitempty"`
@@ -54,7 +58,7 @@ type SendParams struct {
 	// CustomData holds arbitrary key-value custom data (optional).
 	// Both keys and values must be strings. Maximum 25KB when serialized.
 	// Useful for linking chimes to your internal records.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 
 	// IdempotencyKey prevents duplicate sends (optional but strongly recommended).
 	// If the same key is used twice, the second request returns the original chime

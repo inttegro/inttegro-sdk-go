@@ -3,7 +3,7 @@ package payout
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
 )
 
 // Payout represents a settlement transfer to your bank or mobile money account.
@@ -23,7 +23,7 @@ type Payout struct {
 	CanceledAt *time.Time `json:"canceled_at,omitempty"`
 
 	// CustomData contains merchant-defined string metadata attached to the payout.
-	CustomData CustomData `json:"custom_data,omitempty"`
+	CustomData *CustomData `json:"custom_data,omitempty"`
 
 	// DestinationID identifies the financial account receiving the payout.
 	DestinationID string `json:"destination_id"`

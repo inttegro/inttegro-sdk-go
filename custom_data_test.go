@@ -75,3 +75,39 @@ func TestCustomDataPatchDistinguishesSetAndUnset(t *testing.T) {
 		t.Fatalf("old_note = %#v, present=%v", value, ok)
 	}
 }
+
+func TestCustomDataInputPreservesStructuredJSON(t *testing.T) {
+	input, err := NewCustomDataInput(map[string]any{
+		"campaign": "launch",
+		"audience": map[string]any{"tier": "vip"},
+		"visits":   3,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	encoded, err := json.Marshal(input)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var decoded map[string]any
+	if err := json.Unmarshal(encoded, &decoded); err != nil {
+		t.Fatal(err)
+	}
+	if decoded["campaign"] != "launch" || decoded["visits"] != float64(3) {
+		t.Fatalf("decoded input = %#v", decoded)
+	}
+}
+
+func TestCustomDataPatchAcceptsStructuredValues(t *testing.T) {
+	patch := NewCustomDataPatch()
+	if err := patch.Set("preferences", map[string]any{"newsletter": true}); err != nil {
+		t.Fatal(err)
+	}
+	encoded, err := json.Marshal(patch)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got, want := string(encoded), `{"preferences":{"newsletter":true}}`; got != want {
+		t.Fatalf("encoded = %s, want %s", got, want)
+	}
+}

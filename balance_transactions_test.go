@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/balancetransaction"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/payment"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/balancetransaction"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/payment"
 )
 
 func TestBalanceTransactionDeserializesSemanticSources(t *testing.T) {

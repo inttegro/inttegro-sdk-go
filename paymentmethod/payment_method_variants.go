@@ -3,7 +3,7 @@ package paymentmethod
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/bankaccount"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/bankaccount"
 )
 
 // MobileMoneyNetwork identifies a supported mobile money network.
