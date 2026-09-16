@@ -3,7 +3,8 @@ package refund
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
 )
 
 // RefundLineItem is one immutable order-line allocation in a refund.
@@ -18,24 +19,24 @@ type LineItem struct {
 
 // Refund is the canonical refund object embedded in order responses.
 type Refund struct {
-	ID            string            `json:"id"`
-	OrderID       string            `json:"order_id"`
-	OrderAmount   *money.Amount     `json:"order_amount,omitempty"`
-	Settlement    Settlement        `json:"settlement"`
-	Status        Status            `json:"status"`
-	Total         money.Amount      `json:"total"`
-	LineItems     []LineItem        `json:"line_items"`
-	Reason        Reason            `json:"reason"`
-	ReasonDetails string            `json:"reason_details,omitempty"`
-	Reference     string            `json:"reference,omitempty"`
-	CustomData    map[string]string `json:"custom_data,omitempty"`
-	CreatedAt     time.Time         `json:"created_at"`
-	ProcessingAt  *time.Time        `json:"processing_at,omitempty"`
-	SucceededAt   *time.Time        `json:"succeeded_at,omitempty"`
-	Failure       *Failure          `json:"failure,omitempty"`
-	FailedAt      *time.Time        `json:"failed_at,omitempty"`
-	CanceledAt    *time.Time        `json:"canceled_at,omitempty"`
-	CancelReason  string            `json:"cancel_reason,omitempty"`
+	ID            string           `json:"id"`
+	OrderID       string           `json:"order_id"`
+	OrderAmount   *money.Amount    `json:"order_amount,omitempty"`
+	Settlement    Settlement       `json:"settlement"`
+	Status        Status           `json:"status"`
+	Total         money.Amount     `json:"total"`
+	LineItems     []LineItem       `json:"line_items"`
+	Reason        Reason           `json:"reason"`
+	ReasonDetails string           `json:"reason_details,omitempty"`
+	Reference     string           `json:"reference,omitempty"`
+	CustomData    *customdata.Data `json:"custom_data,omitempty"`
+	CreatedAt     time.Time        `json:"created_at"`
+	ProcessingAt  *time.Time       `json:"processing_at,omitempty"`
+	SucceededAt   *time.Time       `json:"succeeded_at,omitempty"`
+	Failure       *Failure         `json:"failure,omitempty"`
+	FailedAt      *time.Time       `json:"failed_at,omitempty"`
+	CanceledAt    *time.Time       `json:"canceled_at,omitempty"`
+	CancelReason  string           `json:"cancel_reason,omitempty"`
 }
 
 // RefundPage contains one page of refunds.

@@ -1,5 +1,7 @@
 package uploadrequest
 
+import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+
 type Constraints struct {
 	ContentTypes []string `json:"content_types,omitempty"`
 	ExactSize    int64    `json:"exact_size,omitempty"`
@@ -40,7 +42,7 @@ type UploadRequest struct {
 	Purpose    string            `json:"purpose"`
 	Status     Status            `json:"status"`
 	UploadURL  string            `json:"upload_url,omitempty"`
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data  `json:"custom_data,omitempty"`
 	Metadata   map[string]string `json:"metadata,omitempty"`
 }
 

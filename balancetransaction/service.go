@@ -3,7 +3,7 @@ package balancetransaction
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/internal/transport"
 )
 
 // BalanceTransactionsService provides access to balance transaction history.

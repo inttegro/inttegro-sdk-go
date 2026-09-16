@@ -1,14 +1,18 @@
 package filelink
 
-import "time"
+import (
+	"time"
+
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+)
 
 type CreateParams struct {
-	Access     Access            `json:"access"`
-	CreatedBy  Actor             `json:"created_by"`
-	Delivery   Delivery          `json:"delivery"`
-	ExpiresAt  *time.Time        `json:"expires_at,omitempty"`
-	FileID     string            `json:"file_id"`
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	Access     Access           `json:"access"`
+	CreatedBy  Actor            `json:"created_by"`
+	Delivery   Delivery         `json:"delivery"`
+	ExpiresAt  *time.Time       `json:"expires_at,omitempty"`
+	FileID     string           `json:"file_id"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 }
 
 type PageParams struct {

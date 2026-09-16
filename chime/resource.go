@@ -1,6 +1,10 @@
 package chime
 
-import "time"
+import (
+	"time"
+
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+)
 
 type Page struct {
 	Number int     `json:"number,omitempty"`
@@ -33,7 +37,7 @@ type Chime struct {
 	Purpose string `json:"purpose,omitempty"`
 
 	// CustomData contains attached custom data.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Data `json:"custom_data,omitempty"`
 
 	// Delivery contains delivery status and timestamps.
 	// Tracks whether the message was successfully delivered.

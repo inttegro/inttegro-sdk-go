@@ -1,7 +1,7 @@
 package price
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
 )
 
 type PageParams struct {

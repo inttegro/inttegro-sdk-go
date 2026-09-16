@@ -1,13 +1,17 @@
 package file
 
-import "time"
+import (
+	"time"
+
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+)
 
 type CreateParams struct {
-	File           string            `json:"-"`
-	Purpose        string            `json:"purpose"`
-	Title          string            `json:"title,omitempty"`
-	CustomData     map[string]string `json:"custom_data,omitempty"`
-	IdempotencyKey string            `json:"-"`
+	File           string           `json:"-"`
+	Purpose        string           `json:"purpose"`
+	Title          string           `json:"title,omitempty"`
+	CustomData     *customdata.Data `json:"custom_data,omitempty"`
+	IdempotencyKey string           `json:"-"`
 }
 
 type PageParams struct {

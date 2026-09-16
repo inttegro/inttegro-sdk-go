@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 9.0.0 - 2026-09-16
+
+- Breaking: replaced raw customer address and custom-data maps with named,
+  validated `customer.Address` and `customdata` values.
+- Added distinct custom-data response, request-input, and merge-patch types so
+  open-ended JSON remains supported without ambiguous mutation semantics.
+- Changed the module path to `github.com/zebodotdev/inttegro-sdk-go/v9`.
+
 ## 8.0.0 - 2026-09-14
 
 - Breaking: replaced payout maps and generic payloads with named request,

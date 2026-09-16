@@ -3,8 +3,9 @@ package order
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/payment"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/refund"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/payment"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/refund"
 )
 
 // Order is the complete public order projection returned by the API.
@@ -20,7 +21,7 @@ type Order struct {
 	Invoice          *Invoice          `json:"invoice,omitempty"`
 	LineItemGroup    *LineItemGroup    `json:"line_item_group,omitempty"`
 	Payment          *payment.Payment  `json:"payment,omitempty"`
-	CustomData       map[string]string `json:"custom_data,omitempty"`
+	CustomData       *customdata.Data  `json:"custom_data,omitempty"`
 	CreatedFrom      *CreatedFrom      `json:"created_from,omitempty"`
 	InitiatedAt      time.Time         `json:"initiated_at"`
 	CompletedAt      *time.Time        `json:"completed_at,omitempty"`

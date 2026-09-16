@@ -1,8 +1,9 @@
 package financialaccount
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v8/bankaccount"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/wallet"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/bankaccount"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/wallet"
 )
 
 // FinancialAccountCreateParams creates a payout destination account.
@@ -72,7 +73,7 @@ type CreateParams struct {
 	DoshAccount map[string]any `json:"dosh_account,omitempty"`
 
 	// CustomData contains optional key-value metadata for tracking.
-	CustomData map[string]string `json:"custom_data,omitempty"`
+	CustomData *customdata.Input `json:"custom_data,omitempty"`
 
 	// Owner contains financial account owner information (required for payouts).
 	Owner *bankaccount.Owner `json:"owner,omitempty"`

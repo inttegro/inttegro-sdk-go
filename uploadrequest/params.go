@@ -3,19 +3,20 @@ package uploadrequest
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v8/filelink"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/filelink"
 )
 
 type CreateParams struct {
-	Constraints Constraints       `json:"constraints"`
-	Display     Display           `json:"display"`
-	ExpiresAt   *time.Time        `json:"expires_at,omitempty"`
-	CustomData  map[string]string `json:"custom_data,omitempty"`
-	Purpose     string            `json:"purpose"`
-	Recipient   Party             `json:"recipient"`
-	Requester   filelink.Actor    `json:"requester"`
-	Resource    FileResource      `json:"resource"`
-	Subject     Party             `json:"subject"`
+	Constraints Constraints      `json:"constraints"`
+	Display     Display          `json:"display"`
+	ExpiresAt   *time.Time       `json:"expires_at,omitempty"`
+	CustomData  *customdata.Data `json:"custom_data,omitempty"`
+	Purpose     string           `json:"purpose"`
+	Recipient   Party            `json:"recipient"`
+	Requester   filelink.Actor   `json:"requester"`
+	Resource    FileResource     `json:"resource"`
+	Subject     Party            `json:"subject"`
 }
 
 type PageParams struct {

@@ -1,8 +1,9 @@
 package refund
 
 import (
-	"github.com/zebodotdev/inttegro-sdk-go/v8/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v8/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
 )
 
 // CreateRefundLineItem requests a refund allocation against one paid order
@@ -16,13 +17,13 @@ type CreateLineItem struct {
 
 // CreateRefundRequest starts a refund for 1 to 64 paid order line items.
 type CreateParams struct {
-	LineItems     []CreateLineItem  `json:"line_items"`
-	OrderID       string            `json:"order_id"`
-	Reason        Reason            `json:"reason"`
-	CustomData    map[string]string `json:"custom_data,omitempty"`
-	ReasonDetails string            `json:"reason_details,omitempty"`
-	Reference     string            `json:"reference,omitempty"`
-	RequestMeta   *request.Meta     `json:"request_meta,omitempty"`
+	LineItems     []CreateLineItem `json:"line_items"`
+	OrderID       string           `json:"order_id"`
+	Reason        Reason           `json:"reason"`
+	CustomData    *customdata.Data `json:"custom_data,omitempty"`
+	ReasonDetails string           `json:"reason_details,omitempty"`
+	Reference     string           `json:"reference,omitempty"`
+	RequestMeta   *request.Meta    `json:"request_meta,omitempty"`
 }
 
 // CancelRefundRequest cancels a refund that has not begun processing.
