@@ -301,6 +301,11 @@ func assertDecodedRefund(t *testing.T, got refund.Refund) {
 		*got.LineItems[0].Reason != refund.ReasonItemDamaged {
 		t.Fatalf("decoded refund lines = %#v", got.LineItems)
 	}
+	line := got.LineItems[0].OrderLineItem
+	if line == nil || line.Type != refund.OrderLineItemTypeProduct || line.Quantity != 2 ||
+		line.Product == nil || line.Product.ID != "prod_123" || line.Product.Name != "Premium subscription" {
+		t.Fatalf("decoded refund order line item = %#v", line)
+	}
 }
 
 func mustCustomData(values map[string]string) *customdata.Data {
@@ -331,6 +336,12 @@ const refundObjectJSON = `{
     "line_items": [{
       "id": "rli_123",
       "order_line_item_id": "oli_123",
+      "order_line_item": {
+        "id": "oli_123",
+        "type": "product",
+        "quantity": 2,
+        "product": {"id": "prod_123", "name": "Premium subscription"}
+      },
       "original_amount_paid": {"currency": "ghs", "value": 5000},
       "refund_amount": {"currency": "ghs", "value": 2500},
       "reason": "item_damaged",

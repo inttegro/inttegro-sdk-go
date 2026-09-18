@@ -9,12 +9,15 @@ import (
 
 // RefundLineItem is one immutable order-line allocation in a refund.
 type LineItem struct {
-	ID                 string       `json:"id"`
-	OrderLineItemID    string       `json:"order_line_item_id"`
-	OriginalAmountPaid money.Amount `json:"original_amount_paid"`
-	RefundAmount       money.Amount `json:"refund_amount"`
-	Reason             *Reason      `json:"reason,omitempty"`
-	ReasonDetails      string       `json:"reason_details,omitempty"`
+	ID string `json:"id"`
+	// OrderLineItemID is retained for compatibility.
+	// Deprecated: use OrderLineItem.ID.
+	OrderLineItemID    string         `json:"order_line_item_id"`
+	OrderLineItem      *OrderLineItem `json:"order_line_item,omitempty"`
+	OriginalAmountPaid money.Amount   `json:"original_amount_paid"`
+	RefundAmount       money.Amount   `json:"refund_amount"`
+	Reason             *Reason        `json:"reason,omitempty"`
+	ReasonDetails      string         `json:"reason_details,omitempty"`
 }
 
 // Refund is the canonical refund object embedded in order responses.
