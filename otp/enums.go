@@ -8,6 +8,24 @@ const (
 	AlphabetTypeAlphanumeric AlphabetType = "alphanumeric"
 )
 
+type Purpose string
+
+const (
+	PurposeAccountCreation              Purpose = "account_creation"
+	PurposeAccountRecovery              Purpose = "account_recovery"
+	PurposeEmailVerification            Purpose = "email_verification"
+	PurposeFinancialAccountVerification Purpose = "financial_account_verification"
+	PurposePasswordReset                Purpose = "password_reset"
+	PurposePaymentConfirmation          Purpose = "payment_confirmation"
+	PurposePaymentMethodVerification    Purpose = "payment_method_verification"
+	PurposePayoutConfirmation           Purpose = "payout_confirmation"
+	PurposePhoneVerification            Purpose = "phone_verification"
+	PurposeSensitiveAction              Purpose = "sensitive_action"
+	PurposeSignIn                       Purpose = "sign_in"
+	PurposeTransactionConfirmation      Purpose = "transaction_confirmation"
+	PurposeUnspecified                  Purpose = "unspecified"
+)
+
 type Status string
 
 const (

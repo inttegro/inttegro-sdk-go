@@ -4,7 +4,7 @@ package otp
 type InitiateParams struct {
 	AsyncDelivery             *bool        `json:"async_delivery,omitempty"`
 	MessageTemplate           string       `json:"message_template,omitempty"`
-	Purpose                   string       `json:"purpose,omitempty"`
+	Purpose                   Purpose      `json:"purpose"`
 	Recipient                 string       `json:"recipient"`
 	Sender                    string       `json:"sender,omitempty"`
 	ServiceName               string       `json:"service_name"`

@@ -153,7 +153,7 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 		check(download.Close())
 	}
 
-	_, err := client.Otp.Initiate(ctx, otp.InitiateParams{Recipient: "+233", ServiceName: "Inttegro", TokenSize: 6})
+	_, err := client.Otp.Initiate(ctx, otp.InitiateParams{Purpose: otp.PurposeUnspecified, Recipient: "+233", ServiceName: "Inttegro", TokenSize: 6})
 	check(err)
 	_, err = client.Otp.Verify(ctx, otp.VerifyParams{Recipient: "+233", TransactionID: "ot_1", Token: "123456"})
 	check(err)
