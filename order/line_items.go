@@ -1,6 +1,8 @@
 package order
 
 import (
+	"encoding/json"
+
 	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
 	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
 	"github.com/zebodotdev/inttegro-sdk-go/v9/price"
@@ -23,6 +25,14 @@ import (
 //	    Reference: "SKU-12345",
 //	}
 type ProductLineItemParams struct {
+	// ProductID references an existing catalog product. Leave this empty when
+	// supplying inline product details.
+	ProductID string `json:"product_id,omitempty"`
+
+	// PriceID references a saved price for ProductID. Leave this empty when
+	// supplying an explicit Price.
+	PriceID string `json:"price_id,omitempty"`
+
 	// Type indicates whether the product is physical or digital (required).
 	// Values: "physical" or "digital"
 	// Physical products require shipping address.
@@ -62,6 +72,37 @@ type ProductLineItemParams struct {
 	// Maximum 25KB when serialized.
 	// Learn more: https://studio.inttegro.com/custom-data
 	CustomData *customdata.Data `json:"custom_data,omitempty"`
+}
+
+// MarshalJSON preserves the inline-product shape while emitting only the
+// fields accepted by the catalog-backed variants when ProductID is present.
+func (p ProductLineItemParams) MarshalJSON() ([]byte, error) {
+	if p.ProductID == "" {
+		type inlineProductLineItemParams ProductLineItemParams
+		return json.Marshal(inlineProductLineItemParams(p))
+	}
+
+	if p.PriceID != "" {
+		return json.Marshal(struct {
+			ProductID string `json:"product_id"`
+			PriceID   string `json:"price_id"`
+			Quantity  int64  `json:"quantity"`
+		}{
+			ProductID: p.ProductID,
+			PriceID:   p.PriceID,
+			Quantity:  p.Quantity,
+		})
+	}
+
+	return json.Marshal(struct {
+		ProductID string             `json:"product_id"`
+		Quantity  int64              `json:"quantity"`
+		Price     price.InlineParams `json:"price"`
+	}{
+		ProductID: p.ProductID,
+		Quantity:  p.Quantity,
+		Price:     p.Price,
+	})
 }
 
 // ProductLineItem is a product returned in an order.
