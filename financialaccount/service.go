@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/zebodotdev/inttegro-sdk-go/v9/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/search"
 )
 
 // FinancialAccountsService manages payout destination accounts.
@@ -163,6 +164,17 @@ func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
 		return nil, err
 	}
 	return &resp.Page, nil
+}
+
+// Search finds financial-account projections owned by the authenticated application.
+func (s *Service) Search(ctx context.Context, params search.Params) (*search.Page, error) {
+	var resp struct {
+		Search search.Page `json:"search"`
+	}
+	if err := s.client.Do(ctx, "POST", "/financial_accounts/search", params, &resp); err != nil {
+		return nil, err
+	}
+	return &resp.Search, nil
 }
 
 // Verify is currently not implemented by the API (returns 501) but exposed for completeness.

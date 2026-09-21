@@ -553,7 +553,7 @@ func isIdempotentMutationPath(pathOrURL string) bool {
 		return false
 	}
 	switch parts[len(parts)-1] {
-	case "lookup", "page", "settings", "countries", "contents", "balances", "render_preview", "usage":
+	case "lookup", "page", "search", "settings", "countries", "contents", "balances", "render_preview", "usage":
 		return false
 	default:
 		return true
