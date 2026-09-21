@@ -28,6 +28,9 @@ func TestOtpUsesTypedRequestsAndResponses(t *testing.T) {
 			if params.TokenAlphabetType != otp.AlphabetTypeNumeric {
 				t.Fatalf("unexpected alphabet type %q", params.TokenAlphabetType)
 			}
+			if params.Purpose != otp.PurposeSignIn {
+				t.Fatalf("unexpected purpose %q", params.Purpose)
+			}
 			_, _ = w.Write([]byte(`{"transaction":{"id":"ot_1","expires_at":"2026-01-01T00:10:00Z","full_message":"Your code is {token}.","initiated_at":"2026-01-01T00:00:00Z","status":"pending_verification"}}`))
 		case "/otp/verify":
 			_, _ = w.Write([]byte(`{"transaction":{"id":"ot_1","expires_at":"2026-01-01T00:10:00Z","full_message":"Your code is {token}.","initiated_at":"2026-01-01T00:00:00Z","status":"verified"},"verification_attempt":{"attempted_at":"2026-01-01T00:01:00Z","id":"ov_1","presented_token":"123456","recipient":"+233241234567","result":{"verdict":"pass"}}}`))
@@ -43,6 +46,7 @@ func TestOtpUsesTypedRequestsAndResponses(t *testing.T) {
 	ctx := context.Background()
 	transaction, err := client.Otp.Initiate(ctx, otp.InitiateParams{
 		Recipient:         "+233241234567",
+		Purpose:           otp.PurposeSignIn,
 		ServiceName:       "MyApp",
 		TokenAlphabetType: otp.AlphabetTypeNumeric,
 		TokenSize:         6,

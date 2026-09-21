@@ -32,6 +32,7 @@ import (
 	"github.com/zebodotdev/inttegro-sdk-go/v9/product"
 	"github.com/zebodotdev/inttegro-sdk-go/v9/purchaseintent"
 	"github.com/zebodotdev/inttegro-sdk-go/v9/refund"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/search"
 	"github.com/zebodotdev/inttegro-sdk-go/v9/secretkey"
 	"github.com/zebodotdev/inttegro-sdk-go/v9/uploadrequest"
 )
@@ -153,7 +154,7 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 		check(download.Close())
 	}
 
-	_, err := client.Otp.Initiate(ctx, otp.InitiateParams{Recipient: "+233", ServiceName: "Inttegro", TokenSize: 6})
+	_, err := client.Otp.Initiate(ctx, otp.InitiateParams{Purpose: otp.PurposeUnspecified, Recipient: "+233", ServiceName: "Inttegro", TokenSize: 6})
 	check(err)
 	_, err = client.Otp.Verify(ctx, otp.VerifyParams{Recipient: "+233", TransactionID: "ot_1", Token: "123456"})
 	check(err)
@@ -211,6 +212,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.Customers.Page(ctx, customer.PageParams{PageNumber: 1, PageSize: 20})
 	check(err)
+	_, err = client.Customers.Search(ctx, search.Params{Text: "Jane"})
+	check(err)
 
 	_, err = client.Orders.Create(ctx, order.CreateParams{Number: "ORDER-1"})
 	check(err)
@@ -235,6 +238,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.Orders.SendReceipt(ctx, order.SendReceiptParams{OrderID: "or_1"})
 	check(err)
 	_, err = client.Orders.Page(ctx, order.PageParams{PageNumber: 1, PageSize: 20})
+	check(err)
+	_, err = client.Orders.Search(ctx, search.Params{Text: "ORDER-1"})
 	check(err)
 	refundRequest := refund.CreateParams{
 		OrderID: "or_1",
@@ -280,6 +285,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.FinancialAccounts.Page(ctx, financialaccount.PageParams{PageNumber: 1, PageSize: 20})
 	check(err)
+	_, err = client.FinancialAccounts.Search(ctx, search.Params{Text: "Primary"})
+	check(err)
 	_, err = client.FinancialAccounts.Verify(ctx, map[string]any{"account_id": "fa_1"})
 	check(err)
 	_, err = client.FinancialAccounts.Connect(ctx, financialaccount.CreateParams{Label: "Primary"})
@@ -323,6 +330,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.Payouts.DisableFX(ctx)
 	check(err)
 	_, err = client.Payouts.Page(ctx, payout.PageParams{PageNumber: 1, PageSize: 20})
+	check(err)
+	_, err = client.Payouts.Search(ctx, search.Params{Text: "payout"})
 	check(err)
 	_, err = client.Payouts.Cancel(ctx, "po_1")
 	check(err)
@@ -398,6 +407,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.Products.Archive(ctx, "prod_1")
 	check(err)
 	_, err = client.Products.Page(ctx, product.PageParams{PageNumber: 1, PageSize: 20})
+	check(err)
+	_, err = client.Products.Search(ctx, search.Params{Text: "product"})
 	check(err)
 
 	_, err = client.PurchaseIntents.Create(ctx, purchaseintent.CreateParams{

@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/zebodotdev/inttegro-sdk-go/v9/internal/transport"
+	"github.com/zebodotdev/inttegro-sdk-go/v9/search"
 )
 
 // PayoutsService manages payout configuration, scheduling, and history.
@@ -249,6 +250,17 @@ func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
 		return nil, err
 	}
 	return &resp.Page, nil
+}
+
+// Search finds payout projections owned by the authenticated application.
+func (s *Service) Search(ctx context.Context, params search.Params) (*search.Page, error) {
+	var resp struct {
+		Search search.Page `json:"search"`
+	}
+	if err := s.client.Do(ctx, "POST", "/payouts/search", params, &resp); err != nil {
+		return nil, err
+	}
+	return &resp.Search, nil
 }
 
 // NewService constructs the resource service used by inttegro.Client.

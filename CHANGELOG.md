@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 9.1.0 - 2026-09-21
+
+- Added typed search across customers, financial accounts, orders, payouts, and
+  products, including filters, facets, sorting, cursor pagination, totals, and
+  freshness metadata.
+- Added typed verification purposes for OTP initiation requests.
+
 ## 9.0.0 - 2026-09-16
 
 - Breaking: replaced raw customer address and custom-data maps with named,
