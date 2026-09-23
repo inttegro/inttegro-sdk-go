@@ -1,6 +1,6 @@
 package file
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 
 // File represents an uploaded file.
 type File struct {

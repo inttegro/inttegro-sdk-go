@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/otp"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/otp"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/request"
 )
 
 func TestOtpUsesTypedRequestsAndResponses(t *testing.T) {

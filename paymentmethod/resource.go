@@ -3,7 +3,7 @@ package paymentmethod
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 )
 
 // PaymentMethod is a tokenized payment instrument tied to a customer.

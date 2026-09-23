@@ -1,7 +1,7 @@
 // Package wallet provides wallet values.
 package wallet
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/paymentmethod"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/paymentmethod"
 
 // Type identifies a wallet implementation.
 type Type string

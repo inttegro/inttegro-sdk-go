@@ -1,6 +1,6 @@
 package inttegro
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 
 const (
 	MaxCustomDataKeyBytes = customdata.MaxKeyBytes

@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/payout"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/payout"
 )
 
 func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
@@ -43,7 +43,9 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 	if got.Error == nil || got.Error.Type != "network_error" || got.Error.OccurredAt.IsZero() {
 		t.Fatalf("typed payout error = %#v", got.Error)
 	}
-	if len(got.BalanceTransactions) != 1 || got.BalanceTransactions[0] != "bt_123" {
+	if len(got.BalanceTransactions) != 1 || got.BalanceTransactions[0].ID != "bt_123" ||
+		got.BalanceTransactions[0].Amount.Value != 20000 ||
+		got.BalanceTransactions[0].AllocatedAmount.Value != 12500 {
 		t.Fatalf("balance transactions = %#v", got.BalanceTransactions)
 	}
 	batch, _ := got.CustomData.Get("batch")
@@ -78,7 +80,7 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 
 const canonicalPayoutJSON = `{
   "amount":{"currency":"ghs","value":12500},
-  "balance_transactions":["bt_123"],
+  "balance_transactions":[{"id":"bt_123","amount":{"currency":"ghs","value":20000},"allocated_amount":{"currency":"ghs","value":12500}}],
   "custom_data":{"batch":"weekly"},
   "destination_id":"fa_ghs",
   "error":{"cause":"provider unavailable","message":"Payout failed","occurred_at":"2026-09-14T09:05:00Z","type":"network_error"},

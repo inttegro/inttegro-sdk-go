@@ -1,6 +1,6 @@
 package filelink
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 
 // FileLink represents a shareable link to an uploaded file.
 type FileLink struct {

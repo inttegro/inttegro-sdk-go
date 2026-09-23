@@ -3,7 +3,7 @@ package payout
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
 )
 
 // Payout represents a settlement transfer to your bank or mobile money account.
@@ -16,8 +16,9 @@ type Payout struct {
 	// It is absent while only the maximum payout amount is known.
 	Amount *money.Amount `json:"amount,omitempty"`
 
-	// BalanceTransactions contains the balance transaction IDs included in the payout.
-	BalanceTransactions []string `json:"balance_transactions,omitempty"`
+	// BalanceTransactions contains each source's original amount and the exact
+	// portion allocated to this payout.
+	BalanceTransactions []BalanceTransaction `json:"balance_transactions,omitempty"`
 
 	// CanceledAt is when a scheduled payout was canceled.
 	CanceledAt *time.Time `json:"canceled_at,omitempty"`
@@ -78,4 +79,17 @@ type Payout struct {
 
 	// SucceededAt is when the payout completed successfully.
 	SucceededAt *time.Time `json:"succeeded_at,omitempty"`
+}
+
+// BalanceTransaction is a sparse view of one balance transaction's
+// contribution to a payout.
+type BalanceTransaction struct {
+	// ID is the unique balance transaction identifier.
+	ID string `json:"id"`
+
+	// Amount is the balance transaction's original amount before allocations.
+	Amount money.Amount `json:"amount"`
+
+	// AllocatedAmount is the portion allocated to this payout.
+	AllocatedAmount money.Amount `json:"allocated_amount"`
 }

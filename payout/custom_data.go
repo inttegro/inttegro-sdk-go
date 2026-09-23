@@ -1,6 +1,6 @@
 package payout
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 
 // CustomData contains merchant-defined payout metadata.
 //
