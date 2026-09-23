@@ -3,8 +3,8 @@ package uploadrequest
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/filelink"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/filelink"
 )
 
 type CreateParams struct {

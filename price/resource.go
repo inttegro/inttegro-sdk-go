@@ -3,8 +3,8 @@ package price
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/product"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/product"
 )
 
 type Page struct {

@@ -13,7 +13,7 @@ All official Inttegro SDKs expose the same API capabilities. This module adds Go
 ## Install
 
 ```bash
-go get github.com/zebodotdev/inttegro-sdk-go/v9
+go get github.com/zebodotdev/inttegro-sdk-go/v10
 ```
 
 Store your secret key in the server environment:
@@ -38,14 +38,14 @@ import (
 	"log"
 	"os"
 
-	inttegro "github.com/zebodotdev/inttegro-sdk-go/v9"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/checkout"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/customer"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/order"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/price"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/product"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/request"
+	inttegro "github.com/zebodotdev/inttegro-sdk-go/v10"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/checkout"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/customer"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/order"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/price"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/product"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/request"
 )
 
 func main() {

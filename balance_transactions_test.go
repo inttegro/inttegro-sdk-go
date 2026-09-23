@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/balancetransaction"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/payment"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/balancetransaction"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/payment"
 )
 
 func TestBalanceTransactionDeserializesSemanticSources(t *testing.T) {
@@ -17,7 +17,7 @@ func TestBalanceTransactionDeserializesSemanticSources(t *testing.T) {
 	}{
 		{
 			name:       "payment",
-			body:       `{"id":"bt_payment","type":"payment","payment_id":"py_123","order_id":"or_123","amount":{"currency":"GHS","value":2500},"created_at":"2026-08-31T12:00:00Z"}`,
+			body:       `{"id":"bt_payment","type":"payment","payment_id":"py_123","order_id":"or_123","amount":{"currency":"GHS","value":2500},"available_amount":{"currency":"GHS","value":1500},"pending_amount":{"currency":"GHS","value":1000},"spent_amount":{"currency":"GHS","value":0},"allocations":[{"id":"bta_123","type":"payout","status":"pending","payout":{"id":"po_123","amount":{"currency":"GHS","value":1000}},"created_at":"2026-08-31T12:01:00Z","updated_at":"2026-08-31T12:01:00Z"}],"created_at":"2026-08-31T12:00:00Z"}`,
 			wantType:   balancetransaction.TypePayment,
 			wantSource: "py_123",
 		},
@@ -43,6 +43,14 @@ func TestBalanceTransactionDeserializesSemanticSources(t *testing.T) {
 			}
 			if txn.ID == "" || txn.OrderID == "" || txn.Amount.Currency == "" || txn.CreatedAt.IsZero() {
 				t.Fatalf("required fields were not decoded: %#v", txn)
+			}
+			if tt.name == "payment" {
+				if len(txn.Allocations) != 1 || txn.Allocations[0].Payout == nil {
+					t.Fatalf("allocations were not decoded: %#v", txn.Allocations)
+				}
+				if txn.AvailableAmount == nil || txn.PendingAmount == nil || txn.SpentAmount == nil {
+					t.Fatalf("allocation amounts were not decoded: %#v", txn)
+				}
 			}
 		})
 	}

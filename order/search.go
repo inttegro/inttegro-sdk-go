@@ -3,7 +3,7 @@ package order
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/search"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/search"
 )
 
 // Search finds order projections owned by the authenticated application.

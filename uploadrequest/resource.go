@@ -1,6 +1,6 @@
 package uploadrequest
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 
 type Constraints struct {
 	ContentTypes []string `json:"content_types,omitempty"`

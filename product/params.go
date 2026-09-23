@@ -1,6 +1,6 @@
 package product
 
-import "github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
+import "github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 
 // CreateProductParams creates a catalog product.
 type CreateParams struct {

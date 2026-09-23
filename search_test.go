@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/search"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/search"
 )
 
 func TestResourceSearchEndpointsUseTypedContract(t *testing.T) {

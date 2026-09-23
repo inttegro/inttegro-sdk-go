@@ -3,9 +3,9 @@ package financialaccount
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v9/bankaccount"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/customdata"
-	"github.com/zebodotdev/inttegro-sdk-go/v9/wallet"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/bankaccount"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
+	"github.com/zebodotdev/inttegro-sdk-go/v10/wallet"
 )
 
 // FinancialAccount represents a connected payout destination account.
