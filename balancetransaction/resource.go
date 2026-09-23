@@ -7,8 +7,8 @@ import (
 	"github.com/zebodotdev/inttegro-sdk-go/v10/payout"
 )
 
-// BalanceTransaction represents a merchant balance entry caused by a payment or
-// refund. Exactly one of PaymentID and RefundID is present, matching Type.
+// BalanceTransaction represents a merchant balance entry caused by a payment,
+// refund, or payout. Exactly one source ID is present, matching Type.
 type BalanceTransaction struct {
 	// ID is the unique balance transaction identifier (read-only).
 	// Starts with "bt_". Example: "bt_abc123def456"
@@ -23,12 +23,12 @@ type BalanceTransaction struct {
 	// RefundID is present only when Type is refund.
 	RefundID string `json:"refund_id,omitempty"`
 
-	// PayoutID identifies the legacy payout that claimed this whole transaction.
-	// Deprecated: inspect Allocations because one transaction can fund many payouts.
+	// PayoutID identifies a payout debit when Type is payout. On legacy payment
+	// transactions it can identify the payout that claimed the whole transaction.
 	PayoutID string `json:"payout_id,omitempty"`
 
-	// OrderID is the strongly referenced source order ID.
-	OrderID string `json:"order_id"`
+	// OrderID is present for payment and refund entries and omitted for payouts.
+	OrderID string `json:"order_id,omitempty"`
 
 	// Amount is the transaction amount in the public money shape.
 	Amount money.Amount `json:"amount"`
@@ -94,8 +94,12 @@ func (t BalanceTransaction) SourceID() (string, bool) {
 			return t.PaymentID, true
 		}
 	case TypeRefund:
-		if t.RefundID != "" && t.PaymentID == "" {
+		if t.RefundID != "" && t.PaymentID == "" && t.PayoutID == "" {
 			return t.RefundID, true
+		}
+	case TypePayout:
+		if t.PayoutID != "" && t.PaymentID == "" && t.RefundID == "" && t.OrderID == "" {
+			return t.PayoutID, true
 		}
 	}
 	return "", false
