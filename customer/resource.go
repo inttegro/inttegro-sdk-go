@@ -52,6 +52,7 @@ type Customer struct {
 	CreatedAt       *time.Time              `json:"created_at,omitempty"`
 	CustomData      *customdata.Data        `json:"custom_data,omitempty"`
 	Email           string                  `json:"email_address,omitempty"`
+	Fingerprint     string                  `json:"fingerprint"`
 	Guest           bool                    `json:"guest,omitempty"`
 	ID              string                  `json:"id,omitempty"`
 	Name            string                  `json:"name,omitempty"`
