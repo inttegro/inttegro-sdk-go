@@ -5,6 +5,7 @@ type Type string
 const (
 	TypePayment Type = "payment"
 	TypeRefund  Type = "refund"
+	TypePayout  Type = "payout"
 )
 
 // AllocationType identifies what consumed part of a payment balance transaction.

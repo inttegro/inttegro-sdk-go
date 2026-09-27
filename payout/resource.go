@@ -20,6 +20,10 @@ type Payout struct {
 	// portion allocated to this payout.
 	BalanceTransactions []BalanceTransaction `json:"balance_transactions,omitempty"`
 
+	// BalanceTransactionID is the payout's own immutable debit. It is distinct
+	// from BalanceTransactions, which lists the funding contributions.
+	BalanceTransactionID string `json:"balance_transaction_id,omitempty"`
+
 	// CanceledAt is when a scheduled payout was canceled.
 	CanceledAt *time.Time `json:"canceled_at,omitempty"`
 

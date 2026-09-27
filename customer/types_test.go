@@ -39,6 +39,7 @@ func TestCustomerDecodesTypedAddressesAndCustomData(t *testing.T) {
 	err := json.Unmarshal([]byte(`{
 		"id":"cu_1",
 		"name":"Ama Mensah",
+		"fingerprint":"cfp_v1_app_buyer",
 		"billing_address":{"city":"Accra","country":"gh"},
 		"shipping_address":{"city":"Kumasi","country":"gh"},
 		"custom_data":{"segment":"vip"}
@@ -54,5 +55,8 @@ func TestCustomerDecodesTypedAddressesAndCustomData(t *testing.T) {
 	}
 	if segment, ok := customer.CustomData.Get("segment"); !ok || segment != "vip" {
 		t.Fatalf("segment = %q, present=%v", segment, ok)
+	}
+	if customer.Fingerprint != "cfp_v1_app_buyer" {
+		t.Fatalf("fingerprint = %q", customer.Fingerprint)
 	}
 }
