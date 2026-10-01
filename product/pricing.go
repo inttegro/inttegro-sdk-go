@@ -9,7 +9,7 @@ type PriceType string
 
 const (
 	// PriceTypeFixedAmount identifies a fixed product price.
-	PriceTypeFixedAmount            PriceType = "fixed_amount"
+	PriceTypeFixedAmount PriceType = "fixed_amount"
 	// PriceTypeCustomerSelectedAmount identifies a customer-selected product price.
 	PriceTypeCustomerSelectedAmount PriceType = "customer_selected_amount"
 )
