@@ -34,7 +34,8 @@ func TestProductsEndpointsMatchSpec(t *testing.T) {
 	}
 	if _, err := client.Prices.AddToProduct(ctx, price.AddToProductParams{
 		ProductID:    "prod_123",
-		Amount:       money.AmountParams{Currency: money.GHS, Value: 5000},
+		Type:         price.TypeFixedAmount,
+		FixedAmount:  &money.AmountParams{Currency: money.GHS, Value: 5000},
 		SetAsDefault: true,
 	}); err != nil {
 		t.Fatal(err)

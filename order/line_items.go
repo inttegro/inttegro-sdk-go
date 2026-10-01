@@ -2,6 +2,7 @@ package order
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
 	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
@@ -32,6 +33,10 @@ type ProductLineItemParams struct {
 	// PriceID references a saved price for ProductID. Leave this empty when
 	// supplying an explicit Price.
 	PriceID string `json:"price_id,omitempty"`
+
+	// CustomerSelectedPrice couples a saved customer-selected price with the
+	// concrete amount chosen for this order.
+	CustomerSelectedPrice *CustomerSelectedPriceParams `json:"customer_selected_price,omitempty"`
 
 	// Type indicates whether the product is physical or digital (required).
 	// Values: "physical" or "digital"
@@ -77,9 +82,32 @@ type ProductLineItemParams struct {
 // MarshalJSON preserves the inline-product shape while emitting only the
 // fields accepted by the catalog-backed variants when ProductID is present.
 func (p ProductLineItemParams) MarshalJSON() ([]byte, error) {
+	if p.CustomerSelectedPrice != nil {
+		if p.ProductID == "" || p.PriceID != "" || p.Price.AmountParams != (money.AmountParams{}) ||
+			p.Type != "" || p.Name != "" || p.About != "" || p.Reference != "" ||
+			p.TaxCode != "" || p.CustomData != nil || p.Quantity <= 0 {
+			return nil, fmt.Errorf("order: customer_selected_price is valid only for a catalog product and cannot be combined with price or price_id")
+		}
+		if p.CustomerSelectedPrice.PriceID == "" || p.CustomerSelectedPrice.SelectedAmount.Currency == "" {
+			return nil, fmt.Errorf("order: customer_selected_price requires price_id and selected_amount")
+		}
+	}
+
 	if p.ProductID == "" {
 		type inlineProductLineItemParams ProductLineItemParams
 		return json.Marshal(inlineProductLineItemParams(p))
+	}
+
+	if p.CustomerSelectedPrice != nil {
+		return json.Marshal(struct {
+			ProductID             string                       `json:"product_id"`
+			CustomerSelectedPrice *CustomerSelectedPriceParams `json:"customer_selected_price"`
+			Quantity              int64                        `json:"quantity"`
+		}{
+			ProductID:             p.ProductID,
+			CustomerSelectedPrice: p.CustomerSelectedPrice,
+			Quantity:              p.Quantity,
+		})
 	}
 
 	if p.PriceID != "" {

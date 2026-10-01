@@ -392,8 +392,9 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.Products.Create(ctx, product.CreateParams{Type: "physical", Name: "Product"})
 	check(err)
 	_, err = client.Prices.AddToProduct(ctx, price.AddToProductParams{
-		ProductID: "prod_1",
-		Amount:    money.AmountParams{Currency: money.GHS, Value: 100},
+		ProductID:   "prod_1",
+		Type:        price.TypeFixedAmount,
+		FixedAmount: &money.AmountParams{Currency: money.GHS, Value: 100},
 	})
 	check(err)
 	_, err = client.Products.Lookup(ctx, "prod_1")
@@ -429,7 +430,10 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.PurchaseIntents.Page(ctx, purchaseintent.PageParams{PageNumber: 1, PageSize: 20})
 	check(err)
 
-	_, err = client.Prices.Create(ctx, price.CreateParams{Amount: money.AmountParams{Currency: money.GHS, Value: 100}})
+	_, err = client.Prices.Create(ctx, price.CreateParams{
+		Type:        price.TypeFixedAmount,
+		FixedAmount: &money.AmountParams{Currency: money.GHS, Value: 100},
+	})
 	check(err)
 	_, err = client.Prices.Lookup(ctx, "pr_1")
 	check(err)
