@@ -30,6 +30,35 @@ func TestProductLineItemParamsMarshalCatalogProductWithSavedPrice(t *testing.T) 
 	assertProductLineItemJSON(t, value, `{"product_id":"prod_abc123xyz","price_id":"pr_xyz789","quantity":2}`)
 }
 
+func TestProductLineItemParamsMarshalCatalogProductWithCustomerSelectedPrice(t *testing.T) {
+	value := ProductLineItemParams{
+		ProductID: "prod_donation",
+		CustomerSelectedPrice: &CustomerSelectedPriceParams{
+			PriceID:        "pr_donation",
+			SelectedAmount: money.AmountParams{Currency: money.GHS, Value: 75000},
+		},
+		Quantity: 1,
+	}
+
+	assertProductLineItemJSON(t, value, `{"product_id":"prod_donation","customer_selected_price":{"price_id":"pr_donation","selected_amount":{"currency":"ghs","value":75000}},"quantity":1}`)
+}
+
+func TestProductLineItemParamsRejectsMixedCustomerSelectedPrice(t *testing.T) {
+	value := ProductLineItemParams{
+		ProductID: "prod_donation",
+		PriceID:   "pr_fixed",
+		CustomerSelectedPrice: &CustomerSelectedPriceParams{
+			PriceID:        "pr_donation",
+			SelectedAmount: money.AmountParams{Currency: money.GHS, Value: 75000},
+		},
+		Quantity: 1,
+	}
+
+	if _, err := json.Marshal(value); err == nil {
+		t.Fatal("json.Marshal() error = nil, want mixed price choice rejection")
+	}
+}
+
 func assertProductLineItemJSON(t *testing.T, value ProductLineItemParams, want string) {
 	t.Helper()
 
