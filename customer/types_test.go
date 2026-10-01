@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
 )
 
 func TestCreateParamsUseTypedAddressesAndCustomData(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/customer"
-	"github.com/zebodotdev/inttegro-sdk-go/v10/order"
+	"github.com/inttegro/inttegro-sdk-go/v10/customer"
+	"github.com/inttegro/inttegro-sdk-go/v10/order"
 )
 
 func TestOrderDocumentDeliveryEndpointsMatchSpec(t *testing.T) {

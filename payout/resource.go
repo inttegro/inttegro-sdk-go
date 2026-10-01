@@ -3,7 +3,7 @@ package payout
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
+	"github.com/inttegro/inttegro-sdk-go/v10/money"
 )
 
 // Payout represents a settlement transfer to your bank or mobile money account.

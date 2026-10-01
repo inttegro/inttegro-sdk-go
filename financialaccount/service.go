@@ -3,8 +3,8 @@ package financialaccount
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/internal/transport"
-	"github.com/zebodotdev/inttegro-sdk-go/v10/search"
+	"github.com/inttegro/inttegro-sdk-go/v10/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v10/search"
 )
 
 // FinancialAccountsService manages payout destination accounts.

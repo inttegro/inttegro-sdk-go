@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Breaking: changed the module and import path to
+  `github.com/inttegro/inttegro-sdk-go/v10` to match the repository's Inttegro
+  organization ownership.
+
 ## 10.2.0 - 2026-10-01
 
 - Added typed fixed and customer-selected catalog price definitions, suggested

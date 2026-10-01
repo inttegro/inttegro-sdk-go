@@ -3,7 +3,7 @@ package payment
 import (
 	"time"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/paymentmethod"
+	"github.com/inttegro/inttegro-sdk-go/v10/paymentmethod"
 )
 
 type PaymentMethod struct {

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
+	"github.com/inttegro/inttegro-sdk-go/v10/money"
 )
 
 // Type identifies the definition carried by a catalog price.
