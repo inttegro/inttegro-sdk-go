@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/customdata"
-	"github.com/zebodotdev/inttegro-sdk-go/v10/money"
-	"github.com/zebodotdev/inttegro-sdk-go/v10/price"
-	"github.com/zebodotdev/inttegro-sdk-go/v10/product"
+	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v10/money"
+	"github.com/inttegro/inttegro-sdk-go/v10/price"
+	"github.com/inttegro/inttegro-sdk-go/v10/product"
 )
 
 // ProductLineItemParams represents a product supplied in an order request.

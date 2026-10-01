@@ -3,7 +3,7 @@ package purchaseintent
 import (
 	"context"
 
-	"github.com/zebodotdev/inttegro-sdk-go/v10/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v10/internal/transport"
 )
 
 // PurchaseIntentsService manages Buy link purchase intents.
