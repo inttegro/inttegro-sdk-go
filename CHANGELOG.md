@@ -2,9 +2,13 @@
 
 ## Unreleased
 
+## 10.3.0 - 2026-10-02
+
 - Breaking: changed the module and import path to
   `github.com/inttegro/inttegro-sdk-go/v10` to match the repository's Inttegro
   organization ownership.
+- Updated release verification and provenance to publish the Inttegro-owned
+  module identity.
 
 ## 10.2.0 - 2026-10-01
 
