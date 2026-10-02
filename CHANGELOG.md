@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 10.3.1 - 2026-10-02
+
+- Restored the SDK's broad Inttegro API positioning while keeping the concrete
+  checkout examples in the integration guide.
+
 ## 10.3.0 - 2026-10-02
 
 - Breaking: changed the module and import path to
