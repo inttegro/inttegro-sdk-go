@@ -44,6 +44,7 @@ var openAPICapabilityURLPaths = map[string]bool{
 
 var openAPIClientCheckoutPaths = map[string]bool{
 	"/checkout/lookup":               true,
+	"/checkout/select_amount":        true,
 	"/checkout/pay":                  true,
 	"/checkout/request_confirmation": true,
 	"/checkout/confirm_payment":      true,

@@ -5,7 +5,10 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
+
+	"github.com/inttegro/inttegro-sdk-go/v10/purchaseintent"
 )
 
 func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {
@@ -20,6 +23,11 @@ func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {
 				"created_at":     "2026-09-09T12:00:00Z",
 				"id":             "sale_123",
 				"merchant":       map[string]any{"organization_name": "Tea House Ltd"},
+				"presentation": map[string]any{
+					"buy_page": map[string]any{
+						"text": map[string]any{"checkout_section_title": "Support this cause"},
+					},
+				},
 				"product": map[string]any{
 					"active":     true,
 					"created_at": "2026-09-09T11:00:00Z",
@@ -52,5 +60,49 @@ func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {
 	}
 	if got := intent.Usage.Order.ID; got != "or_123" {
 		t.Fatalf("usage order ID = %q", got)
+	}
+	if got := intent.Presentation.BuyPage.Text.CheckoutSectionTitle; got != "Support this cause" {
+		t.Fatalf("checkout section title = %q", got)
+	}
+}
+
+func TestPurchaseIntentPresentationSerializesCreateAndUpdate(t *testing.T) {
+	createBody, err := json.Marshal(purchaseintent.CreateParams{
+		Quantity: purchaseintent.Quantity{Min: 1},
+		Presentation: &purchaseintent.Presentation{
+			BuyPage: &purchaseintent.BuyPagePresentation{
+				Text: &purchaseintent.BuyPageText{AmountFieldLabel: "Your contribution"},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatalf("marshal create params: %v", err)
+	}
+	if !strings.Contains(string(createBody), `"amount_field_label":"Your contribution"`) {
+		t.Fatalf("create presentation missing from %s", createBody)
+	}
+
+	updateBody, err := json.Marshal(purchaseintent.UpdateParams{
+		ID: "sale_123",
+		Presentation: &purchaseintent.PresentationUpdate{
+			BuyPage: purchaseintent.BuyPagePresentationUpdate{
+				Text: purchaseintent.BuyPageTextUpdate{
+					CheckoutSectionTitle: purchaseintent.SetText("Contribute now"),
+					AmountFieldLabel:     purchaseintent.ClearText(),
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatalf("marshal update params: %v", err)
+	}
+	if !strings.Contains(string(updateBody), `"checkout_section_title":"Contribute now"`) {
+		t.Fatalf("update presentation missing from %s", updateBody)
+	}
+	if !strings.Contains(string(updateBody), `"amount_field_label":null`) {
+		t.Fatalf("update presentation reset missing from %s", updateBody)
+	}
+	if strings.Contains(string(updateBody), `"primary_action_label"`) {
+		t.Fatalf("omitted update field was serialized in %s", updateBody)
 	}
 }
