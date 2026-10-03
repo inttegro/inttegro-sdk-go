@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 10.4.0 - 2026-10-03
+
+- Added typed hosted Buy-page text overrides to Purchase Intent create,
+  update, and response models, including explicit default restoration.
+- Added the application-scoped financial-account fingerprint to typed
+  responses.
+
 ## 10.3.1 - 2026-10-02
 
 - Restored the SDK's broad Inttegro API positioning while keeping the concrete
