@@ -34,7 +34,7 @@ type FinancialAccount struct {
 	Description string `json:"description,omitempty"`
 
 	// Fingerprint recognizes the same underlying account within this application.
-	Fingerprint string `json:"fingerprint,omitempty"`
+	Fingerprint string `json:"fingerprint"`
 
 	// PullConfiguration indicates whether Inttegro can debit this account.
 	PullConfiguration *PullPushConfig `json:"pull_configuration,omitempty"`
