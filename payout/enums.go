@@ -8,6 +8,6 @@ const (
 	StatusProcessing  Status = "processing"
 	StatusExecuting   Status = "executing"
 	StatusSucceeded   Status = "succeeded"
-	StatusInvalid     Status = "invalid"
+	StatusFailed      Status = "failed"
 	StatusCanceled    Status = "canceled"
 )

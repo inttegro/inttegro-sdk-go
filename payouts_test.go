@@ -40,8 +40,12 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Lookup() error = %v", err)
 	}
-	if got.Error == nil || got.Error.Type != "network_error" || got.Error.OccurredAt.IsZero() {
+	if got.Error == nil || got.Error.Type != "temporarily_unavailable" || got.Error.OccurredAt.IsZero() {
 		t.Fatalf("typed payout error = %#v", got.Error)
+	}
+	if got.Status != payout.StatusFailed || got.Failure == nil ||
+		got.Failure.Reason != payout.FailureReasonTemporarilyUnavailable || !got.Failure.Retryable {
+		t.Fatalf("typed payout failure = %#v", got)
 	}
 	if len(got.BalanceTransactions) != 1 || got.BalanceTransactions[0].ID != "bt_123" ||
 		got.BalanceTransactions[0].Amount.Value != 20000 ||
@@ -83,12 +87,13 @@ const canonicalPayoutJSON = `{
   "balance_transactions":[{"id":"bt_123","amount":{"currency":"ghs","value":20000},"allocated_amount":{"currency":"ghs","value":12500}}],
   "custom_data":{"batch":"weekly"},
   "destination_id":"fa_ghs",
-  "error":{"cause":"provider unavailable","message":"Payout failed","occurred_at":"2026-09-14T09:05:00Z","type":"network_error"},
+  "error":{"cause":"temporarily_unavailable","message":"Payout processing was temporarily unavailable.","occurred_at":"2026-09-14T09:05:00Z","type":"temporarily_unavailable"},
   "execute_after":"2026-09-14T09:00:00Z",
   "failed_at":"2026-09-14T09:05:00Z",
+  "failure":{"detail":"Payout processing was temporarily unavailable.","reason":"temporarily_unavailable","retryable":true},
   "id":"po_123",
   "initiated_at":"2026-09-14T08:55:00Z",
   "max_amount":{"currency":"ghs","value":12500},
   "sent_at":"2026-09-14T09:01:00Z",
-  "status":"invalid"
+  "status":"failed"
 }`
