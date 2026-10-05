@@ -3,7 +3,7 @@ package secretkey
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
 )
 
 // KeysService manages secret keys for the authenticated application.

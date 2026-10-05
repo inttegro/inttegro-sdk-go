@@ -3,8 +3,8 @@ package customer
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v10/money"
+	"github.com/inttegro/inttegro-sdk-go/v11/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v11/money"
 )
 
 // CustomerData captures inline customer information for order creation.

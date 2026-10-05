@@ -3,7 +3,7 @@ package chime
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v11/customdata"
 )
 
 type Page struct {

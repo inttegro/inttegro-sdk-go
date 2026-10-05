@@ -3,8 +3,8 @@ package price
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v10/request"
+	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v11/request"
 )
 
 // PricesService manages catalog prices.

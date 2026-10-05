@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/payment"
+	"github.com/inttegro/inttegro-sdk-go/v11/payment"
 )
 
 func TestOrderQuestions(t *testing.T) {

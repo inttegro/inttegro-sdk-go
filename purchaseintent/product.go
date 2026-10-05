@@ -3,8 +3,8 @@ package purchaseintent
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v10/product"
+	"github.com/inttegro/inttegro-sdk-go/v11/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v11/product"
 )
 
 type Product struct {

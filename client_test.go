@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/messagetemplate"
+	"github.com/inttegro/inttegro-sdk-go/v11/messagetemplate"
 	"go.opentelemetry.io/otel/propagation"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
