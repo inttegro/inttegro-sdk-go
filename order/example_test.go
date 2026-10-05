@@ -3,11 +3,11 @@ package order_test
 import (
 	"context"
 
-	inttegro "github.com/inttegro/inttegro-sdk-go/v10"
-	"github.com/inttegro/inttegro-sdk-go/v10/money"
-	"github.com/inttegro/inttegro-sdk-go/v10/order"
-	"github.com/inttegro/inttegro-sdk-go/v10/price"
-	"github.com/inttegro/inttegro-sdk-go/v10/product"
+	inttegro "github.com/inttegro/inttegro-sdk-go/v11"
+	"github.com/inttegro/inttegro-sdk-go/v11/money"
+	"github.com/inttegro/inttegro-sdk-go/v11/order"
+	"github.com/inttegro/inttegro-sdk-go/v11/price"
+	"github.com/inttegro/inttegro-sdk-go/v11/product"
 )
 
 func ExampleService_Create() {

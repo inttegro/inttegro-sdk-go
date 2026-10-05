@@ -3,9 +3,9 @@ package order
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v10/paymentmethod"
-	"github.com/inttegro/inttegro-sdk-go/v10/request"
+	"github.com/inttegro/inttegro-sdk-go/v11/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v11/paymentmethod"
+	"github.com/inttegro/inttegro-sdk-go/v11/request"
 )
 
 // Update modifies mutable fields on an existing order.

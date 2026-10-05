@@ -3,7 +3,7 @@ package app
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/secretkey"
+	"github.com/inttegro/inttegro-sdk-go/v11/secretkey"
 )
 
 // AppSecretKey is the initial secret key returned when an app is created.

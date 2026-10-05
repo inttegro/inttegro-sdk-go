@@ -3,7 +3,7 @@ package paymentmethod
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v11/customdata"
 )
 
 // PaymentMethod is a tokenized payment instrument tied to a customer.

@@ -13,7 +13,7 @@ All official Inttegro SDKs expose the same API capabilities. This module adds Go
 ## Install
 
 ```bash
-go get github.com/inttegro/inttegro-sdk-go/v10
+go get github.com/inttegro/inttegro-sdk-go/v11
 ```
 
 Store your secret key in the server environment:
@@ -38,14 +38,14 @@ import (
 	"log"
 	"os"
 
-	inttegro "github.com/inttegro/inttegro-sdk-go/v10"
-	"github.com/inttegro/inttegro-sdk-go/v10/checkout"
-	"github.com/inttegro/inttegro-sdk-go/v10/customer"
-	"github.com/inttegro/inttegro-sdk-go/v10/money"
-	"github.com/inttegro/inttegro-sdk-go/v10/order"
-	"github.com/inttegro/inttegro-sdk-go/v10/price"
-	"github.com/inttegro/inttegro-sdk-go/v10/product"
-	"github.com/inttegro/inttegro-sdk-go/v10/request"
+	inttegro "github.com/inttegro/inttegro-sdk-go/v11"
+	"github.com/inttegro/inttegro-sdk-go/v11/checkout"
+	"github.com/inttegro/inttegro-sdk-go/v11/customer"
+	"github.com/inttegro/inttegro-sdk-go/v11/money"
+	"github.com/inttegro/inttegro-sdk-go/v11/order"
+	"github.com/inttegro/inttegro-sdk-go/v11/price"
+	"github.com/inttegro/inttegro-sdk-go/v11/product"
+	"github.com/inttegro/inttegro-sdk-go/v11/request"
 )
 
 func main() {

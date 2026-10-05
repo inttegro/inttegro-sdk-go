@@ -3,7 +3,7 @@ package order
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/search"
+	"github.com/inttegro/inttegro-sdk-go/v11/search"
 )
 
 // Search finds order projections owned by the authenticated application.

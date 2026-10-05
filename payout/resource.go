@@ -3,7 +3,7 @@ package payout
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/money"
+	"github.com/inttegro/inttegro-sdk-go/v11/money"
 )
 
 // Payout represents a settlement transfer to your bank or mobile money account.
@@ -34,6 +34,7 @@ type Payout struct {
 	DestinationID string `json:"destination_id"`
 
 	// Error describes a public payout execution failure.
+	// Deprecated: use Failure.
 	Error *Error `json:"error,omitempty"`
 
 	// ExecuteAfter is the earliest time at which payout execution may begin.
@@ -47,6 +48,10 @@ type Payout struct {
 
 	// FailedAt is when the payout entered its unsuccessful terminal state.
 	FailedAt *time.Time `json:"failed_at,omitempty"`
+
+	// Failure explains why a terminal payout failed without exposing provider
+	// or internal diagnostic details.
+	Failure *Failure `json:"failure,omitempty"`
 
 	// ID is the unique payout identifier.
 	ID string `json:"id"`

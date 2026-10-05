@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/app"
-	"github.com/inttegro/inttegro-sdk-go/v10/money"
-	"github.com/inttegro/inttegro-sdk-go/v10/price"
-	"github.com/inttegro/inttegro-sdk-go/v10/product"
+	"github.com/inttegro/inttegro-sdk-go/v11/app"
+	"github.com/inttegro/inttegro-sdk-go/v11/money"
+	"github.com/inttegro/inttegro-sdk-go/v11/price"
+	"github.com/inttegro/inttegro-sdk-go/v11/product"
 )
 
 func TestProductsEndpointsMatchSpec(t *testing.T) {

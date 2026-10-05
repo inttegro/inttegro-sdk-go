@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/product"
-	"github.com/inttegro/inttegro-sdk-go/v10/refund"
-	"github.com/inttegro/inttegro-sdk-go/v10/uploadrequest"
+	"github.com/inttegro/inttegro-sdk-go/v11/product"
+	"github.com/inttegro/inttegro-sdk-go/v11/refund"
+	"github.com/inttegro/inttegro-sdk-go/v11/uploadrequest"
 )
 
 func TestEnumConstantsSerializeAsWireValues(t *testing.T) {

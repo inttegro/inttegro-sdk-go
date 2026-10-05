@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/price"
+	"github.com/inttegro/inttegro-sdk-go/v11/price"
 )
 
 type OriginalPriceParams struct {

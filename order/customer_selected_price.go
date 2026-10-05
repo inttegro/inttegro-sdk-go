@@ -1,6 +1,6 @@
 package order
 
-import "github.com/inttegro/inttegro-sdk-go/v10/money"
+import "github.com/inttegro/inttegro-sdk-go/v11/money"
 
 // CustomerSelectedPriceParams couples a saved customer-selected catalog price
 // with the concrete unit amount chosen for an order.

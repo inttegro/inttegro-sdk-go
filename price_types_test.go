@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v10/money"
-	"github.com/inttegro/inttegro-sdk-go/v10/price"
+	"github.com/inttegro/inttegro-sdk-go/v11/money"
+	"github.com/inttegro/inttegro-sdk-go/v11/price"
 )
 
 func TestPriceParamsEmbedsAmountOnTheWire(t *testing.T) {
