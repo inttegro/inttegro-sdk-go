@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 11.0.1 - 2026-10-05
+
+- Corrected release verification and provenance metadata for the new
+  `github.com/inttegro/inttegro-sdk-go/v11` module path.
+
 ## 11.0.0 - 2026-10-05
 
 - Breaking: replaced the payout status `invalid` with `failed`.
