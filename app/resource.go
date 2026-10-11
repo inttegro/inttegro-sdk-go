@@ -17,13 +17,14 @@ type SecretKey struct {
 
 // App represents an Inttegro account.
 type App struct {
-	ID           string        `json:"id"`
-	Name         string        `json:"name"`
-	Alias        string        `json:"alias,omitempty"`
-	Description  string        `json:"description,omitempty"`
-	CreatedAt    time.Time     `json:"created_at"`
-	UpdatedAt    *time.Time    `json:"updated_at,omitempty"`
-	ArchivedAt   *time.Time    `json:"archived_at,omitempty"`
-	SecretKey    *SecretKey    `json:"secret_key,omitempty"`
-	Relationship *Relationship `json:"relationship,omitempty"`
+	ID           string         `json:"id"`
+	Name         string         `json:"name"`
+	Alias        string         `json:"alias,omitempty"`
+	Description  string         `json:"description,omitempty"`
+	CreatedAt    time.Time      `json:"created_at"`
+	UpdatedAt    *time.Time     `json:"updated_at,omitempty"`
+	ArchivedAt   *time.Time     `json:"archived_at,omitempty"`
+	Capabilities map[string]any `json:"capabilities"`
+	SecretKey    *SecretKey     `json:"secret_key,omitempty"`
+	Relationship *Relationship  `json:"relationship,omitempty"`
 }

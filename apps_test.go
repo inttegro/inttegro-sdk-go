@@ -122,9 +122,12 @@ func TestAppsServiceUsesTypedContracts(t *testing.T) {
 	if created.Relationship == nil ||
 		created.Relationship.Kind != app.RelationshipKindPlacement ||
 		created.Relationship.Status != app.RelationshipStatusActive ||
-		created.Relationship.RelationshipPolicy.Management != app.ManagementRoleParent ||
-		created.Relationship.RelationshipPolicy.Credentials != app.CredentialOwnerChild {
+		created.Relationship.Parent.ID != "app_parent" ||
+		created.Relationship.Parent.Name != "Parent App" {
 		t.Fatalf("decoded relationship = %#v", created.Relationship)
+	}
+	if created.Capabilities == nil || lookedUp.Capabilities == nil || updated.Capabilities == nil {
+		t.Fatalf("decoded app capabilities must always be present")
 	}
 	if lookedUp.UpdatedAt == nil || lookedUp.ArchivedAt != nil {
 		t.Fatalf("decoded lookup app = %#v", lookedUp)
@@ -155,30 +158,19 @@ const createAppResponseJSON = `{
     "alias": "acme-prod-api",
     "description": "Production Inttegro API for Acme Marketplace",
     "created_at": "2026-09-02T10:00:00Z",
+    "capabilities": {},
     "secret_key": {
       "id": "sk_child",
       "token_type": "bearer",
       "issued_at": "2026-09-02T10:00:00Z",
       "token": "sk_test_child"
     },
-    "relationship": {
-      "id": "rel_123",
-      "kind": "placement",
-      "policy_version": "app_relationship_authority.v1",
-      "status": "active",
-      "actor_app_id": "app_parent",
-      "creator_app_id": "app_parent",
-      "placement_parent_app_id": "app_parent",
-      "subject_app_id": "app_child",
-      "child_app_id": "app_child",
-      "child_standing": "controlled",
-      "relationship_policy": {
-        "child_standing": "controlled",
-        "credentials": "child",
-        "management": "parent"
-      },
-      "retained_creator_authority_exists": true,
-      "created_at": "2026-09-02T10:00:00Z"
+	    "relationship": {
+	      "id": "rel_123",
+	      "kind": "placement",
+	      "parent": {"id": "app_parent", "name": "Parent App", "alias": "parent"},
+	      "status": "active",
+	      "created_at": "2026-09-02T10:00:00Z"
     }
   }
 }`
@@ -190,7 +182,8 @@ const lookupAppResponseJSON = `{
     "alias": "acme-prod-api",
     "description": "Production Inttegro API for Acme Marketplace",
     "created_at": "2026-09-02T10:00:00Z",
-    "updated_at": "2026-09-02T10:05:00Z"
+    "updated_at": "2026-09-02T10:05:00Z",
+    "capabilities": {}
   }
 }`
 
@@ -201,6 +194,7 @@ const updateAppResponseJSON = `{
     "alias": "acme-api",
     "description": "Production Inttegro API for Acme Marketplace",
     "created_at": "2026-09-02T10:00:00Z",
-    "updated_at": "2026-09-02T10:10:00Z"
+    "updated_at": "2026-09-02T10:10:00Z",
+    "capabilities": {}
   }
 }`
