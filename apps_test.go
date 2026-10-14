@@ -37,6 +37,8 @@ func TestAppsServiceUsesTypedContracts(t *testing.T) {
 			_, _ = io.WriteString(w, createAppResponseJSON)
 		case "/apps/lookup":
 			_, _ = io.WriteString(w, lookupAppResponseJSON)
+		case "/apps/capabilities":
+			_, _ = io.WriteString(w, appCapabilitiesResponseJSON)
 		case "/apps/update":
 			_, _ = io.WriteString(w, updateAppResponseJSON)
 		default:
@@ -71,12 +73,16 @@ func TestAppsServiceUsesTypedContracts(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Apps.Lookup() error = %v", err)
 	}
+	capabilities, err := client.Apps.Capabilities(ctx)
+	if err != nil {
+		t.Fatalf("Apps.Capabilities() error = %v", err)
+	}
 	updated, err := client.Apps.Update(ctx, app.UpdateParams{Alias: String("acme-api")}, request.WithIdempotencyKey("apps-update-123"))
 	if err != nil {
 		t.Fatalf("Apps.Update() error = %v", err)
 	}
 
-	wantPaths := []string{"/apps/create", "/apps/lookup", "/apps/update"}
+	wantPaths := []string{"/apps/create", "/apps/lookup", "/apps/capabilities", "/apps/update"}
 	if len(captured) != len(wantPaths) {
 		t.Fatalf("captured requests = %#v", captured)
 	}
@@ -108,9 +114,10 @@ func TestAppsServiceUsesTypedContracts(t *testing.T) {
 		},
 	})
 	assertJSONMapEqual(t, captured[1].body, map[string]any{})
-	assertJSONMapEqual(t, captured[2].body, map[string]any{"alias": "acme-api"})
-	if captured[2].idempotencyKey != "apps-update-123" {
-		t.Fatalf("Apps.Update() Idempotency-Key = %q", captured[2].idempotencyKey)
+	assertJSONMapEqual(t, captured[2].body, map[string]any{})
+	assertJSONMapEqual(t, captured[3].body, map[string]any{"alias": "acme-api"})
+	if captured[3].idempotencyKey != "apps-update-123" {
+		t.Fatalf("Apps.Update() Idempotency-Key = %q", captured[3].idempotencyKey)
 	}
 
 	if created.ID != "app_child" || created.Name != "Acme Production API" {
@@ -135,7 +142,25 @@ func TestAppsServiceUsesTypedContracts(t *testing.T) {
 	if updated.Alias != "acme-api" {
 		t.Fatalf("decoded updated app = %#v", updated)
 	}
+	if capabilities.Payments.Status != app.CapabilityStatusEnabled ||
+		capabilities.Payouts.Status != app.CapabilityStatusRestricted ||
+		capabilities.Payouts.Requirements == nil ||
+		len(capabilities.Payouts.Requirements.CurrentlyDue) != 1 {
+		t.Fatalf("decoded app capabilities = %#v", capabilities)
+	}
 }
+
+const appCapabilitiesResponseJSON = `{
+  "capabilities": {
+    "payments": {"status":"enabled","status_changed_at":"2026-09-02T10:00:00Z"},
+    "payouts": {
+      "status":"restricted",
+      "status_reason":"setup_incomplete",
+      "status_changed_at":"2026-09-02T10:00:00Z",
+      "requirements":{"currently_due":[{"code":"connect_payout_account","description":"Connect a payout account.","due_at":null}]}
+    }
+  }
+}`
 
 func TestUpdateAppParamsCanClearOptionalFields(t *testing.T) {
 	raw, err := json.Marshal(app.UpdateParams{

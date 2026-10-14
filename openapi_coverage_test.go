@@ -263,6 +263,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.Apps.Lookup(ctx)
 	check(err)
+	_, err = client.Apps.Capabilities(ctx)
+	check(err)
 	_, err = client.Apps.Update(ctx, app.UpdateParams{Alias: String("app")})
 	check(err)
 	_, err = client.Keys.Generate(ctx, secretkey.GenerateParams{Label: "Integration"})
