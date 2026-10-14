@@ -1,5 +1,18 @@
 package payout
 
+import "github.com/inttegro/inttegro-sdk-go/v11/money"
+
+// AmountLimits is the inclusive payout amount range.
+type AmountLimits struct {
+	Min money.Amount `json:"min"`
+	Max money.Amount `json:"max"`
+}
+
+// SettingsLimits contains platform limits applied to payouts.
+type SettingsLimits struct {
+	Amount AmountLimits `json:"amount"`
+}
+
 // SettingsLookup contains the complete payout configuration returned by
 // Service.Settings.
 type SettingsLookup struct {
@@ -9,6 +22,9 @@ type SettingsLookup struct {
 	// FXEnabled reports whether payout currency conversion is enabled.
 	// It is absent when the setting has not been configured.
 	FXEnabled *bool `json:"fx_enabled,omitempty"`
+
+	// Limits contains the platform payout amount range.
+	Limits SettingsLimits `json:"limits"`
 
 	// Schedule is the active payout schedule, when configured.
 	Schedule *SettingsLookupSchedule `json:"schedule,omitempty"`
@@ -25,6 +41,9 @@ type SettingsMutation struct {
 
 	// ID is the payout settings identifier, when returned.
 	ID string `json:"id,omitempty"`
+
+	// Limits contains the platform payout amount range.
+	Limits SettingsLimits `json:"limits"`
 
 	// Schedule is the updated payout schedule, when returned.
 	Schedule *SettingsMutationSchedule `json:"schedule,omitempty"`

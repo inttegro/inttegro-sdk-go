@@ -21,9 +21,9 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 			if err := json.NewDecoder(r.Body).Decode(&setDestinationsBody); err != nil {
 				t.Fatalf("decode set destinations request: %v", err)
 			}
-			_, _ = io.WriteString(w, `{"settings":{"destinations":{"ghs":"fa_ghs"},"id":"ps_123"}}`)
+			_, _ = io.WriteString(w, `{"settings":{"destinations":{"ghs":"fa_ghs"},"id":"ps_123","limits":{"amount":{"min":{"currency":"ghs","value":25000},"max":{"currency":"ghs","value":9999999}}}}}`)
 		case "/payouts/settings":
-			_, _ = io.WriteString(w, `{"settings":{"destinations":{"ghs":"fa_ghs"},"fx_enabled":true,"schedule":{"aging_spec":{"abide":"strict","label":"Seven days","t_plus":"168h"},"description":"Weekly payouts","interval":"weekly","name":"Weekly","schedule_on":"monday","type":"automatic"}}}`)
+			_, _ = io.WriteString(w, `{"settings":{"destinations":{"ghs":"fa_ghs"},"fx_enabled":true,"limits":{"amount":{"min":{"currency":"ghs","value":25000},"max":{"currency":"ghs","value":9999999}}},"schedule":{"aging_spec":{"abide":"strict","label":"Seven days","t_plus":"168h"},"description":"Weekly payouts","interval":"weekly","name":"Weekly","schedule_on":"monday","type":"automatic"}}}`)
 		case "/payouts/page":
 			_, _ = io.WriteString(w, `{"page":{"number":1,"size":1,"payouts":[`+canonicalPayoutJSON+`]}}`)
 		default:
@@ -61,7 +61,7 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Settings() error = %v", err)
 	}
-	if settings.Destinations.GHS != "fa_ghs" || settings.Schedule == nil || settings.Schedule.AgingSpec.TPlus != "168h" {
+	if settings.Destinations.GHS != "fa_ghs" || settings.Limits.Amount.Min.Value != 25000 || settings.Limits.Amount.Max.Value != 9999999 || settings.Schedule == nil || settings.Schedule.AgingSpec.TPlus != "168h" {
 		t.Fatalf("typed lookup settings = %#v", settings)
 	}
 
@@ -69,7 +69,7 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 	if err != nil {
 		t.Fatalf("SetDestinations() error = %v", err)
 	}
-	if setDestinationsBody.Destinations.GHS != "fa_ghs" || mutation.Destinations == nil || mutation.Destinations.GHS != "fa_ghs" {
+	if setDestinationsBody.Destinations.GHS != "fa_ghs" || mutation.Destinations == nil || mutation.Destinations.GHS != "fa_ghs" || mutation.Limits.Amount.Min.Value != 25000 {
 		t.Fatalf("typed destination request/response = %#v / %#v", setDestinationsBody, mutation)
 	}
 
