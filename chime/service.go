@@ -3,9 +3,9 @@ package chime
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/broadcast"
-	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v11/schedule"
+	"github.com/inttegro/inttegro-sdk-go/v12/broadcast"
+	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v12/schedule"
 )
 
 // ChimesService sends and manages notification messages (SMS and email).

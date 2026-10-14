@@ -3,7 +3,7 @@ package order
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
 )
 
 // OrdersService provides access to order creation, payment, and lifecycle management.

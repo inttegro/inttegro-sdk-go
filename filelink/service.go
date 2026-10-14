@@ -3,9 +3,9 @@ package filelink
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/file"
-	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v11/request"
+	"github.com/inttegro/inttegro-sdk-go/v12/file"
+	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v12/request"
 )
 
 type Service struct {

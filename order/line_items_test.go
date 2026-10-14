@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/money"
-	"github.com/inttegro/inttegro-sdk-go/v11/price"
+	"github.com/inttegro/inttegro-sdk-go/v12/money"
+	"github.com/inttegro/inttegro-sdk-go/v12/price"
 )
 
 func TestProductLineItemParamsMarshalCatalogProductWithExplicitPrice(t *testing.T) {

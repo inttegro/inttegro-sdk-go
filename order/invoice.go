@@ -1,6 +1,6 @@
 package order
 
-import "github.com/inttegro/inttegro-sdk-go/v11/customdata"
+import "github.com/inttegro/inttegro-sdk-go/v12/customdata"
 
 type Invoice struct {
 	Number string        `json:"number,omitempty"`

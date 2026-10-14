@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/request"
-	"github.com/inttegro/inttegro-sdk-go/v11/response"
+	"github.com/inttegro/inttegro-sdk-go/v12/request"
+	"github.com/inttegro/inttegro-sdk-go/v12/response"
 )
 
 // Client is implemented by the root inttegro.Client.

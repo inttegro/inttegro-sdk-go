@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/payout"
+	"github.com/inttegro/inttegro-sdk-go/v12/payout"
 )
 
 func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
