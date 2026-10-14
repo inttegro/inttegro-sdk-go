@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v11/money"
-	"github.com/inttegro/inttegro-sdk-go/v11/refund"
-	"github.com/inttegro/inttegro-sdk-go/v11/request"
+	"github.com/inttegro/inttegro-sdk-go/v12/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v12/money"
+	"github.com/inttegro/inttegro-sdk-go/v12/refund"
+	"github.com/inttegro/inttegro-sdk-go/v12/request"
 )
 
 func TestRefundsServiceUsesCanonicalContracts(t *testing.T) {

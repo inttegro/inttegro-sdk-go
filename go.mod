@@ -1,4 +1,4 @@
-module github.com/inttegro/inttegro-sdk-go/v11
+module github.com/inttegro/inttegro-sdk-go/v12
 
 go 1.26.0
 

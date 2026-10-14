@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 12.0.0 - 2026-10-14
+
+- Breaking: changed the module and import path to
+  `github.com/inttegro/inttegro-sdk-go/v12`.
+- Breaking: replaced the legacy flat payout minimum with typed
+  `Limits.Amount.Min` and `Limits.Amount.Max` values.
+- Breaking: reshaped application placement relationships around a typed parent
+  identity.
+- Added typed payment and payout capability lookup for the authenticated app.
+- Added payment receipt data separately from invoice data.
+
 ## 11.0.1 - 2026-10-05
 
 - Corrected release verification and provenance metadata for the new

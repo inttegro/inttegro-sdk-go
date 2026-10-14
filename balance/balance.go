@@ -5,7 +5,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
 )
 
 // Service retrieves the current application balance.

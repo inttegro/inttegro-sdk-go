@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/purchaseintent"
+	"github.com/inttegro/inttegro-sdk-go/v12/purchaseintent"
 )
 
 func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {

@@ -1,7 +1,7 @@
 package order
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v11/customer"
+	"github.com/inttegro/inttegro-sdk-go/v12/customer"
 )
 
 // BillingDetails captures billing contact information for an order.

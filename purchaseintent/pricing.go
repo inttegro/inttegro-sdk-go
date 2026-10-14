@@ -1,7 +1,7 @@
 package purchaseintent
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v11/money"
+	"github.com/inttegro/inttegro-sdk-go/v12/money"
 )
 
 type OriginalPrice struct {

@@ -1,9 +1,9 @@
 package order
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v11/bankaccount"
-	"github.com/inttegro/inttegro-sdk-go/v11/financialaccount"
-	"github.com/inttegro/inttegro-sdk-go/v11/wallet"
+	"github.com/inttegro/inttegro-sdk-go/v12/bankaccount"
+	"github.com/inttegro/inttegro-sdk-go/v12/financialaccount"
+	"github.com/inttegro/inttegro-sdk-go/v12/wallet"
 )
 
 // OrderPayoutSettings overrides payout configuration for a single order.

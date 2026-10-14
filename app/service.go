@@ -3,8 +3,8 @@ package app
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v11/request"
+	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v12/request"
 )
 
 // AppsService manages applications associated with Inttegro API keys.

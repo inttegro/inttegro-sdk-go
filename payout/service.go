@@ -3,8 +3,8 @@ package payout
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v11/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v11/search"
+	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v12/search"
 )
 
 // PayoutsService manages payout configuration, scheduling, and history.
