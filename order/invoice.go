@@ -8,9 +8,8 @@ type Invoice struct {
 }
 
 type InvoiceFormat struct {
-	Web     DocumentFormat  `json:"web"`
-	PDF     DocumentFormat  `json:"pdf"`
-	Receipt *DocumentFormat `json:"receipt,omitempty"`
+	Web DocumentFormat `json:"web"`
+	PDF DocumentFormat `json:"pdf"`
 }
 
 type DocumentFormat struct {

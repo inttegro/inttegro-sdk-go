@@ -16,17 +16,16 @@ type RelationshipPolicy struct {
 
 // AppRelationship is the placement relationship receipt for a child app.
 type Relationship struct {
-	ID                             string             `json:"id"`
-	Kind                           RelationshipKind   `json:"kind"`
-	PolicyVersion                  string             `json:"policy_version"`
-	Status                         RelationshipStatus `json:"status"`
-	ActorAppID                     string             `json:"actor_app_id"`
-	CreatorAppID                   string             `json:"creator_app_id"`
-	PlacementParentAppID           string             `json:"placement_parent_app_id"`
-	SubjectAppID                   string             `json:"subject_app_id"`
-	ChildAppID                     string             `json:"child_app_id"`
-	ChildStanding                  string             `json:"child_standing"`
-	RelationshipPolicy             RelationshipPolicy `json:"relationship_policy"`
-	RetainedCreatorAuthorityExists bool               `json:"retained_creator_authority_exists"`
-	CreatedAt                      time.Time          `json:"created_at"`
+	ID        string             `json:"id"`
+	Kind      RelationshipKind   `json:"kind"`
+	Parent    RelationshipParent `json:"parent"`
+	Status    RelationshipStatus `json:"status"`
+	CreatedAt time.Time          `json:"created_at"`
+}
+
+// RelationshipParent identifies the app that directly contains a child app.
+type RelationshipParent struct {
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Alias string `json:"alias,omitempty"`
 }

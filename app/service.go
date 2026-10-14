@@ -34,6 +34,17 @@ func (s *Service) Lookup(ctx context.Context) (*App, error) {
 	return &resp.App, nil
 }
 
+// Capabilities retrieves the authenticated application's payment and payout capability states.
+func (s *Service) Capabilities(ctx context.Context) (*Capabilities, error) {
+	var resp struct {
+		Capabilities Capabilities `json:"capabilities"`
+	}
+	if err := s.client.Do(ctx, "POST", "/apps/capabilities", map[string]any{}, &resp); err != nil {
+		return nil, err
+	}
+	return &resp.Capabilities, nil
+}
+
 // Update changes attributes of the application associated with the API key used for the request.
 func (s *Service) Update(ctx context.Context, params UpdateParams, opts ...request.Option) (*App, error) {
 	var resp struct {

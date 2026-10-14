@@ -16,6 +16,7 @@ type Payment struct {
 	PaymentMethod       *PaymentMethod                         `json:"payment_method,omitempty"`
 	BillingDetails      *BillingDetails                        `json:"billing_details,omitempty"`
 	Customer            *Customer                              `json:"customer,omitempty"`
+	Receipt             *Receipt                               `json:"receipt,omitempty"`
 	LatestAttempt       *Attempt                               `json:"latest_attempt,omitempty"`
 	Amount              money.Amount                           `json:"amount"`
 	NextAction          *NextAction                            `json:"next_action,omitempty"`
