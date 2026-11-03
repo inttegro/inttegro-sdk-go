@@ -6,6 +6,9 @@ type SettingsLookupScheduleAgingSpec struct {
 	// Abide describes how the aging period is applied.
 	Abide string `json:"abide"`
 
+	// PublicID is the public balance transaction aging specification identifier.
+	PublicID string `json:"public_id"`
+
 	// Label is the human-readable aging rule label.
 	Label string `json:"label"`
 
@@ -37,10 +40,10 @@ type SettingsLookupSchedule struct {
 // SettingsMutationScheduleSpec describes the aging rule returned after a
 // payout settings mutation.
 type SettingsMutationScheduleSpec struct {
-	Abide string `json:"abide"`
-	ID    string `json:"id"`
-	Label string `json:"label"`
-	TPlus string `json:"t_plus"`
+	Abide    string `json:"abide"`
+	PublicID string `json:"public_id"`
+	Label    string `json:"label"`
+	TPlus    string `json:"t_plus"`
 }
 
 // SettingsMutationSchedule is the updated schedule returned after a payout
