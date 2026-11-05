@@ -55,14 +55,13 @@ type Capabilities struct {
 
 // ChildrenPolicy is the active immutable version assigned to an application.
 type ChildrenPolicy struct {
-	ID                 string       `json:"id"`
-	OwnerApplicationID string       `json:"owner_application_id"`
-	Version            int          `json:"version"`
-	ActiveVersion      int          `json:"active_version"`
-	Name               string       `json:"name"`
-	Description        string       `json:"description,omitempty"`
-	Capabilities       Capabilities `json:"capabilities"`
-	CreatedAt          time.Time    `json:"created_at"`
-	UpdatedAt          time.Time    `json:"updated_at"`
-	VersionCreatedAt   time.Time    `json:"version_created_at"`
+	ID               string       `json:"id"`
+	Version          int          `json:"version"`
+	ActiveVersion    int          `json:"active_version"`
+	Name             string       `json:"name"`
+	Description      string       `json:"description,omitempty"`
+	Capabilities     Capabilities `json:"capabilities"`
+	CreatedAt        time.Time    `json:"created_at"`
+	UpdatedAt        time.Time    `json:"updated_at"`
+	VersionCreatedAt time.Time    `json:"version_created_at"`
 }
