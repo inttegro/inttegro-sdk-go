@@ -10,6 +10,14 @@ type CreateParams struct {
 // LookupParams identifies an operating policy owned by the authenticated app.
 type LookupParams struct {
 	OperatingPolicyID string `json:"operating_policy_id"`
+	Version           int    `json:"version,omitempty"`
+}
+
+// PageParams identifies one operating policy and controls version pagination.
+type PageParams struct {
+	OperatingPolicyID string `json:"operating_policy_id"`
+	Number            int    `json:"number,omitempty"`
+	Size              int    `json:"size,omitempty"`
 }
 
 // UpdateParams creates and activates a new immutable policy version.

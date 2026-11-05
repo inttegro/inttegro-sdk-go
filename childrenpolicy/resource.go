@@ -65,3 +65,13 @@ type ChildrenPolicy struct {
 	UpdatedAt        time.Time    `json:"updated_at"`
 	VersionCreatedAt time.Time    `json:"version_created_at"`
 }
+
+// Page contains immutable children-policy versions ordered newest first.
+type Page struct {
+	Number   int              `json:"number"`
+	Size     int              `json:"size"`
+	Count    int              `json:"count"`
+	Total    int              `json:"total"`
+	HasMore  bool             `json:"has_more"`
+	Versions []ChildrenPolicy `json:"versions"`
+}

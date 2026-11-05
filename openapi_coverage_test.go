@@ -16,6 +16,7 @@ import (
 	"github.com/inttegro/inttegro-sdk-go/v12/app"
 	"github.com/inttegro/inttegro-sdk-go/v12/balancetransaction"
 	"github.com/inttegro/inttegro-sdk-go/v12/broadcast"
+	"github.com/inttegro/inttegro-sdk-go/v12/childrenpolicy"
 	"github.com/inttegro/inttegro-sdk-go/v12/chime"
 	"github.com/inttegro/inttegro-sdk-go/v12/customer"
 	"github.com/inttegro/inttegro-sdk-go/v12/file"
@@ -270,6 +271,10 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.ChildrenPolicies.Lookup(ctx)
 	check(err)
+	_, err = client.ChildrenPolicies.Lookup(ctx, childrenpolicy.LookupParams{Version: 1})
+	check(err)
+	_, err = client.ChildrenPolicies.Page(ctx, childrenpolicy.PageParams{Number: 1, Size: 20})
+	check(err)
 	_, err = client.OperatingPolicies.Create(ctx, operatingpolicy.CreateParams{
 		Name: "payments", Capabilities: operatingpolicy.CapabilitiesSelection{
 			Payments: &operatingpolicy.PaymentsSelection{Currencies: []string{"ghs"}},
@@ -277,6 +282,10 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	})
 	check(err)
 	_, err = client.OperatingPolicies.Lookup(ctx, operatingpolicy.LookupParams{OperatingPolicyID: "op_1"})
+	check(err)
+	_, err = client.OperatingPolicies.Lookup(ctx, operatingpolicy.LookupParams{OperatingPolicyID: "op_1", Version: 1})
+	check(err)
+	_, err = client.OperatingPolicies.Page(ctx, operatingpolicy.PageParams{OperatingPolicyID: "op_1", Number: 1, Size: 20})
 	check(err)
 	name := "payments v2"
 	_, err = client.OperatingPolicies.Update(ctx, operatingpolicy.UpdateParams{

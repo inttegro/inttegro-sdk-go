@@ -16,9 +16,21 @@ func (s *Service) Create(ctx context.Context, params CreateParams) (*OperatingPo
 	return s.send(ctx, "/operating_policies/create", params)
 }
 
-// Lookup returns the active version of an operating policy.
+// Lookup returns the latest version of an operating policy, or an exact
+// immutable version when params specifies one.
 func (s *Service) Lookup(ctx context.Context, params LookupParams) (*OperatingPolicy, error) {
 	return s.send(ctx, "/operating_policies/lookup", params)
+}
+
+// Page lists immutable versions of one operating policy.
+func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
+	var resp struct {
+		Page Page `json:"page"`
+	}
+	if err := s.client.Do(ctx, "POST", "/operating_policies/page", params, &resp); err != nil {
+		return nil, err
+	}
+	return &resp.Page, nil
 }
 
 // Update creates and activates a new immutable operating-policy version.
