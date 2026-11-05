@@ -95,6 +95,7 @@ import (
 	"github.com/inttegro/inttegro-sdk-go/v12/balance"
 	"github.com/inttegro/inttegro-sdk-go/v12/balancetransaction"
 	"github.com/inttegro/inttegro-sdk-go/v12/broadcast"
+	"github.com/inttegro/inttegro-sdk-go/v12/childrenpolicy"
 	"github.com/inttegro/inttegro-sdk-go/v12/chime"
 	"github.com/inttegro/inttegro-sdk-go/v12/customer"
 	resourcefile "github.com/inttegro/inttegro-sdk-go/v12/file"
@@ -102,6 +103,7 @@ import (
 	"github.com/inttegro/inttegro-sdk-go/v12/filereference"
 	"github.com/inttegro/inttegro-sdk-go/v12/financialaccount"
 	"github.com/inttegro/inttegro-sdk-go/v12/messagetemplate"
+	"github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
 	"github.com/inttegro/inttegro-sdk-go/v12/order"
 	"github.com/inttegro/inttegro-sdk-go/v12/otp"
 	"github.com/inttegro/inttegro-sdk-go/v12/paymentmethod"
@@ -224,6 +226,12 @@ type Client struct {
 
 	// Apps provides access to application creation, lookup, and updates.
 	Apps *app.Service
+
+	// ChildrenPolicies provides gated lookup of the authenticated app's policy.
+	ChildrenPolicies *childrenpolicy.Service
+
+	// OperatingPolicies provides reusable operating-policy template management.
+	OperatingPolicies *operatingpolicy.Service
 
 	// Keys provides access to secret key management.
 	Keys *secretkey.Service
@@ -374,6 +382,8 @@ func NewClient(apiKey string, opts ...ClientOption) *Client {
 	c.Prices = price.NewService(c)
 	c.Spec = spec.NewService(c)
 	c.Apps = app.NewService(c)
+	c.ChildrenPolicies = childrenpolicy.NewService(c)
+	c.OperatingPolicies = operatingpolicy.NewService(c)
 	c.Keys = secretkey.NewService(c)
 	c.PurchaseIntents = purchaseintent.NewService(c)
 	c.FileReferences = filereference.NewService(c)
