@@ -1,5 +1,7 @@
 package app
 
+import "github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
+
 // CreateAppParams creates an Inttegro child app.
 type CreateParams struct {
 	// Name is the app's display name. It must not be empty after trimming.
@@ -16,6 +18,9 @@ type CreateParams struct {
 
 	// PlacementParentApplicationID places the child under another app when separately authorized.
 	PlacementParentApplicationID string `json:"placement_parent_application_id,omitempty"`
+
+	// OperatingPolicy selects a parent-owned template or inline capabilities.
+	OperatingPolicy *operatingpolicy.Selection `json:"operating_policy,omitempty"`
 
 	// RelationshipPolicy customizes the direct parent-child relationship.
 	RelationshipPolicy *RelationshipPolicy `json:"relationship_policy,omitempty"`
@@ -34,4 +39,7 @@ type UpdateParams struct {
 
 	// LegalEntityType changes or clears the caller-defined legal-entity label.
 	LegalEntityType *string `json:"legal_entity_type,omitempty"`
+
+	// OperatingPolicy replaces the app's immutable operating-policy snapshot.
+	OperatingPolicy *operatingpolicy.Selection `json:"operating_policy,omitempty"`
 }

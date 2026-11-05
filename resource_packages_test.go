@@ -25,9 +25,9 @@ func TestClientUsesResourceOwnedServices(t *testing.T) {
 	client := inttegro.NewClient("sk_test_resource_packages")
 	services := []any{
 		client.Apps, client.Balances, client.BalanceTransactions,
-		client.Broadcasts, client.Chimes, client.Customers, client.Files,
+		client.Broadcasts, client.Chimes, client.ChildrenPolicies, client.Customers, client.Files,
 		client.FileLinks, client.FileReferences, client.FinancialAccounts,
-		client.MessageTemplates, client.Orders, client.Otp,
+		client.MessageTemplates, client.OperatingPolicies, client.Orders, client.Otp,
 		client.PaymentMethods, client.Payouts, client.Prices, client.Products,
 		client.PurchaseIntents, client.Refunds, client.Schedules, client.Keys,
 		client.Spec, client.UploadRequests,
@@ -70,6 +70,7 @@ func TestResourcePackagesNamePrimaryTypesAfterPackages(t *testing.T) {
 		"balancetransaction": "BalanceTransaction",
 		"broadcast":          "Broadcast",
 		"chime":              "Chime",
+		"childrenpolicy":     "ChildrenPolicy",
 		"customer":           "Customer",
 		"file":               "File",
 		"filelink":           "FileLink",
@@ -78,6 +79,7 @@ func TestResourcePackagesNamePrimaryTypesAfterPackages(t *testing.T) {
 		"invoice":            "Invoice",
 		"messagetemplate":    "MessageTemplate",
 		"order":              "Order",
+		"operatingpolicy":    "OperatingPolicy",
 		"payment":            "Payment",
 		"paymentmethod":      "PaymentMethod",
 		"payout":             "Payout",

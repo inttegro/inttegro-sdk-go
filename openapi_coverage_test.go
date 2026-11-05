@@ -24,6 +24,7 @@ import (
 	"github.com/inttegro/inttegro-sdk-go/v12/financialaccount"
 	"github.com/inttegro/inttegro-sdk-go/v12/messagetemplate"
 	"github.com/inttegro/inttegro-sdk-go/v12/money"
+	"github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
 	"github.com/inttegro/inttegro-sdk-go/v12/order"
 	"github.com/inttegro/inttegro-sdk-go/v12/otp"
 	"github.com/inttegro/inttegro-sdk-go/v12/paymentmethod"
@@ -266,6 +267,21 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.Apps.Capabilities(ctx)
 	check(err)
 	_, err = client.Apps.Update(ctx, app.UpdateParams{Alias: String("app")})
+	check(err)
+	_, err = client.ChildrenPolicies.Lookup(ctx)
+	check(err)
+	_, err = client.OperatingPolicies.Create(ctx, operatingpolicy.CreateParams{
+		Name: "payments", Capabilities: operatingpolicy.CapabilitiesSelection{
+			Payments: &operatingpolicy.PaymentsSelection{Currencies: []string{"ghs"}},
+		},
+	})
+	check(err)
+	_, err = client.OperatingPolicies.Lookup(ctx, operatingpolicy.LookupParams{OperatingPolicyID: "op_1"})
+	check(err)
+	name := "payments v2"
+	_, err = client.OperatingPolicies.Update(ctx, operatingpolicy.UpdateParams{
+		OperatingPolicyID: "op_1", ExpectedVersion: 1, Name: &name,
+	})
 	check(err)
 	_, err = client.Keys.Generate(ctx, secretkey.GenerateParams{Label: "Integration"})
 	check(err)
