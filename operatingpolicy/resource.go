@@ -15,8 +15,8 @@ type Limits struct {
 
 // BTAgingSpec is the platform-resolved payout aging configuration.
 type BTAgingSpec struct {
-	PublicID string `json:"public_id"`
-	TPlus    string `json:"t_plus"`
+	ID    string `json:"id"`
+	TPlus string `json:"t_plus"`
 }
 
 // BTAgingSpecReference selects a platform-owned payout aging configuration.

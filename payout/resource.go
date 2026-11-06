@@ -101,4 +101,7 @@ type BalanceTransaction struct {
 
 	// AllocatedAmount is the portion allocated to this payout.
 	AllocatedAmount money.Amount `json:"allocated_amount"`
+
+	// Status describes whether this contribution is reserved, completed, or released.
+	Status BalanceTransactionStatus `json:"status"`
 }

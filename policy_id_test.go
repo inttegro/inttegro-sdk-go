@@ -8,9 +8,9 @@ import (
 	"github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
 )
 
-func TestPolicyAgingSpecsExposePublicID(t *testing.T) {
-	childrenJSON := []byte(`{"public_id":"bt_aging_spec_immediate","t_plus":"0h"}`)
-	operatingJSON := []byte(`{"public_id":"bt_aging_spec_168_hourly","t_plus":"168h"}`)
+func TestPolicyAgingSpecsExposeID(t *testing.T) {
+	childrenJSON := []byte(`{"id":"bt_aging_spec_immediate","t_plus":"0h"}`)
+	operatingJSON := []byte(`{"id":"bt_aging_spec_168_hourly","t_plus":"168h"}`)
 
 	var children childrenpolicy.BTAgingSpec
 	if err := json.Unmarshal(childrenJSON, &children); err != nil {
@@ -21,7 +21,7 @@ func TestPolicyAgingSpecsExposePublicID(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if children.PublicID != "bt_aging_spec_immediate" || operating.PublicID != "bt_aging_spec_168_hourly" {
-		t.Fatalf("decoded public ids = %q/%q", children.PublicID, operating.PublicID)
+	if children.ID != "bt_aging_spec_immediate" || operating.ID != "bt_aging_spec_168_hourly" {
+		t.Fatalf("decoded ids = %q/%q", children.ID, operating.ID)
 	}
 }

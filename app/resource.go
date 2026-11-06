@@ -3,6 +3,7 @@ package app
 import (
 	"time"
 
+	"github.com/inttegro/inttegro-sdk-go/v12/childrenpolicy"
 	"github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
 	"github.com/inttegro/inttegro-sdk-go/v12/secretkey"
 )
@@ -18,15 +19,16 @@ type SecretKey struct {
 
 // App represents an Inttegro account.
 type App struct {
-	ID              string                    `json:"id"`
-	Name            string                    `json:"name"`
-	Alias           string                    `json:"alias,omitempty"`
-	Description     string                    `json:"description,omitempty"`
-	CreatedAt       time.Time                 `json:"created_at"`
-	UpdatedAt       *time.Time                `json:"updated_at,omitempty"`
-	ArchivedAt      *time.Time                `json:"archived_at,omitempty"`
-	Capabilities    map[string]any            `json:"capabilities"`
-	OperatingPolicy *operatingpolicy.Snapshot `json:"operating_policy,omitempty"`
-	SecretKey       *SecretKey                `json:"secret_key,omitempty"`
-	Relationship    *Relationship             `json:"relationship,omitempty"`
+	ID              string                         `json:"id"`
+	Name            string                         `json:"name"`
+	Alias           string                         `json:"alias,omitempty"`
+	Description     string                         `json:"description,omitempty"`
+	CreatedAt       time.Time                      `json:"created_at"`
+	UpdatedAt       *time.Time                     `json:"updated_at,omitempty"`
+	ArchivedAt      *time.Time                     `json:"archived_at,omitempty"`
+	Capabilities    map[string]any                 `json:"capabilities"`
+	ChildrenPolicy  *childrenpolicy.ChildrenPolicy `json:"children_policy,omitempty"`
+	OperatingPolicy *operatingpolicy.Snapshot      `json:"operating_policy,omitempty"`
+	SecretKey       *SecretKey                     `json:"secret_key,omitempty"`
+	Relationship    *Relationship                  `json:"relationship,omitempty"`
 }

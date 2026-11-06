@@ -49,7 +49,8 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 	}
 	if len(got.BalanceTransactions) != 1 || got.BalanceTransactions[0].ID != "bt_123" ||
 		got.BalanceTransactions[0].Amount.Value != 20000 ||
-		got.BalanceTransactions[0].AllocatedAmount.Value != 12500 {
+		got.BalanceTransactions[0].AllocatedAmount.Value != 12500 ||
+		got.BalanceTransactions[0].Status != payout.BalanceTransactionStatusReserved {
 		t.Fatalf("balance transactions = %#v", got.BalanceTransactions)
 	}
 	batch, _ := got.CustomData.Get("batch")
@@ -84,7 +85,7 @@ func TestPayoutsUseCanonicalTypedContracts(t *testing.T) {
 
 const canonicalPayoutJSON = `{
   "amount":{"currency":"ghs","value":12500},
-  "balance_transactions":[{"id":"bt_123","amount":{"currency":"ghs","value":20000},"allocated_amount":{"currency":"ghs","value":12500}}],
+  "balance_transactions":[{"id":"bt_123","amount":{"currency":"ghs","value":20000},"allocated_amount":{"currency":"ghs","value":12500},"status":"reserved"}],
   "custom_data":{"batch":"weekly"},
   "destination_id":"fa_ghs",
   "error":{"cause":"temporarily_unavailable","message":"Payout processing was temporarily unavailable.","occurred_at":"2026-09-14T09:05:00Z","type":"temporarily_unavailable"},

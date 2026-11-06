@@ -15,8 +15,8 @@ type Limits struct {
 
 // BTAgingSpec is one permitted payout balance-transaction aging option.
 type BTAgingSpec struct {
-	PublicID string `json:"public_id"`
-	TPlus    string `json:"t_plus"`
+	ID    string `json:"id"`
+	TPlus string `json:"t_plus"`
 }
 
 // PaymentMethodCapabilities lists permitted values for one payment method.
