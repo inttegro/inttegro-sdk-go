@@ -15,8 +15,8 @@ type Limits struct {
 
 // BTAgingSpec is one permitted payout balance-transaction aging option.
 type BTAgingSpec struct {
-	PublicID string `json:"public_id"`
-	TPlus    string `json:"t_plus"`
+	ID    string `json:"id"`
+	TPlus string `json:"t_plus"`
 }
 
 // PaymentMethodCapabilities lists permitted values for one payment method.
@@ -55,14 +55,23 @@ type Capabilities struct {
 
 // ChildrenPolicy is the active immutable version assigned to an application.
 type ChildrenPolicy struct {
-	ID                 string       `json:"id"`
-	OwnerApplicationID string       `json:"owner_application_id"`
-	Version            int          `json:"version"`
-	ActiveVersion      int          `json:"active_version"`
-	Name               string       `json:"name"`
-	Description        string       `json:"description,omitempty"`
-	Capabilities       Capabilities `json:"capabilities"`
-	CreatedAt          time.Time    `json:"created_at"`
-	UpdatedAt          time.Time    `json:"updated_at"`
-	VersionCreatedAt   time.Time    `json:"version_created_at"`
+	ID               string       `json:"id"`
+	Version          int          `json:"version"`
+	ActiveVersion    int          `json:"active_version"`
+	Name             string       `json:"name"`
+	Description      string       `json:"description,omitempty"`
+	Capabilities     Capabilities `json:"capabilities"`
+	CreatedAt        time.Time    `json:"created_at"`
+	UpdatedAt        time.Time    `json:"updated_at"`
+	VersionCreatedAt time.Time    `json:"version_created_at"`
+}
+
+// Page contains immutable children-policy versions ordered newest first.
+type Page struct {
+	Number   int              `json:"number"`
+	Size     int              `json:"size"`
+	Count    int              `json:"count"`
+	Total    int              `json:"total"`
+	HasMore  bool             `json:"has_more"`
+	Versions []ChildrenPolicy `json:"versions"`
 }

@@ -11,3 +11,13 @@ const (
 	StatusFailed      Status = "failed"
 	StatusCanceled    Status = "canceled"
 )
+
+// BalanceTransactionStatus describes what happened to a balance transaction's
+// contribution to a payout.
+type BalanceTransactionStatus string
+
+const (
+	BalanceTransactionStatusReserved  BalanceTransactionStatus = "reserved"
+	BalanceTransactionStatusCompleted BalanceTransactionStatus = "completed"
+	BalanceTransactionStatusReleased  BalanceTransactionStatus = "released"
+)

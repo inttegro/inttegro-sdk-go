@@ -1,7 +1,7 @@
 package product
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v12/money"
+	"github.com/inttegro/inttegro-sdk-go/v13/money"
 )
 
 // PriceType identifies the definition carried by an embedded product price.

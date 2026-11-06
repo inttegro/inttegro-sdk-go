@@ -15,8 +15,8 @@ type Limits struct {
 
 // BTAgingSpec is the platform-resolved payout aging configuration.
 type BTAgingSpec struct {
-	PublicID string `json:"public_id"`
-	TPlus    string `json:"t_plus"`
+	ID    string `json:"id"`
+	TPlus string `json:"t_plus"`
 }
 
 // BTAgingSpecReference selects a platform-owned payout aging configuration.
@@ -111,4 +111,14 @@ type OperatingPolicy struct {
 	CreatedAt             time.Time    `json:"created_at"`
 	UpdatedAt             time.Time    `json:"updated_at"`
 	VersionCreatedAt      time.Time    `json:"version_created_at"`
+}
+
+// Page contains immutable versions of one operating policy ordered newest first.
+type Page struct {
+	Number   int               `json:"number"`
+	Size     int               `json:"size"`
+	Count    int               `json:"count"`
+	Total    int               `json:"total"`
+	HasMore  bool              `json:"has_more"`
+	Versions []OperatingPolicy `json:"versions"`
 }

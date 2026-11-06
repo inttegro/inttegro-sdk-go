@@ -1,9 +1,9 @@
 package refund
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v12/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v12/money"
-	"github.com/inttegro/inttegro-sdk-go/v12/request"
+	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v13/money"
+	"github.com/inttegro/inttegro-sdk-go/v13/request"
 )
 
 // CreateRefundLineItem requests a refund allocation against one paid order

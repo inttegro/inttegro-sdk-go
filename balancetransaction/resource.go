@@ -3,8 +3,8 @@ package balancetransaction
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/money"
-	"github.com/inttegro/inttegro-sdk-go/v12/payout"
+	"github.com/inttegro/inttegro-sdk-go/v13/money"
+	"github.com/inttegro/inttegro-sdk-go/v13/payout"
 )
 
 // BalanceTransaction represents a merchant balance entry caused by a payment,

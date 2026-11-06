@@ -3,7 +3,7 @@ package payout
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/money"
+	"github.com/inttegro/inttegro-sdk-go/v13/money"
 )
 
 // Payout represents a settlement transfer to your bank or mobile money account.
@@ -101,4 +101,7 @@ type BalanceTransaction struct {
 
 	// AllocatedAmount is the portion allocated to this payout.
 	AllocatedAmount money.Amount `json:"allocated_amount"`
+
+	// Status describes whether this contribution is reserved, completed, or released.
+	Status BalanceTransactionStatus `json:"status"`
 }

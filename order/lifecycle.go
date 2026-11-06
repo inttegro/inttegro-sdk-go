@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/request"
+	"github.com/inttegro/inttegro-sdk-go/v13/request"
 )
 
 // Complete marks an order as completed and fulfilled.

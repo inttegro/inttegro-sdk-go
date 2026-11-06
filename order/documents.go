@@ -3,7 +3,7 @@ package order
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/request"
+	"github.com/inttegro/inttegro-sdk-go/v13/request"
 )
 
 // SendInvoice sends the hosted invoice link for an existing order.

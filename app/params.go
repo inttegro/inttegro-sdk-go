@@ -1,6 +1,6 @@
 package app
 
-import "github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
+import "github.com/inttegro/inttegro-sdk-go/v13/operatingpolicy"
 
 // CreateAppParams creates an Inttegro child app.
 type CreateParams struct {

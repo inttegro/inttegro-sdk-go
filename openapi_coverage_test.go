@@ -13,29 +13,30 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/app"
-	"github.com/inttegro/inttegro-sdk-go/v12/balancetransaction"
-	"github.com/inttegro/inttegro-sdk-go/v12/broadcast"
-	"github.com/inttegro/inttegro-sdk-go/v12/chime"
-	"github.com/inttegro/inttegro-sdk-go/v12/customer"
-	"github.com/inttegro/inttegro-sdk-go/v12/file"
-	"github.com/inttegro/inttegro-sdk-go/v12/filelink"
-	"github.com/inttegro/inttegro-sdk-go/v12/filereference"
-	"github.com/inttegro/inttegro-sdk-go/v12/financialaccount"
-	"github.com/inttegro/inttegro-sdk-go/v12/messagetemplate"
-	"github.com/inttegro/inttegro-sdk-go/v12/money"
-	"github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v12/order"
-	"github.com/inttegro/inttegro-sdk-go/v12/otp"
-	"github.com/inttegro/inttegro-sdk-go/v12/paymentmethod"
-	"github.com/inttegro/inttegro-sdk-go/v12/payout"
-	"github.com/inttegro/inttegro-sdk-go/v12/price"
-	"github.com/inttegro/inttegro-sdk-go/v12/product"
-	"github.com/inttegro/inttegro-sdk-go/v12/purchaseintent"
-	"github.com/inttegro/inttegro-sdk-go/v12/refund"
-	"github.com/inttegro/inttegro-sdk-go/v12/search"
-	"github.com/inttegro/inttegro-sdk-go/v12/secretkey"
-	"github.com/inttegro/inttegro-sdk-go/v12/uploadrequest"
+	"github.com/inttegro/inttegro-sdk-go/v13/app"
+	"github.com/inttegro/inttegro-sdk-go/v13/balancetransaction"
+	"github.com/inttegro/inttegro-sdk-go/v13/broadcast"
+	"github.com/inttegro/inttegro-sdk-go/v13/childrenpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v13/chime"
+	"github.com/inttegro/inttegro-sdk-go/v13/customer"
+	"github.com/inttegro/inttegro-sdk-go/v13/file"
+	"github.com/inttegro/inttegro-sdk-go/v13/filelink"
+	"github.com/inttegro/inttegro-sdk-go/v13/filereference"
+	"github.com/inttegro/inttegro-sdk-go/v13/financialaccount"
+	"github.com/inttegro/inttegro-sdk-go/v13/messagetemplate"
+	"github.com/inttegro/inttegro-sdk-go/v13/money"
+	"github.com/inttegro/inttegro-sdk-go/v13/operatingpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v13/order"
+	"github.com/inttegro/inttegro-sdk-go/v13/otp"
+	"github.com/inttegro/inttegro-sdk-go/v13/paymentmethod"
+	"github.com/inttegro/inttegro-sdk-go/v13/payout"
+	"github.com/inttegro/inttegro-sdk-go/v13/price"
+	"github.com/inttegro/inttegro-sdk-go/v13/product"
+	"github.com/inttegro/inttegro-sdk-go/v13/purchaseintent"
+	"github.com/inttegro/inttegro-sdk-go/v13/refund"
+	"github.com/inttegro/inttegro-sdk-go/v13/search"
+	"github.com/inttegro/inttegro-sdk-go/v13/secretkey"
+	"github.com/inttegro/inttegro-sdk-go/v13/uploadrequest"
 )
 
 var openAPICapabilityURLPaths = map[string]bool{
@@ -270,6 +271,10 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.ChildrenPolicies.Lookup(ctx)
 	check(err)
+	_, err = client.ChildrenPolicies.Lookup(ctx, childrenpolicy.LookupParams{Version: 1})
+	check(err)
+	_, err = client.ChildrenPolicies.Page(ctx, childrenpolicy.PageParams{Number: 1, Size: 20})
+	check(err)
 	_, err = client.OperatingPolicies.Create(ctx, operatingpolicy.CreateParams{
 		Name: "payments", Capabilities: operatingpolicy.CapabilitiesSelection{
 			Payments: &operatingpolicy.PaymentsSelection{Currencies: []string{"ghs"}},
@@ -277,6 +282,10 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	})
 	check(err)
 	_, err = client.OperatingPolicies.Lookup(ctx, operatingpolicy.LookupParams{OperatingPolicyID: "op_1"})
+	check(err)
+	_, err = client.OperatingPolicies.Lookup(ctx, operatingpolicy.LookupParams{OperatingPolicyID: "op_1", Version: 1})
+	check(err)
+	_, err = client.OperatingPolicies.Page(ctx, operatingpolicy.PageParams{OperatingPolicyID: "op_1", Number: 1, Size: 20})
 	check(err)
 	name := "payments v2"
 	_, err = client.OperatingPolicies.Update(ctx, operatingpolicy.UpdateParams{
