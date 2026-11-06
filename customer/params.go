@@ -1,8 +1,8 @@
 package customer
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v12/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v12/request"
+	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v13/request"
 )
 
 // CreateCustomerParams creates a customer record.

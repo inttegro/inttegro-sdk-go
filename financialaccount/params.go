@@ -1,9 +1,9 @@
 package financialaccount
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v12/bankaccount"
-	"github.com/inttegro/inttegro-sdk-go/v12/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v12/wallet"
+	"github.com/inttegro/inttegro-sdk-go/v13/bankaccount"
+	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v13/wallet"
 )
 
 // FinancialAccountCreateParams creates a payout destination account.

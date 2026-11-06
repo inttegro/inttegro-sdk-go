@@ -3,9 +3,9 @@ package customer
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v12/request"
-	"github.com/inttegro/inttegro-sdk-go/v12/search"
+	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v13/request"
+	"github.com/inttegro/inttegro-sdk-go/v13/search"
 )
 
 // CustomersService manages customer records.

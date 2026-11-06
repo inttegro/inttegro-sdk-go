@@ -3,9 +3,9 @@ package order
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v12/payment"
-	"github.com/inttegro/inttegro-sdk-go/v12/refund"
+	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v13/payment"
+	"github.com/inttegro/inttegro-sdk-go/v13/refund"
 )
 
 // Order is the complete public order projection returned by the API.

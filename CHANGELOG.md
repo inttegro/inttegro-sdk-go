@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 13.0.0 - 2026-11-06
+
+- Breaking: changed the module and import path to
+  `github.com/inttegro/inttegro-sdk-go/v13`.
+- Breaking: renamed the children-policy and operating-policy balance-transaction
+  aging identifier from `public_id` to `id` to match the public API contract.
+- Added active children-policy projections to typed application create, lookup,
+  and update responses.
+- Added immutable version lookup and page history for children and operating
+  policies.
+- Added typed payout balance-transaction allocation statuses.
+
 ## 12.1.0 - 2026-11-05
 
 - Added typed private-beta children-policy lookup and operating-policy create,

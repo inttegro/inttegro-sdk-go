@@ -3,7 +3,7 @@ package file
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
 )
 
 type CreateParams struct {

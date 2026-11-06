@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/childrenpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v12/operatingpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v13/childrenpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v13/operatingpolicy"
 )
 
 func TestPolicyVersionLookupAndPage(t *testing.T) {

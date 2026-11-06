@@ -12,14 +12,14 @@ import (
 	"strings"
 	"testing"
 
-	inttegro "github.com/inttegro/inttegro-sdk-go/v12"
-	"github.com/inttegro/inttegro-sdk-go/v12/payment"
-	"github.com/inttegro/inttegro-sdk-go/v12/product"
-	"github.com/inttegro/inttegro-sdk-go/v12/purchaseintent"
-	"github.com/inttegro/inttegro-sdk-go/v12/refund"
+	inttegro "github.com/inttegro/inttegro-sdk-go/v13"
+	"github.com/inttegro/inttegro-sdk-go/v13/payment"
+	"github.com/inttegro/inttegro-sdk-go/v13/product"
+	"github.com/inttegro/inttegro-sdk-go/v13/purchaseintent"
+	"github.com/inttegro/inttegro-sdk-go/v13/refund"
 )
 
-const modulePath = "github.com/inttegro/inttegro-sdk-go/v12"
+const modulePath = "github.com/inttegro/inttegro-sdk-go/v13"
 
 func TestClientUsesResourceOwnedServices(t *testing.T) {
 	client := inttegro.NewClient("sk_test_resource_packages")

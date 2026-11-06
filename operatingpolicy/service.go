@@ -3,7 +3,7 @@ package operatingpolicy
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
 )
 
 // Service manages reusable operating-policy templates.

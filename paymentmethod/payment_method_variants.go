@@ -3,7 +3,7 @@ package paymentmethod
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v12/bankaccount"
+	"github.com/inttegro/inttegro-sdk-go/v13/bankaccount"
 )
 
 // MobileMoneyNetwork identifies a supported mobile money network.
