@@ -13,7 +13,7 @@ import (
 func FuzzRequestMetaIdempotency(f *testing.F) {
 	for _, seed := range []string{
 		`{"amount": 100}`,
-		`{"idempotency_key":"legacy","request_meta":{"idempotency_key":"existing"}}`,
+		`{"request_meta":{"idempotency_key":"existing"}}`,
 		`null`,
 		`[]`,
 		`not-json`,
@@ -23,17 +23,7 @@ func FuzzRequestMetaIdempotency(f *testing.F) {
 	}
 
 	f.Fuzz(func(t *testing.T, raw []byte, generate bool) {
-		var original map[string]any
-		decodeErr := json.Unmarshal(raw, &original)
-		_, hasTopLevelKey := original["idempotency_key"]
-
 		encoded, err := withRequestMetaIdempotency(raw, generate)
-		if decodeErr == nil && original != nil && hasTopLevelKey {
-			if err == nil {
-				t.Fatal("top-level idempotency_key was accepted")
-			}
-			return
-		}
 		if err != nil {
 			t.Fatalf("transform request metadata: %v", err)
 		}

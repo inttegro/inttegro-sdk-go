@@ -124,9 +124,8 @@ import (
 
 const (
 	// DefaultBaseURL is the production Inttegro API base URL.
-	DefaultBaseURL              = "https://api.inttegro.com"
-	defaultTimeout              = 30 * time.Second
-	topLevelIdempotencyKeyError = "top-level idempotency_key is not supported; use request_meta.idempotency_key or the Idempotency-Key header"
+	DefaultBaseURL = "https://api.inttegro.com"
+	defaultTimeout = 30 * time.Second
 )
 
 // Client is the main entry point for interacting with the Inttegro API.
@@ -520,7 +519,7 @@ func (c *Client) jsonRequestBody(method, path string, body any, explicitIdempote
 		return nil, err
 	}
 	if !strings.EqualFold(method, "POST") || !isIdempotentMutationPath(path) {
-		return validateNoTopLevelIdempotencyKey(raw)
+		return raw, nil
 	}
 	return withRequestMetaIdempotency(raw, explicitIdempotencyKey == "")
 }
@@ -529,9 +528,6 @@ func withRequestMetaIdempotency(raw []byte, generate bool) ([]byte, error) {
 	var payload map[string]any
 	if err := json.Unmarshal(raw, &payload); err != nil || payload == nil {
 		return raw, nil
-	}
-	if _, ok := payload["idempotency_key"]; ok {
-		return nil, errors.New(topLevelIdempotencyKeyError)
 	}
 	requestMeta, _ := payload["request_meta"].(map[string]any)
 	if requestMeta == nil {
@@ -546,10 +542,6 @@ func withRequestMetaIdempotency(raw []byte, generate bool) ([]byte, error) {
 		payload["request_meta"] = requestMeta
 	}
 	return json.Marshal(payload)
-}
-
-func validateNoTopLevelIdempotencyKey(raw []byte) ([]byte, error) {
-	return withRequestMetaIdempotency(raw, false)
 }
 
 func isIdempotentMutationPath(pathOrURL string) bool {
