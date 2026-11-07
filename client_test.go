@@ -349,14 +349,10 @@ func TestDoGeneratesRequestMetaIdempotencyKeyForMutations(t *testing.T) {
 	defer close()
 
 	err := client.do(context.Background(), "POST", "/orders/create", map[string]any{
-		"number":          "ORDER-1",
-		"idempotency_key": "legacy",
+		"number": "ORDER-1",
 	}, nil)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
-	}
-	if _, ok := body["idempotency_key"]; ok {
-		t.Fatalf("top-level idempotency_key should not be sent: %#v", body)
 	}
 	requestMeta, ok := body["request_meta"].(map[string]any)
 	if !ok {
@@ -382,15 +378,11 @@ func TestDoSkipsIdempotencyForReadStylePosts(t *testing.T) {
 	}
 	defer close()
 
-	err := client.do(context.Background(), "POST", "/orders/lookup", map[string]any{
-		"order_id":        "or_123",
-		"idempotency_key": "legacy",
+	err := client.Do(context.Background(), "POST", "/orders/lookup", map[string]any{
+		"order_id": "or_123",
 	}, nil)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
-	}
-	if _, ok := body["idempotency_key"]; ok {
-		t.Fatalf("top-level idempotency_key should not be sent: %#v", body)
 	}
 	if _, ok := body["request_meta"]; ok {
 		t.Fatalf("request_meta should not be sent for lookup: %#v", body)

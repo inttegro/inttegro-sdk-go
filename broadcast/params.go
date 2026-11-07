@@ -1,14 +1,16 @@
 package broadcast
 
+import "github.com/inttegro/inttegro-sdk-go/v13/request"
+
 // BroadcastChimeParams sends a broadcast chime to multiple recipients.
 type CreateParams struct {
-	Recipients       []string `json:"recipients,omitempty"`
-	MessageTemplate  string   `json:"message_template,omitempty"`
-	ServiceName      string   `json:"service_name,omitempty"`
-	Sender           string   `json:"sender,omitempty"`
-	Purpose          string   `json:"purpose,omitempty"`
-	PreferredGateway string   `json:"preferred_gateway,omitempty"`
-	IdempotencyKey   string   `json:"idempotency_key,omitempty"`
+	Recipients       []string      `json:"recipients,omitempty"`
+	MessageTemplate  string        `json:"message_template,omitempty"`
+	ServiceName      string        `json:"service_name,omitempty"`
+	Sender           string        `json:"sender,omitempty"`
+	Purpose          string        `json:"purpose,omitempty"`
+	PreferredGateway string        `json:"preferred_gateway,omitempty"`
+	RequestMeta      *request.Meta `json:"request_meta,omitempty"`
 }
 
 // LookupBroadcastParams specifies which broadcast to retrieve.

@@ -519,7 +519,7 @@ func (c *Client) jsonRequestBody(method, path string, body any, explicitIdempote
 		return nil, err
 	}
 	if !strings.EqualFold(method, "POST") || !isIdempotentMutationPath(path) {
-		return withoutTopLevelIdempotencyKey(raw)
+		return raw, nil
 	}
 	return withRequestMetaIdempotency(raw, explicitIdempotencyKey == "")
 }
@@ -529,7 +529,6 @@ func withRequestMetaIdempotency(raw []byte, generate bool) ([]byte, error) {
 	if err := json.Unmarshal(raw, &payload); err != nil || payload == nil {
 		return raw, nil
 	}
-	delete(payload, "idempotency_key")
 	requestMeta, _ := payload["request_meta"].(map[string]any)
 	if requestMeta == nil {
 		requestMeta = map[string]any{}
@@ -543,10 +542,6 @@ func withRequestMetaIdempotency(raw []byte, generate bool) ([]byte, error) {
 		payload["request_meta"] = requestMeta
 	}
 	return json.Marshal(payload)
-}
-
-func withoutTopLevelIdempotencyKey(raw []byte) ([]byte, error) {
-	return withRequestMetaIdempotency(raw, false)
 }
 
 func isIdempotentMutationPath(pathOrURL string) bool {

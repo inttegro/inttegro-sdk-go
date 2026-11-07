@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v13/request"
 )
 
 type PageParams struct {
@@ -28,7 +29,7 @@ type PageParams struct {
 //	    FullMessage: "Your order #12345 has shipped!",
 //	    Transport:   chime.TransportSMS,
 //	    Purpose:     "order_shipped",
-//	    IdempotencyKey: "chime_order_12345_shipped",
+//	    RequestMeta: &request.Meta{IdempotencyKey: "chime_order_12345_shipped"},
 //	}
 type SendParams struct {
 	// Recipient specifies who receives the chime (required).
@@ -60,11 +61,8 @@ type SendParams struct {
 	// Useful for linking chimes to your internal records.
 	CustomData *customdata.Data `json:"custom_data,omitempty"`
 
-	// IdempotencyKey prevents duplicate sends (optional but strongly recommended).
-	// If the same key is used twice, the second request returns the original chime
-	// instead of sending a duplicate. Keys can be reused if the original failed.
-	// Example: "chime_order_12345_shipped"
-	IdempotencyKey string `json:"idempotency_key,omitempty"`
+	// RequestMeta carries request controls such as an idempotency key.
+	RequestMeta *request.Meta `json:"request_meta,omitempty"`
 }
 
 // ScheduleChimeParams schedules a notification for future delivery.
@@ -100,8 +98,8 @@ type ScheduleParams struct {
 	// Purpose categorizes the chime for analytics (optional).
 	Purpose string `json:"purpose,omitempty"`
 
-	// IdempotencyKey prevents duplicate scheduling (optional but recommended).
-	IdempotencyKey string `json:"idempotency_key,omitempty"`
+	// RequestMeta carries request controls such as an idempotency key.
+	RequestMeta *request.Meta `json:"request_meta,omitempty"`
 }
 
 // LookupChimeParams specifies which chime to retrieve.
