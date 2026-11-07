@@ -23,7 +23,17 @@ func FuzzRequestMetaIdempotency(f *testing.F) {
 	}
 
 	f.Fuzz(func(t *testing.T, raw []byte, generate bool) {
+		var original map[string]any
+		decodeErr := json.Unmarshal(raw, &original)
+		_, hasTopLevelKey := original["idempotency_key"]
+
 		encoded, err := withRequestMetaIdempotency(raw, generate)
+		if decodeErr == nil && original != nil && hasTopLevelKey {
+			if err == nil {
+				t.Fatal("top-level idempotency_key was accepted")
+			}
+			return
+		}
 		if err != nil {
 			t.Fatalf("transform request metadata: %v", err)
 		}
@@ -34,9 +44,6 @@ func FuzzRequestMetaIdempotency(f *testing.F) {
 		var payload map[string]any
 		if err := json.Unmarshal(encoded, &payload); err != nil || payload == nil {
 			return
-		}
-		if _, exists := payload["idempotency_key"]; exists {
-			t.Fatalf("legacy top-level idempotency key was retained: %s", encoded)
 		}
 	})
 }

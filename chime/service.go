@@ -25,7 +25,7 @@ import (
 //	    },
 //	    FullMessage: "Your order #12345 has shipped!",
 //	    Transport:   chime.TransportSMS,
-//	    IdempotencyKey: "chime_order_12345_shipped",
+//	    RequestMeta: &request.Meta{IdempotencyKey: "chime_order_12345_shipped"},
 //	})
 type Service struct {
 	client transport.Client

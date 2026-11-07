@@ -334,14 +334,9 @@ func spanTelemetryText(span sdktrace.ReadOnlySpan) string {
 	return builder.String()
 }
 
-func TestDoGeneratesRequestMetaIdempotencyKeyForMutations(t *testing.T) {
-	var body map[string]any
+func TestDoRejectsTopLevelIdempotencyKeyForMutations(t *testing.T) {
 	client, close := newTestClient(t, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-			t.Fatalf("decode body: %v", err)
-		}
-		w.Header().Set("Content-Type", "application/json")
-		io.WriteString(w, `{"ok":true}`)
+		t.Fatal("request with a top-level idempotency_key reached the server")
 	}))
 	if client == nil {
 		return
@@ -352,19 +347,26 @@ func TestDoGeneratesRequestMetaIdempotencyKeyForMutations(t *testing.T) {
 		"number":          "ORDER-1",
 		"idempotency_key": "legacy",
 	}, nil)
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
+	if err == nil || !strings.Contains(err.Error(), topLevelIdempotencyKeyError) {
+		t.Fatalf("error = %v, want top-level idempotency rejection", err)
 	}
-	if _, ok := body["idempotency_key"]; ok {
-		t.Fatalf("top-level idempotency_key should not be sent: %#v", body)
+}
+
+func TestDoRejectsTopLevelIdempotencyKeyForReadStylePosts(t *testing.T) {
+	client, close := newTestClient(t, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		t.Fatal("request with a top-level idempotency_key reached the server")
+	}))
+	if client == nil {
+		return
 	}
-	requestMeta, ok := body["request_meta"].(map[string]any)
-	if !ok {
-		t.Fatalf("request_meta missing: %#v", body)
-	}
-	key, _ := requestMeta["idempotency_key"].(string)
-	if !uuidV7Pattern.MatchString(key) {
-		t.Fatalf("idempotency key %q is not UUIDv7", key)
+	defer close()
+
+	err := client.do(context.Background(), "POST", "/orders/lookup", map[string]any{
+		"order_id":        "or_123",
+		"idempotency_key": "legacy",
+	}, nil)
+	if err == nil || !strings.Contains(err.Error(), topLevelIdempotencyKeyError) {
+		t.Fatalf("error = %v, want top-level idempotency rejection", err)
 	}
 }
 
@@ -382,15 +384,11 @@ func TestDoSkipsIdempotencyForReadStylePosts(t *testing.T) {
 	}
 	defer close()
 
-	err := client.do(context.Background(), "POST", "/orders/lookup", map[string]any{
-		"order_id":        "or_123",
-		"idempotency_key": "legacy",
+	err := client.Do(context.Background(), "POST", "/orders/lookup", map[string]any{
+		"order_id": "or_123",
 	}, nil)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
-	}
-	if _, ok := body["idempotency_key"]; ok {
-		t.Fatalf("top-level idempotency_key should not be sent: %#v", body)
 	}
 	if _, ok := body["request_meta"]; ok {
 		t.Fatalf("request_meta should not be sent for lookup: %#v", body)
