@@ -34,7 +34,6 @@ type PriceSummary struct {
 	ID                     string                  `json:"id"`
 	Label                  string                  `json:"label,omitempty"`
 	Type                   PriceType               `json:"type"`
-	Nominal                money.Amount            `json:"nominal,omitempty"`
 	FixedAmount            *money.Amount           `json:"fixed_amount,omitempty"`
 	CustomerSelectedAmount *CustomerSelectedAmount `json:"customer_selected_amount,omitempty"`
 	Active                 bool                    `json:"active"`

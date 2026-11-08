@@ -93,7 +93,7 @@ func TestProductDecodesCanonicalMetadata(t *testing.T) {
 		"active":true,
 		"media":{"web_page_url":"https://demos.inttegro.dev/","gallery":["https://example.com/one.jpg"]},
 		"attributes":[{"name":"term","value":"month"}],
-		"prices":[{"id":"pr_123","active":true,"nominal":{"currency":"ghs","value":5000}}]
+		"prices":[{"id":"pr_123","active":true,"type":"fixed_amount","fixed_amount":{"currency":"ghs","value":5000}}]
 	}`)
 	if err := json.Unmarshal(raw, &product); err != nil {
 		t.Fatal(err)
@@ -109,6 +109,9 @@ func TestProductDecodesCanonicalMetadata(t *testing.T) {
 	}
 	if len(product.Prices) != 1 || !product.Prices[0].Active {
 		t.Fatalf("prices = %#v, want active price", product.Prices)
+	}
+	if got, want := product.Prices[0].FixedAmount.Value, int64(5000); got != want {
+		t.Fatalf("price fixed amount = %d, want %d", got, want)
 	}
 }
 

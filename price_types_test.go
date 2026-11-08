@@ -22,11 +22,14 @@ func TestPriceParamsEmbedsAmountOnTheWire(t *testing.T) {
 
 func TestCatalogPriceRetainsReferencedProductID(t *testing.T) {
 	var price price.Price
-	if err := json.Unmarshal([]byte(`{"id":"pr_123","active":true,"nominal":{"currency":"ghs","value":3005},"product_id":"prod_123","created_at":"2026-09-02T12:00:00Z"}`), &price); err != nil {
+	if err := json.Unmarshal([]byte(`{"id":"pr_123","active":true,"type":"fixed_amount","fixed_amount":{"currency":"ghs","value":3005},"product_id":"prod_123","created_at":"2026-09-02T12:00:00Z"}`), &price); err != nil {
 		t.Fatal(err)
 	}
 	if got, want := price.ProductID, "prod_123"; got != want {
 		t.Fatalf("CatalogPrice.ProductID = %q, want %q", got, want)
+	}
+	if got, want := price.FixedAmount.Value, int64(3005); got != want {
+		t.Fatalf("CatalogPrice.FixedAmount.Value = %d, want %d", got, want)
 	}
 }
 
