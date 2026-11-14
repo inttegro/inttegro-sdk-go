@@ -14,6 +14,10 @@ type ProductSelector struct {
 	VariantSetID string `json:"variant_set_id,omitempty"`
 }
 
+type BundleSelector struct {
+	ID string `json:"id"`
+}
+
 type PriceSelector struct {
 	ID         string               `json:"id,omitempty"`
 	Nominal    *price.InlineParams  `json:"nominal,omitempty"`

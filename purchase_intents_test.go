@@ -68,6 +68,8 @@ func TestPurchaseIntentLookupReturnsTypedResource(t *testing.T) {
 
 func TestPurchaseIntentPresentationSerializesCreateAndUpdate(t *testing.T) {
 	createBody, err := json.Marshal(purchaseintent.CreateParams{
+		Product:  &purchaseintent.ProductSelector{ID: "prod_123"},
+		Price:    &purchaseintent.PriceSelector{ID: "pr_123"},
 		Quantity: purchaseintent.Quantity{Min: 1},
 		Presentation: &purchaseintent.Presentation{
 			BuyPage: &purchaseintent.BuyPagePresentation{
@@ -80,6 +82,9 @@ func TestPurchaseIntentPresentationSerializesCreateAndUpdate(t *testing.T) {
 	}
 	if !strings.Contains(string(createBody), `"amount_field_label":"Your contribution"`) {
 		t.Fatalf("create presentation missing from %s", createBody)
+	}
+	if !strings.Contains(string(createBody), `"product":{"id":"prod_123"}`) {
+		t.Fatalf("create params missing product selector: %s", createBody)
 	}
 
 	updateBody, err := json.Marshal(purchaseintent.UpdateParams{
@@ -104,5 +109,43 @@ func TestPurchaseIntentPresentationSerializesCreateAndUpdate(t *testing.T) {
 	}
 	if strings.Contains(string(updateBody), `"primary_action_label"`) {
 		t.Fatalf("omitted update field was serialized in %s", updateBody)
+	}
+}
+
+func TestPurchaseIntentLookupReturnsBundle(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(map[string]any{
+			"purchase_intent": map[string]any{
+				"allow_variants": false,
+				"bundle": map[string]any{
+					"id":   "pbd_123",
+					"name": "Tea collection",
+					"price": map[string]any{
+						"active":  true,
+						"nominal": map[string]any{"currency": "ghs", "value": 3200},
+					},
+					"components": []map[string]any{{"name": "Tea guide", "quantity": 1}},
+				},
+				"created_at": "2026-11-14T00:00:00Z",
+				"id":         "sale_bundle",
+				"quantity":   map[string]any{"min": 1},
+				"status":     "active",
+				"usage":      map[string]any{"multi_use": true},
+			},
+		})
+	}))
+	defer srv.Close()
+
+	client := NewClient("sk_test", WithBaseURL(srv.URL))
+	intent, err := client.PurchaseIntents.Lookup(context.Background(), "sale_bundle")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if intent.Bundle == nil {
+		t.Fatalf("bundle intent = %#v", intent)
+	}
+	if intent.Bundle.ID != "pbd_123" || len(intent.Bundle.Components) != 1 {
+		t.Fatalf("bundle = %#v", intent.Bundle)
 	}
 }

@@ -71,14 +71,18 @@ type PresentationUpdate struct {
 }
 
 type CreateParams struct {
-	Product      *ProductSelector `json:"product,omitempty"`
-	ProductID    string           `json:"product_id,omitempty"`
-	Price        *PriceSelector   `json:"price,omitempty"`
-	PriceID      string           `json:"price_id,omitempty"`
-	Quantity     Quantity         `json:"quantity"`
-	Usage        *Usage           `json:"usage,omitempty"`
-	ExpiresAt    *time.Time       `json:"expires_at,omitempty"`
-	Presentation *Presentation    `json:"presentation,omitempty"`
+	Product   *ProductSelector `json:"product,omitempty"`
+	ProductID string           `json:"product_id,omitempty"`
+	Bundle    *BundleSelector  `json:"bundle,omitempty"`
+	BundleID  string           `json:"bundle_id,omitempty"`
+	// Price or PriceID is required for products and optional for bundles. When
+	// both are omitted for a bundle, checkout uses its current catalog price.
+	Price        *PriceSelector `json:"price,omitempty"`
+	PriceID      string         `json:"price_id,omitempty"`
+	Quantity     Quantity       `json:"quantity"`
+	Usage        *Usage         `json:"usage,omitempty"`
+	ExpiresAt    *time.Time     `json:"expires_at,omitempty"`
+	Presentation *Presentation  `json:"presentation,omitempty"`
 }
 
 type UpdateParams struct {
