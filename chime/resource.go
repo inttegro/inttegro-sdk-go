@@ -39,11 +39,20 @@ type Chime struct {
 	// CustomData contains attached custom data.
 	CustomData *customdata.Data `json:"custom_data,omitempty"`
 
-	// Delivery contains delivery status and timestamps.
-	// Tracks whether the message was successfully delivered.
-	Delivery any `json:"delivery,omitempty"`
-
 	// Transmission contains low-level transmission details.
-	// Includes carrier responses, error codes, etc.
-	Transmission any `json:"transmission,omitempty"`
+	Transmission *Transmission `json:"transmission,omitempty"`
+}
+
+// Transmission describes the public delivery lifecycle for a chime.
+type Transmission struct {
+	Address       string     `json:"address"`
+	CreatedAt     time.Time  `json:"created_at"`
+	DeliveredAt   *time.Time `json:"delivered_at,omitempty"`
+	FailedAt      *time.Time `json:"failed_at,omitempty"`
+	InitializedAt time.Time  `json:"initialized_at"`
+	Mechanism     string     `json:"mechanism"`
+	SentAt        *time.Time `json:"sent_at,omitempty"`
+	SentVia       string     `json:"sent_via,omitempty"`
+	Status        string     `json:"status"`
+	SuppressedAt  *time.Time `json:"suppressed_at,omitempty"`
 }

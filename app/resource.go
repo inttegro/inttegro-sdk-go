@@ -26,7 +26,7 @@ type App struct {
 	CreatedAt       time.Time                      `json:"created_at"`
 	UpdatedAt       *time.Time                     `json:"updated_at,omitempty"`
 	ArchivedAt      *time.Time                     `json:"archived_at,omitempty"`
-	Capabilities    map[string]any                 `json:"capabilities"`
+	Capabilities    CapabilityProjection           `json:"capabilities"`
 	ChildrenPolicy  *childrenpolicy.ChildrenPolicy `json:"children_policy,omitempty"`
 	OperatingPolicy *operatingpolicy.Snapshot      `json:"operating_policy,omitempty"`
 	SecretKey       *SecretKey                     `json:"secret_key,omitempty"`

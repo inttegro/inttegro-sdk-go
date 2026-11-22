@@ -1,6 +1,8 @@
 // Package invoice provides invoice resources and operations.
 package invoice
 
+import "time"
+
 type DocumentKind string
 
 const (
@@ -29,7 +31,6 @@ type Delivery struct {
 type DeliveryAttempt struct {
 	Channel DeliveryChannel `json:"channel"`
 	ChimeID string          `json:"chime_id,omitempty"`
-	Error   string          `json:"error,omitempty"`
 }
 
 // InvoiceFormat contains URLs for invoice documents in different formats.
@@ -64,6 +65,25 @@ type Invoice struct {
 	// Format contains links to invoice documents.
 	Format *Format `json:"format,omitempty"`
 
-	// Deliveries tracks invoice email/SMS delivery attempts.
-	Deliveries any `json:"deliveries,omitempty"`
+	// DeliverySummary aggregates accepted invoice deliveries by channel.
+	DeliverySummary *DeliverySummary `json:"delivery_summary,omitempty"`
+}
+
+// DeliverySummary aggregates accepted sends for one invoice or receipt.
+type DeliverySummary struct {
+	Channels     DeliverySummaryChannels `json:"channels"`
+	LatestSentAt time.Time               `json:"latest_sent_at"`
+	TotalCount   int64                   `json:"total_count"`
+}
+
+// DeliverySummaryChannels groups accepted sends by channel.
+type DeliverySummaryChannels struct {
+	Email *DeliveryChannelSummary `json:"email,omitempty"`
+	SMS   *DeliveryChannelSummary `json:"sms,omitempty"`
+}
+
+// DeliveryChannelSummary aggregates accepted sends through one channel.
+type DeliveryChannelSummary struct {
+	Count        int64     `json:"count"`
+	LatestSentAt time.Time `json:"latest_sent_at"`
 }

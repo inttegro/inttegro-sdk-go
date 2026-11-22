@@ -70,7 +70,7 @@ type CreateParams struct {
 	BankAccount *bankaccount.Config `json:"bank_account,omitempty"`
 
 	// DoshAccount contains Dosh wallet details (required when Type is "dosh_account").
-	DoshAccount map[string]any `json:"dosh_account,omitempty"`
+	DoshAccount *DoshAccount `json:"dosh_account,omitempty"`
 
 	// CustomData contains optional key-value metadata for tracking.
 	CustomData *customdata.Input `json:"custom_data,omitempty"`
@@ -103,4 +103,40 @@ type DisconnectParams struct {
 type PageParams struct {
 	PageNumber int `json:"page_number,omitempty"`
 	PageSize   int `json:"page_size,omitempty"`
+}
+
+// UpdateParams changes the mutable fields of a financial account.
+type UpdateParams struct {
+	AccountID   string            `json:"account_id"`
+	CustomData  *customdata.Patch `json:"custom_data,omitempty"`
+	Description string            `json:"description,omitempty"`
+	Label       string            `json:"label,omitempty"`
+	Owner       *OwnerUpdate      `json:"owner,omitempty"`
+	Reference   string            `json:"reference,omitempty"`
+}
+
+// OwnerUpdate contains financial-account owner fields that can be changed.
+type OwnerUpdate struct {
+	Name    string         `json:"name,omitempty"`
+	Address *AddressUpdate `json:"address,omitempty"`
+}
+
+// AddressUpdate contains mutable financial-account owner address fields.
+type AddressUpdate struct {
+	City     string `json:"city,omitempty"`
+	Country  string `json:"country,omitempty"`
+	Line1    string `json:"line_1,omitempty"`
+	Line2    string `json:"line_2,omitempty"`
+	Name     string `json:"name,omitempty"`
+	Phone    string `json:"phone,omitempty"`
+	PostCode string `json:"post_code,omitempty"`
+	Region   string `json:"region,omitempty"`
+}
+
+// EnablePullParams enables debits and records the mandate evidence supplied by
+// the integrating application.
+type EnablePullParams struct {
+	AccountID string `json:"account_id"`
+	IPAddress string `json:"ip_address,omitempty"`
+	UserAgent string `json:"user_agent,omitempty"`
 }

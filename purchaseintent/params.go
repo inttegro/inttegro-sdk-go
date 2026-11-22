@@ -86,9 +86,11 @@ type CreateParams struct {
 }
 
 type UpdateParams struct {
-	ID           string              `json:"id"`
-	Quantity     *Quantity           `json:"quantity,omitempty"`
-	ExpiresAt    any                 `json:"expires_at,omitempty"`
+	ID       string    `json:"id"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	// ExpiresAt distinguishes omission (nil) from clearing the expiry (a
+	// non-nil pointer containing nil).
+	ExpiresAt    **time.Time         `json:"expires_at,omitempty"`
 	Reactivate   *bool               `json:"reactivate,omitempty"`
 	Presentation *PresentationUpdate `json:"presentation,omitempty"`
 }

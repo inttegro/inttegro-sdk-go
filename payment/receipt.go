@@ -19,12 +19,17 @@ type ReceiptDocumentFormat struct {
 }
 
 type ReceiptDeliverySummary struct {
-	Channels     map[string]ReceiptDeliveryChannelSummary `json:"channels"`
-	TotalCount   int                                      `json:"total_count"`
-	LatestSentAt *time.Time                               `json:"latest_sent_at,omitempty"`
+	Channels     ReceiptDeliveryChannels `json:"channels"`
+	TotalCount   int64                   `json:"total_count"`
+	LatestSentAt time.Time               `json:"latest_sent_at"`
+}
+
+type ReceiptDeliveryChannels struct {
+	Email *ReceiptDeliveryChannelSummary `json:"email,omitempty"`
+	SMS   *ReceiptDeliveryChannelSummary `json:"sms,omitempty"`
 }
 
 type ReceiptDeliveryChannelSummary struct {
-	Count        int        `json:"count"`
-	LatestSentAt *time.Time `json:"latest_sent_at,omitempty"`
+	Count        int64     `json:"count"`
+	LatestSentAt time.Time `json:"latest_sent_at"`
 }

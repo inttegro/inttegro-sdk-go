@@ -49,7 +49,7 @@ type FinancialAccount struct {
 	BankAccount *bankaccount.Config `json:"bank_account,omitempty"`
 
 	// DoshAccount contains Dosh wallet details (when Type is "dosh_account").
-	DoshAccount map[string]any `json:"dosh_account,omitempty"`
+	DoshAccount *DoshAccount `json:"dosh_account,omitempty"`
 
 	// CustomData contains optional key-value metadata for tracking.
 	CustomData *customdata.Data `json:"custom_data,omitempty"`
@@ -59,7 +59,7 @@ type FinancialAccount struct {
 
 	// Verification contains verification status and requirements.
 	// Nil if verification not started or not required.
-	Verification any `json:"verification,omitempty"`
+	Verification *Verification `json:"verification,omitempty"`
 
 	// ArchivedAt is when the account was archived (ISO 8601, read-only).
 	// Archived accounts cannot receive new payouts.
@@ -72,6 +72,24 @@ type FinancialAccount struct {
 
 	// CreatedAt is when the account was created (ISO 8601, read-only).
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+}
+
+// DoshAccount is the public marker for an Inttegro Dosh account. Credentials
+// and internal identifiers are never accepted or returned.
+type DoshAccount struct{}
+
+// Verification records an account-verification attempt and its request.
+type Verification struct {
+	InitiatedAt time.Time           `json:"initiated_at"`
+	CompletedAt *time.Time          `json:"completed_at,omitempty"`
+	Request     VerificationRequest `json:"request"`
+}
+
+// VerificationRequest identifies the verification mechanism and request.
+type VerificationRequest struct {
+	ID        string `json:"id,omitempty"`
+	Mechanism string `json:"mechanism,omitempty"`
+	Type      string `json:"type,omitempty"`
 }
 
 // FinancialAccountsPage holds paginated account data.
