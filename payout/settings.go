@@ -1,6 +1,6 @@
 package payout
 
-import "github.com/inttegro/inttegro-sdk-go/v13/money"
+import "github.com/inttegro/inttegro-sdk-go/v14/money"
 
 // AmountLimits is the inclusive payout amount range.
 type AmountLimits struct {

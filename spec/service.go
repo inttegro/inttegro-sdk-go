@@ -3,7 +3,7 @@ package spec
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v14/internal/transport"
 )
 
 // SpecService provides access to Inttegro platform specifications.

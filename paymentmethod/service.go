@@ -3,8 +3,8 @@ package paymentmethod
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v13/request"
+	"github.com/inttegro/inttegro-sdk-go/v14/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v14/request"
 )
 
 // PaymentMethodsService manages payment method tokenization, verification, and deletion.
@@ -114,11 +114,11 @@ func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
 }
 
 // Update modifies mutable payment method fields.
-func (s *Service) Update(ctx context.Context, payload any) (*PaymentMethod, error) {
+func (s *Service) Update(ctx context.Context, params UpdateParams) (*PaymentMethod, error) {
 	var resp struct {
 		PaymentMethod PaymentMethod `json:"payment_method"`
 	}
-	if err := s.client.Do(ctx, "POST", "/payment_methods/update", payload, &resp); err != nil {
+	if err := s.client.Do(ctx, "POST", "/payment_methods/update", params, &resp); err != nil {
 		return nil, err
 	}
 	return &resp.PaymentMethod, nil

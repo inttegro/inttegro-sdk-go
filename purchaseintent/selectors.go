@@ -1,7 +1,7 @@
 package purchaseintent
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v13/price"
+	"github.com/inttegro/inttegro-sdk-go/v14/price"
 )
 
 type Quantity struct {
@@ -12,6 +12,10 @@ type Quantity struct {
 type ProductSelector struct {
 	ID           string `json:"id"`
 	VariantSetID string `json:"variant_set_id,omitempty"`
+}
+
+type BundleSelector struct {
+	ID string `json:"id"`
 }
 
 type PriceSelector struct {

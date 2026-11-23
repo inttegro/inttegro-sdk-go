@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/price"
+	"github.com/inttegro/inttegro-sdk-go/v14/price"
 )
 
 type OriginalPriceParams struct {
@@ -71,20 +71,26 @@ type PresentationUpdate struct {
 }
 
 type CreateParams struct {
-	Product      *ProductSelector `json:"product,omitempty"`
-	ProductID    string           `json:"product_id,omitempty"`
-	Price        *PriceSelector   `json:"price,omitempty"`
-	PriceID      string           `json:"price_id,omitempty"`
-	Quantity     Quantity         `json:"quantity"`
-	Usage        *Usage           `json:"usage,omitempty"`
-	ExpiresAt    *time.Time       `json:"expires_at,omitempty"`
-	Presentation *Presentation    `json:"presentation,omitempty"`
+	Product   *ProductSelector `json:"product,omitempty"`
+	ProductID string           `json:"product_id,omitempty"`
+	Bundle    *BundleSelector  `json:"bundle,omitempty"`
+	BundleID  string           `json:"bundle_id,omitempty"`
+	// Price or PriceID is required for products and optional for bundles. When
+	// both are omitted for a bundle, checkout uses its current catalog price.
+	Price        *PriceSelector `json:"price,omitempty"`
+	PriceID      string         `json:"price_id,omitempty"`
+	Quantity     Quantity       `json:"quantity"`
+	Usage        *Usage         `json:"usage,omitempty"`
+	ExpiresAt    *time.Time     `json:"expires_at,omitempty"`
+	Presentation *Presentation  `json:"presentation,omitempty"`
 }
 
 type UpdateParams struct {
-	ID           string              `json:"id"`
-	Quantity     *Quantity           `json:"quantity,omitempty"`
-	ExpiresAt    any                 `json:"expires_at,omitempty"`
+	ID       string    `json:"id"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	// ExpiresAt distinguishes omission (nil) from clearing the expiry (a
+	// non-nil pointer containing nil).
+	ExpiresAt    **time.Time         `json:"expires_at,omitempty"`
 	Reactivate   *bool               `json:"reactivate,omitempty"`
 	Presentation *PresentationUpdate `json:"presentation,omitempty"`
 }

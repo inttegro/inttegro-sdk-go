@@ -3,7 +3,7 @@ package search
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/money"
+	"github.com/inttegro/inttegro-sdk-go/v14/money"
 )
 
 type Total struct {

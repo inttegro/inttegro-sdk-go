@@ -46,3 +46,11 @@ type Capabilities struct {
 	Payments Capability `json:"payments"`
 	Payouts  Capability `json:"payouts"`
 }
+
+// CapabilityProjection contains the capability states currently available on
+// an app resource. Newly created apps can have neither capability yet, while
+// established apps can expose either or both.
+type CapabilityProjection struct {
+	Payments *Capability `json:"payments,omitempty"`
+	Payouts  *Capability `json:"payouts,omitempty"`
+}

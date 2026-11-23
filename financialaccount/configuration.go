@@ -17,5 +17,13 @@ type PullPushConfig struct {
 	EnabledAt *time.Time `json:"enabled_at,omitempty"`
 
 	// Mandate contains mandate details for pull authorization (optional).
-	Mandate map[string]any `json:"mandate,omitempty"`
+	Mandate *Mandate `json:"mandate,omitempty"`
+}
+
+// Mandate records the authorization that enabled account debits.
+type Mandate struct {
+	CreatedAt time.Time `json:"created_at"`
+	ID        string    `json:"id"`
+	IPAddress string    `json:"ip_address"`
+	UserAgent string    `json:"user_agent"`
 }

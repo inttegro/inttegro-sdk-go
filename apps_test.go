@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/app"
-	"github.com/inttegro/inttegro-sdk-go/v13/request"
-	"github.com/inttegro/inttegro-sdk-go/v13/secretkey"
+	"github.com/inttegro/inttegro-sdk-go/v14/app"
+	"github.com/inttegro/inttegro-sdk-go/v14/request"
+	"github.com/inttegro/inttegro-sdk-go/v14/secretkey"
 )
 
 func TestAppsServiceUsesTypedContracts(t *testing.T) {
@@ -133,8 +133,10 @@ func TestAppsServiceUsesTypedContracts(t *testing.T) {
 		created.Relationship.Parent.Name != "Parent App" {
 		t.Fatalf("decoded relationship = %#v", created.Relationship)
 	}
-	if created.Capabilities == nil || lookedUp.Capabilities == nil || updated.Capabilities == nil {
-		t.Fatalf("decoded app capabilities must always be present")
+	if created.Capabilities.Payments != nil || created.Capabilities.Payouts != nil ||
+		lookedUp.Capabilities.Payments != nil || lookedUp.Capabilities.Payouts != nil ||
+		updated.Capabilities.Payments != nil || updated.Capabilities.Payouts != nil {
+		t.Fatalf("empty app capability projections decoded unexpectedly")
 	}
 	if lookedUp.UpdatedAt == nil || lookedUp.ArchivedAt != nil {
 		t.Fatalf("decoded lookup app = %#v", lookedUp)

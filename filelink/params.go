@@ -3,7 +3,7 @@ package filelink
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v14/customdata"
 )
 
 type CreateParams struct {

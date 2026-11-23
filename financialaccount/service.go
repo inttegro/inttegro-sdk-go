@@ -3,8 +3,8 @@ package financialaccount
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v13/search"
+	"github.com/inttegro/inttegro-sdk-go/v14/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v14/search"
 )
 
 // FinancialAccountsService manages payout destination accounts.
@@ -69,59 +69,69 @@ func (s *Service) Connect(ctx context.Context, params CreateParams) (*FinancialA
 }
 
 // Update modifies a financial account (PATCH semantics).
-func (s *Service) Update(ctx context.Context, payload map[string]any) (*FinancialAccount, error) {
+func (s *Service) Update(ctx context.Context, params UpdateParams) (*FinancialAccount, error) {
 	var resp struct {
 		Account FinancialAccount `json:"account"`
 	}
-	if err := s.client.Do(ctx, "POST", "/financial_accounts/update", payload, &resp); err != nil {
+	if err := s.client.Do(ctx, "POST", "/financial_accounts/update", params, &resp); err != nil {
 		return nil, err
 	}
 	return &resp.Account, nil
 }
 
 // EnablePush enables push configuration for payouts.
-func (s *Service) EnablePush(ctx context.Context, accountID string) (map[string]any, error) {
-	var resp map[string]any
+func (s *Service) EnablePush(ctx context.Context, accountID string) (*FinancialAccount, error) {
+	var resp struct {
+		Account FinancialAccount `json:"account"`
+	}
 	if err := s.client.Do(ctx, "POST", "/financial_accounts/enable_push", map[string]string{"account_id": accountID}, &resp); err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return &resp.Account, nil
 }
 
 // DisablePush disables push configuration for payouts.
-func (s *Service) DisablePush(ctx context.Context, accountID string) (map[string]any, error) {
-	var resp map[string]any
+func (s *Service) DisablePush(ctx context.Context, accountID string) (*FinancialAccount, error) {
+	var resp struct {
+		Account FinancialAccount `json:"account"`
+	}
 	if err := s.client.Do(ctx, "POST", "/financial_accounts/disable_push", map[string]string{"account_id": accountID}, &resp); err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return &resp.Account, nil
 }
 
 // DisablePushWithOptions disables push configuration with optional payout-destination handling.
-func (s *Service) DisablePushWithOptions(ctx context.Context, params DisablePushParams) (map[string]any, error) {
-	var resp map[string]any
+func (s *Service) DisablePushWithOptions(ctx context.Context, params DisablePushParams) (*FinancialAccount, error) {
+	var resp struct {
+		Account FinancialAccount `json:"account"`
+	}
 	if err := s.client.Do(ctx, "POST", "/financial_accounts/disable_push", params, &resp); err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return &resp.Account, nil
 }
 
 // EnablePull enables pull configuration for charges.
-func (s *Service) EnablePull(ctx context.Context, accountID string) (map[string]any, error) {
-	var resp map[string]any
-	if err := s.client.Do(ctx, "POST", "/financial_accounts/enable_pull", map[string]string{"account_id": accountID}, &resp); err != nil {
+func (s *Service) EnablePull(ctx context.Context, params EnablePullParams) (*FinancialAccount, error) {
+	var resp struct {
+		Account FinancialAccount `json:"account"`
+	}
+	if err := s.client.Do(ctx, "POST", "/financial_accounts/enable_pull", params, &resp); err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return &resp.Account, nil
 }
 
 // DisablePull disables pull configuration for charges.
-func (s *Service) DisablePull(ctx context.Context, accountID string) (map[string]any, error) {
-	var resp map[string]any
+func (s *Service) DisablePull(ctx context.Context, accountID string) (*FinancialAccount, error) {
+	var resp struct {
+		Account FinancialAccount `json:"account"`
+	}
 	if err := s.client.Do(ctx, "POST", "/financial_accounts/disable_pull", map[string]string{"account_id": accountID}, &resp); err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return &resp.Account, nil
 }
 
 // Disconnect permanently disconnects a financial account.
@@ -146,15 +156,6 @@ func (s *Service) Reconnect(ctx context.Context, accountID string) (*FinancialAc
 	return &resp.Account, nil
 }
 
-// Archive is currently not implemented by the API (returns 501) but exposed for completeness.
-func (s *Service) Archive(ctx context.Context, payload map[string]any) (map[string]any, error) {
-	var resp map[string]any
-	if err := s.client.Do(ctx, "POST", "/financial_accounts/archive", payload, &resp); err != nil {
-		return nil, err
-	}
-	return resp, nil
-}
-
 // Page retrieves a paginated list of financial accounts.
 func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
 	var resp struct {
@@ -175,15 +176,6 @@ func (s *Service) Search(ctx context.Context, params search.Params) (*search.Pag
 		return nil, err
 	}
 	return &resp.Search, nil
-}
-
-// Verify is currently not implemented by the API (returns 501) but exposed for completeness.
-func (s *Service) Verify(ctx context.Context, payload map[string]any) (map[string]any, error) {
-	var resp map[string]any
-	if err := s.client.Do(ctx, "POST", "/financial_accounts/verify", payload, &resp); err != nil {
-		return nil, err
-	}
-	return resp, nil
 }
 
 // NewService constructs the resource service used by inttegro.Client.

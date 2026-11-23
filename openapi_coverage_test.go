@@ -13,30 +13,30 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/app"
-	"github.com/inttegro/inttegro-sdk-go/v13/balancetransaction"
-	"github.com/inttegro/inttegro-sdk-go/v13/broadcast"
-	"github.com/inttegro/inttegro-sdk-go/v13/childrenpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v13/chime"
-	"github.com/inttegro/inttegro-sdk-go/v13/customer"
-	"github.com/inttegro/inttegro-sdk-go/v13/file"
-	"github.com/inttegro/inttegro-sdk-go/v13/filelink"
-	"github.com/inttegro/inttegro-sdk-go/v13/filereference"
-	"github.com/inttegro/inttegro-sdk-go/v13/financialaccount"
-	"github.com/inttegro/inttegro-sdk-go/v13/messagetemplate"
-	"github.com/inttegro/inttegro-sdk-go/v13/money"
-	"github.com/inttegro/inttegro-sdk-go/v13/operatingpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v13/order"
-	"github.com/inttegro/inttegro-sdk-go/v13/otp"
-	"github.com/inttegro/inttegro-sdk-go/v13/paymentmethod"
-	"github.com/inttegro/inttegro-sdk-go/v13/payout"
-	"github.com/inttegro/inttegro-sdk-go/v13/price"
-	"github.com/inttegro/inttegro-sdk-go/v13/product"
-	"github.com/inttegro/inttegro-sdk-go/v13/purchaseintent"
-	"github.com/inttegro/inttegro-sdk-go/v13/refund"
-	"github.com/inttegro/inttegro-sdk-go/v13/search"
-	"github.com/inttegro/inttegro-sdk-go/v13/secretkey"
-	"github.com/inttegro/inttegro-sdk-go/v13/uploadrequest"
+	"github.com/inttegro/inttegro-sdk-go/v14/app"
+	"github.com/inttegro/inttegro-sdk-go/v14/balancetransaction"
+	"github.com/inttegro/inttegro-sdk-go/v14/broadcast"
+	"github.com/inttegro/inttegro-sdk-go/v14/childrenpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v14/chime"
+	"github.com/inttegro/inttegro-sdk-go/v14/customer"
+	"github.com/inttegro/inttegro-sdk-go/v14/file"
+	"github.com/inttegro/inttegro-sdk-go/v14/filelink"
+	"github.com/inttegro/inttegro-sdk-go/v14/filereference"
+	"github.com/inttegro/inttegro-sdk-go/v14/financialaccount"
+	"github.com/inttegro/inttegro-sdk-go/v14/messagetemplate"
+	"github.com/inttegro/inttegro-sdk-go/v14/money"
+	"github.com/inttegro/inttegro-sdk-go/v14/operatingpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v14/order"
+	"github.com/inttegro/inttegro-sdk-go/v14/otp"
+	"github.com/inttegro/inttegro-sdk-go/v14/paymentmethod"
+	"github.com/inttegro/inttegro-sdk-go/v14/payout"
+	"github.com/inttegro/inttegro-sdk-go/v14/price"
+	"github.com/inttegro/inttegro-sdk-go/v14/product"
+	"github.com/inttegro/inttegro-sdk-go/v14/purchaseintent"
+	"github.com/inttegro/inttegro-sdk-go/v14/refund"
+	"github.com/inttegro/inttegro-sdk-go/v14/search"
+	"github.com/inttegro/inttegro-sdk-go/v14/secretkey"
+	"github.com/inttegro/inttegro-sdk-go/v14/uploadrequest"
 )
 
 var openAPICapabilityURLPaths = map[string]bool{
@@ -171,6 +171,8 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	_, err = client.Chimes.Lookup(ctx, "ch_1")
 	check(err)
 	_, err = client.Chimes.Page(ctx, chime.PageParams{PageNumber: 1, PageSize: 20})
+	check(err)
+	_, err = client.Chimes.Settings(ctx)
 	check(err)
 	_, err = client.Chimes.Schedule(ctx, chime.ScheduleParams{FullMessage: "later"})
 	check(err)
@@ -309,17 +311,13 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.FinancialAccounts.Lookup(ctx, "fa_1")
 	check(err)
-	_, err = client.FinancialAccounts.Archive(ctx, map[string]any{"account_id": "fa_1"})
-	check(err)
 	_, err = client.FinancialAccounts.Page(ctx, financialaccount.PageParams{PageNumber: 1, PageSize: 20})
 	check(err)
 	_, err = client.FinancialAccounts.Search(ctx, search.Params{Text: "Primary"})
 	check(err)
-	_, err = client.FinancialAccounts.Verify(ctx, map[string]any{"account_id": "fa_1"})
-	check(err)
 	_, err = client.FinancialAccounts.Connect(ctx, financialaccount.CreateParams{Label: "Primary"})
 	check(err)
-	_, err = client.FinancialAccounts.Update(ctx, map[string]any{"account_id": "fa_1", "label": "Updated"})
+	_, err = client.FinancialAccounts.Update(ctx, financialaccount.UpdateParams{AccountID: "fa_1", Label: "Updated"})
 	check(err)
 	_, err = client.FinancialAccounts.EnablePush(ctx, "fa_1")
 	check(err)
@@ -329,7 +327,7 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.FinancialAccounts.Reconnect(ctx, "fa_1")
 	check(err)
-	_, err = client.FinancialAccounts.EnablePull(ctx, "fa_1")
+	_, err = client.FinancialAccounts.EnablePull(ctx, financialaccount.EnablePullParams{AccountID: "fa_1"})
 	check(err)
 	_, err = client.FinancialAccounts.DisablePull(ctx, "fa_1")
 	check(err)
@@ -402,7 +400,7 @@ func recordSDKPaths(t *testing.T) map[string]bool {
 	check(err)
 	_, err = client.PaymentMethods.Page(ctx, paymentmethod.PageParams{PageNumber: 1, PageSize: 20})
 	check(err)
-	_, err = client.PaymentMethods.Update(ctx, map[string]any{"payment_method_id": "pm_1", "active": true})
+	_, err = client.PaymentMethods.Update(ctx, paymentmethod.UpdateParams{PaymentMethodID: "pm_1", Active: Bool(true)})
 	check(err)
 	_, err = client.PaymentMethods.Activate(ctx, "pm_1")
 	check(err)

@@ -3,9 +3,9 @@ package app
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/childrenpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v13/operatingpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v13/secretkey"
+	"github.com/inttegro/inttegro-sdk-go/v14/childrenpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v14/operatingpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v14/secretkey"
 )
 
 // AppSecretKey is the initial secret key returned when an app is created.
@@ -26,7 +26,7 @@ type App struct {
 	CreatedAt       time.Time                      `json:"created_at"`
 	UpdatedAt       *time.Time                     `json:"updated_at,omitempty"`
 	ArchivedAt      *time.Time                     `json:"archived_at,omitempty"`
-	Capabilities    map[string]any                 `json:"capabilities"`
+	Capabilities    CapabilityProjection           `json:"capabilities"`
 	ChildrenPolicy  *childrenpolicy.ChildrenPolicy `json:"children_policy,omitempty"`
 	OperatingPolicy *operatingpolicy.Snapshot      `json:"operating_policy,omitempty"`
 	SecretKey       *SecretKey                     `json:"secret_key,omitempty"`

@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: inttegro/openapi
-          ref: 09e948b9a3389dc1862c1019c0d50f7d26d12fb1
+          ref: 79980448e93b76929e4b940f8db29d7f6128e527
           path: openapi
           persist-credentials: false
 
@@ -51,7 +51,7 @@ jobs:
           set -euo pipefail
           runtime_version="$(sed -n 's/^const Version = "\([^"]*\)"$/\1/p' version.go)"
           test "${GITHUB_REF_NAME}" = "v${runtime_version}"
-          test "$(go list -m)" = "github.com/inttegro/inttegro-sdk-go/v13"
+          test "$(go list -m)" = "github.com/inttegro/inttegro-sdk-go/v14"
           test "$(git rev-list -n 1 "${GITHUB_REF_NAME}")" = "${GITHUB_SHA}"
 
       - name: Run the release checks
@@ -88,7 +88,7 @@ jobs:
             echo "tag=${GITHUB_REF_NAME}"
             echo "commit=${GITHUB_SHA}"
             echo "workflow=${GITHUB_WORKFLOW_REF}"
-            echo "module=github.com/inttegro/inttegro-sdk-go/v13"
+            echo "module=github.com/inttegro/inttegro-sdk-go/v14"
           } > artifacts/PROVENANCE.txt
           (
             cd artifacts

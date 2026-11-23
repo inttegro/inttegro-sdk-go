@@ -1,7 +1,8 @@
 package paymentmethod
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v13/request"
+	"github.com/inttegro/inttegro-sdk-go/v14/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v14/request"
 )
 
 type PageParams struct {
@@ -75,6 +76,33 @@ type LookupParams struct {
 	// PaymentMethodID is the payment method identifier (required).
 	// Starts with "pm_". Example: "pm_abc123def456"
 	PaymentMethodID string `json:"payment_method_id"`
+}
+
+// UpdateParams changes the mutable fields of a saved payment method.
+type UpdateParams struct {
+	PaymentMethodID string            `json:"payment_method_id"`
+	CustomData      *customdata.Patch `json:"custom_data,omitempty"`
+	Active          *bool             `json:"active,omitempty"`
+	Archived        *bool             `json:"archived,omitempty"`
+	Owner           *UpdateOwner      `json:"owner,omitempty"`
+}
+
+// UpdateOwner contains owner fields that can be changed independently.
+type UpdateOwner struct {
+	Name    string         `json:"name,omitempty"`
+	Address *UpdateAddress `json:"address,omitempty"`
+}
+
+// UpdateAddress contains mutable payment-method owner address fields.
+type UpdateAddress struct {
+	City        string `json:"city,omitempty"`
+	Country     string `json:"country,omitempty"`
+	Line1       string `json:"line1,omitempty"`
+	Line2       string `json:"line2,omitempty"`
+	Name        string `json:"name,omitempty"`
+	PhoneNumber string `json:"phone_number,omitempty"`
+	PostCode    string `json:"post_code,omitempty"`
+	Region      string `json:"region,omitempty"`
 }
 
 // DeletePaymentMethodParams permanently removes a payment method.
