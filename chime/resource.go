@@ -3,7 +3,7 @@ package chime
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v14/customdata"
 )
 
 type Page struct {
@@ -55,4 +55,23 @@ type Transmission struct {
 	SentVia       string     `json:"sent_via,omitempty"`
 	Status        string     `json:"status"`
 	SuppressedAt  *time.Time `json:"suppressed_at,omitempty"`
+}
+
+// Settings contains the effective non-secret delivery defaults for Chimes.
+type Settings struct {
+	SMS   SMSSettings   `json:"sms"`
+	Email EmailSettings `json:"email"`
+}
+
+// SMSSettings describes the platform SMS sender defaults and accepted sender length.
+type SMSSettings struct {
+	DefaultSender    string `json:"default_sender"`
+	MinSenderCharLen int    `json:"min_sender_char_len"`
+	MaxSenderCharLen int    `json:"max_sender_char_len"`
+}
+
+// EmailSettings describes the default and allowed From addresses for email Chimes.
+type EmailSettings struct {
+	DefaultFrom string   `json:"default_from"`
+	AllowedFrom []string `json:"allowed_from"`
 }

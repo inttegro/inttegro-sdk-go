@@ -3,9 +3,9 @@ package chime
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/broadcast"
-	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
-	"github.com/inttegro/inttegro-sdk-go/v13/schedule"
+	"github.com/inttegro/inttegro-sdk-go/v14/broadcast"
+	"github.com/inttegro/inttegro-sdk-go/v14/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v14/schedule"
 )
 
 // ChimesService sends and manages notification messages (SMS and email).
@@ -65,6 +65,17 @@ func (s *Service) Page(ctx context.Context, params PageParams) (*Page, error) {
 		return nil, err
 	}
 	return &resp.Page, nil
+}
+
+// Settings retrieves the effective non-secret SMS and email delivery defaults.
+func (s *Service) Settings(ctx context.Context) (*Settings, error) {
+	var resp struct {
+		Settings Settings `json:"settings"`
+	}
+	if err := s.client.Do(ctx, "POST", "/chimes/settings", struct{}{}, &resp); err != nil {
+		return nil, err
+	}
+	return &resp.Settings, nil
 }
 
 // Schedule enqueues a notification for delivery at a specific time.

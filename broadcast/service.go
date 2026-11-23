@@ -3,7 +3,7 @@ package broadcast
 import (
 	"context"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/internal/transport"
+	"github.com/inttegro/inttegro-sdk-go/v14/internal/transport"
 )
 
 // BroadcastsService manages broadcast chime operations.

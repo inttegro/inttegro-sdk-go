@@ -3,7 +3,7 @@ package product
 import (
 	"time"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v14/customdata"
 )
 
 // Product is a product returned by the catalog API.

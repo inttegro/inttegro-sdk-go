@@ -1,6 +1,6 @@
 package broadcast
 
-import "github.com/inttegro/inttegro-sdk-go/v13/request"
+import "github.com/inttegro/inttegro-sdk-go/v14/request"
 
 // BroadcastChimeParams sends a broadcast chime to multiple recipients.
 type CreateParams struct {

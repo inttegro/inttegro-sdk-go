@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 14.0.0 - 2026-11-23
+
+- Breaking: changed the module and import path to
+  `github.com/inttegro/inttegro-sdk-go/v14`.
+- Breaking: removed provider-specific Chime delivery-event fields, legacy OTP
+  gateway selection, and private document-delivery failure details.
+- Replaced known `map[string]any` request and response shapes with typed
+  application capability, financial-account, payment-method, and document
+  delivery models.
+- Added typed priced-bundle Buy-link inputs.
+- Added typed lookup of effective, non-secret Chime delivery settings.
+
 ## 13.1.0 - 2026-11-07
 
 - Added typed response-projection metadata with resource-level `Pick` and

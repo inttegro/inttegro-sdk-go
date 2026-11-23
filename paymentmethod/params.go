@@ -1,8 +1,8 @@
 package paymentmethod
 
 import (
-	"github.com/inttegro/inttegro-sdk-go/v13/customdata"
-	"github.com/inttegro/inttegro-sdk-go/v13/request"
+	"github.com/inttegro/inttegro-sdk-go/v14/customdata"
+	"github.com/inttegro/inttegro-sdk-go/v14/request"
 )
 
 type PageParams struct {

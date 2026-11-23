@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/inttegro/inttegro-sdk-go/v13/childrenpolicy"
-	"github.com/inttegro/inttegro-sdk-go/v13/operatingpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v14/childrenpolicy"
+	"github.com/inttegro/inttegro-sdk-go/v14/operatingpolicy"
 )
 
 func TestPolicyAgingSpecsExposeID(t *testing.T) {
